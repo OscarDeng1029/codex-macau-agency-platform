@@ -347,6 +347,42 @@
                 return [];
             }
 
+            function getSearchRank(agency, query) {
+                if (!query) return 0;
+
+                const name = String(agency.name || '').toLowerCase();
+                if (name.startsWith(query)) return 0;
+                if (name.includes(query)) return 1;
+
+                const rawTags = parseTags(agency.tags);
+                const otherFields = [
+                    agency.license_no,
+                    agency.licenseNo,
+                    agency.address,
+                    agency.region,
+                    ...(agency.topTags || []),
+                    ...rawTags
+                ].map(value => String(value || '').toLowerCase());
+
+                return otherFields.some(value => value.includes(query)) ? 2 : Infinity;
+            }
+
+            function compareBySelectedSort(a, b, sort) {
+                if (sort === 'rating') {
+                    const rA = a.displayRating === '暫無' ? 0 : parseFloat(a.displayRating) || 0;
+                    const rB = b.displayRating === '暫無' ? 0 : parseFloat(b.displayRating) || 0;
+                    if (rB !== rA) return rB - rA;
+                    return (parseInt(b.totalCount) || 0) - (parseInt(a.totalCount) || 0);
+                }
+
+                const cA = parseInt(a.totalCount) || 0;
+                const cB = parseInt(b.totalCount) || 0;
+                if (cB !== cA) return cB - cA;
+                const rA = a.displayRating === '暫無' ? 0 : parseFloat(a.displayRating) || 0;
+                const rB = b.displayRating === '暫無' ? 0 : parseFloat(b.displayRating) || 0;
+                return rB - rA;
+            }
+
             function showSkeletonLoading() {
                 listContainer.innerHTML = ''; 
                 resultCount.innerHTML = '<span class="animate-pulse text-slate-400">同步數據中...</span>';
@@ -464,16 +500,7 @@
 
                 if (query) {
                     filtered = filtered.filter(a => {
-                        const basicMatch = (a.name && a.name.toLowerCase().includes(query)) || 
-                                        (a.license_no && String(a.license_no).toLowerCase().includes(query)) ||
-                                        (a.address && a.address.toLowerCase().includes(query)) ||
-                                        (a.region && a.region.toLowerCase().includes(query));
-                        
-                        const rawTags = parseTags(a.tags);
-                        const tagMatch = rawTags.some(tag => tag.toLowerCase().includes(query)) ||
-                                        (a.topTags || []).some(tag => tag.toLowerCase().includes(query));
-
-                        return basicMatch || tagMatch;
+                        return getSearchRank(a, query) !== Infinity;
                     });
                 }
 
@@ -496,23 +523,13 @@
                     });
                 }
 
-                if (sort === 'rating') {
-                    filtered.sort((a, b) => {
-                        const rA = a.displayRating === '暫無' ? 0 : parseFloat(a.displayRating) || 0;
-                        const rB = b.displayRating === '暫無' ? 0 : parseFloat(b.displayRating) || 0;
-                        if (rB !== rA) return rB - rA; 
-                        return (parseInt(b.totalCount) || 0) - (parseInt(a.totalCount) || 0);
-                    });
-                } else if (sort === 'reviews') {
-                    filtered.sort((a, b) => {
-                        const cA = parseInt(a.totalCount) || 0;
-                        const cB = parseInt(b.totalCount) || 0;
-                        if (cB !== cA) return cB - cA; 
-                        const rA = a.displayRating === '暫無' ? 0 : parseFloat(a.displayRating) || 0;
-                        const rB = b.displayRating === '暫無' ? 0 : parseFloat(b.displayRating) || 0;
-                        return rB - rA; 
-                    });
-                }
+                filtered.sort((a, b) => {
+                    if (query) {
+                        const rankDiff = getSearchRank(a, query) - getSearchRank(b, query);
+                        if (rankDiff !== 0) return rankDiff;
+                    }
+                    return compareBySelectedSort(a, b, sort);
+                });
 
                 renderAgencyList(filtered);
             }
