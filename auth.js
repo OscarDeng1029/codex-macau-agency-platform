@@ -67,10 +67,16 @@
             return;
         }
 
+        const redirectTo = getOAuthRedirectUrl();
+        sessionStorage.setItem('macau_auth_return_to', window.location.pathname + window.location.search + window.location.hash);
+
         const { error } = await authClient.auth.signInWithOAuth({
             provider: 'google',
             options: {
-                redirectTo: window.location.href
+                redirectTo,
+                queryParams: {
+                    prompt: 'select_account'
+                }
             }
         });
 
@@ -78,6 +84,12 @@
             console.error('Google login failed:', error);
             alert('登入失敗：' + error.message);
         }
+    }
+
+    function getOAuthRedirectUrl() {
+        const url = new URL(window.location.href);
+        url.hash = '';
+        return url.toString();
     }
 
     async function logout() {

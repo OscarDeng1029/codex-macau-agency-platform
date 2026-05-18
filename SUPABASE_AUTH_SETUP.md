@@ -13,6 +13,28 @@ SUPABASE_SERVICE_ROLE_KEY=your Supabase service_role key
 
 Do not expose `SUPABASE_SERVICE_ROLE_KEY` in frontend code.
 
+## Required Supabase Auth URL Settings
+
+If production login redirects to `http://localhost:3000/`, Supabase is falling back to the project Auth URL configuration instead of accepting the deployed callback URL.
+
+In Supabase Dashboard -> Authentication -> URL Configuration, set:
+
+```text
+Site URL: https://www.macauagencyreview.com
+```
+
+Add every deployed origin you use to Redirect URLs, for example:
+
+```text
+https://www.macauagencyreview.com/**
+https://macauagencyreview.com/**
+https://*.vercel.app/**
+http://127.0.0.1:5500/**
+http://localhost:5500/**
+```
+
+Keep the localhost entries only for local testing. The production domain must be present, otherwise OAuth may fall back to a localhost Site URL and Chrome will show an unsafe cross-origin navigation error.
+
 ## What This Fixes
 
 The previous browser-side migration called:

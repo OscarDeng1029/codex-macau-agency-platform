@@ -396,9 +396,11 @@
 
   <script>
     const NO_TEXT_MSG = '該僱主僅進行了評分與打標籤，未留下詳細文字說明。';
+    const LOCAL_REVIEW_STORAGE_KEY = 'macau_housekeeping_my_review_ids';
     let allReviews = [];
     let activeFilter = 'all';
     let currentSession = null;
+    let reviewSource = 'account';
 
     function escapeHTML(value = '') {
       return String(value)
@@ -515,6 +517,26 @@
       status.className = 'mt-3 text-xs font-bold text-rose-600 leading-relaxed';
     }
 
+    function getLocalReviewIds() {
+      const ids = window.MacauAuth?.getLocalReviewIds?.();
+      if (Array.isArray(ids)) return ids;
+
+      try {
+        const parsed = JSON.parse(localStorage.getItem(LOCAL_REVIEW_STORAGE_KEY) || '[]');
+        return Array.isArray(parsed) ? parsed.filter(Boolean) : [];
+      } catch (_err) {
+        return [];
+      }
+    }
+
+    function setLocalReviewIds(ids) {
+      if (!ids.length) {
+        localStorage.removeItem(LOCAL_REVIEW_STORAGE_KEY);
+        return;
+      }
+      localStorage.setItem(LOCAL_REVIEW_STORAGE_KEY, JSON.stringify(ids));
+    }
+
     function getStatusConfig(status) {
       if (status === 'approved') {
         return { text: '已發佈', cls: 'bg-emerald-50 text-emerald-700 border-emerald-100', icon: 'verified' };
@@ -556,8 +578,14 @@
       const summary = document.getElementById('profile-summary');
       if (!summary) return;
 
-      if (!currentSession?.user) {
-        summary.innerText = '請先使用 Google 登入。登入後將顯示已連接 Google，並讀取此帳號下的評價記錄；本機匿名評論會在登入時自動關聯到你的 Google 帳號。';
+      if (reviewSource === 'local') {
+        if (ctx.total === 0) {
+          summary.innerText = '此瀏覽器暫無本機評論記錄。登入後會讀取你的 Google 帳號評論，並自動關聯舊版匿名評論。';
+        } else if (currentSession?.user) {
+          summary.innerText = `已連接 Google，但本機匿名評論尚未完成關聯。此瀏覽器目前有 ${ctx.total} 條本機評價記錄，評過 ${ctx.agencyCount} 間中介。`;
+        } else {
+          summary.innerText = `目前根據此瀏覽器保存的提交記錄顯示：共有 ${ctx.total} 條評價，評過 ${ctx.agencyCount} 間中介；登入後會嘗試關聯到你的 Google 帳號。`;
+        }
       } else if (ctx.total === 0) {
         summary.innerText = '已連接 Google。你還沒有提交過評價，之後的評論會保存到此 Google 帳號下，切換頁面或設備時都能保持登入狀態。';
       } else {
@@ -693,13 +721,21 @@
       try {
         if (typeof supabaseClient === 'undefined') throw new Error('supabaseClient is not available');
 
-        const { error } = await supabaseClient
+        let query = supabaseClient
           .from('reviews')
           .update({ status: 'deleted' })
-          .eq('id', reviewId)
-          .eq('user_id', currentSession.user.id);
+          .eq('id', reviewId);
+
+        if (currentSession?.user?.id) {
+          query = query.eq('user_id', currentSession.user.id);
+        }
+
+        const { error } = await query;
 
         if (error) throw error;
+
+        const nextLocalIds = getLocalReviewIds().filter(id => String(id) !== String(reviewId));
+        setLocalReviewIds(nextLocalIds);
 
         allReviews = allReviews.filter(review => String(review.id) !== String(reviewId));
         applyUI(buildContext(allReviews));
@@ -714,6 +750,29 @@
       }
     };
 
+    async function loadLocalReviews() {
+      const localIds = getLocalReviewIds();
+      if (localIds.length === 0) return [];
+
+      if (typeof supabaseClient === 'undefined') throw new Error('supabaseClient is not available');
+
+      const { data: reviews, error } = await supabaseClient
+        .from('reviews')
+        .select('id, agency_id, agency_name, rating, status, content, created_at')
+        .in('id', localIds)
+        .neq('status', 'deleted')
+        .order('created_at', { ascending: false });
+
+      if (error) throw error;
+
+      const localReviews = Array.isArray(reviews) ? reviews : [];
+      const validIds = new Set(localReviews.map(review => String(review.id)));
+      const stillLocal = localIds.filter(id => validIds.has(String(id)));
+      if (stillLocal.length !== localIds.length) setLocalReviewIds(stillLocal);
+
+      return localReviews;
+    }
+
     async function loadMyReviews() {
       const skeleton = document.getElementById('reviewSkeleton');
       currentSession = window.MacauAuth?.getCurrentSession?.() || await window.MacauAuth?.ready || null;
@@ -721,18 +780,18 @@
       updateSyncStatus();
 
       allReviews = [];
+      reviewSource = currentSession?.user ? 'account' : 'local';
       applyUI(buildContext([]));
-
-      if (!currentSession?.user) {
-        if (skeleton) skeleton.classList.add('hidden');
-        renderReviews();
-        return;
-      }
 
       try {
         if (typeof supabaseClient === 'undefined') throw new Error('supabaseClient is not available');
 
-        const reviews = await window.MacauAuth.getMyReviews();
+        const migration = window.MacauAuth?.getLastMigration?.();
+        const shouldUseLocalReviews = !currentSession?.user || getLocalReviewIds().length > 0 && migration?.status !== 'success';
+        reviewSource = shouldUseLocalReviews ? 'local' : 'account';
+        const reviews = shouldUseLocalReviews
+          ? await loadLocalReviews()
+          : await window.MacauAuth.getMyReviews();
 
         if (skeleton) skeleton.classList.add('hidden');
 
