@@ -489,29 +489,34 @@
       const status = document.getElementById('profile-sync-status');
       if (!status) return;
 
-      const localCount = window.MacauAuth?.getLocalReviewIds?.().length || migration?.localCount || 0;
+      const currentLocalIds = window.MacauAuth?.getLocalReviewIds?.() || [];
+      const seenLocalIds = Array.isArray(migration?.localIds) ? migration.localIds : currentLocalIds;
+      const localCount = seenLocalIds.length || currentLocalIds.length || migration?.localCount || 0;
+      const localIdCopy = seenLocalIds.length ? `（${seenLocalIds.join('、')}）` : '';
       if (!currentSession?.user) {
         status.innerText = localCount > 0
-          ? `此瀏覽器有 ${localCount} 條待關聯的本機匿名評論，登入後會自動連到你的 Google 帳號。`
+          ? `此瀏覽器已讀到 ${localCount} 條待關聯的本機匿名評論${localIdCopy}，登入後會自動連到你的 Google 帳號。`
           : '此瀏覽器暫無待關聯的本機匿名評論。';
         status.className = 'mt-3 text-xs font-bold text-slate-400 leading-relaxed';
         return;
       }
 
       if (!migration || migration.status === 'idle') {
-        status.innerText = '此瀏覽器暫無待關聯的本機匿名評論。';
+        status.innerText = localCount > 0
+          ? `此瀏覽器已讀到 ${localCount} 條待關聯的本機匿名評論${localIdCopy}，等待關聯到目前 Google 帳號。`
+          : '此瀏覽器暫無待關聯的本機匿名評論。';
         status.className = 'mt-3 text-xs font-bold text-slate-400 leading-relaxed';
         return;
       }
 
       if (migration.status === 'success') {
         const ignored = (migration.blocked || 0) + (migration.missing || 0);
-        status.innerText = `已讀取本機 ${migration.localCount || 0} 條匿名評論：成功關聯 ${migration.migrated || 0} 條，已屬於此帳號 ${migration.alreadyOwned || 0} 條，忽略 ${ignored} 條。`;
+        status.innerText = `已讀取本機 ${migration.localCount || 0} 條匿名評論${localIdCopy}：成功關聯 ${migration.migrated || 0} 條，已屬於此帳號 ${migration.alreadyOwned || 0} 條，忽略 ${ignored} 條。`;
         status.className = 'mt-3 text-xs font-bold text-emerald-700 leading-relaxed';
         return;
       }
 
-      status.innerText = `已讀取本機 ${migration.localCount || 0} 條匿名評論，但服務端關聯失敗：${migration.error?.message || '未知錯誤'}。`;
+      status.innerText = `已讀取本機 ${migration.localCount || localCount || 0} 條匿名評論${localIdCopy}，但服務端關聯失敗：${migration.error?.message || '未知錯誤'}。`;
       status.className = 'mt-3 text-xs font-bold text-rose-600 leading-relaxed';
     }
 
@@ -759,6 +764,7 @@
 
     document.addEventListener('DOMContentLoaded', () => {
       setupFilters();
+      updateSyncStatus();
       loadMyReviews();
       window.addEventListener('macau-auth-change', event => {
         currentSession = event.detail?.session || null;
