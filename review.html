@@ -306,13 +306,15 @@
             document.getElementById('backBtn').addEventListener('click', () => window.history.back());
             let currentSession = await window.MacauAuth?.ready;
             const submitBtn = document.getElementById('submitBtn');
+            let isSubmitting = false;
 
             function refreshSubmitState() {
                 currentSession = window.MacauAuth?.getCurrentSession?.() || currentSession;
-                if (!submitBtn) return;
+                if (!submitBtn || isSubmitting) return;
                 submitBtn.innerHTML = currentSession?.user
                     ? '<span class="material-symbols-rounded text-[20px]">verified_user</span> 登入後安全提交'
                     : '<span class="material-symbols-rounded text-[20px]">login</span> 使用 Google 登入後提交';
+                submitBtn.disabled = false;
             }
 
             window.addEventListener('macau-auth-change', event => {
@@ -324,6 +326,7 @@
             const urlParams = new URLSearchParams(window.location.search);
             const targetId = urlParams.get('id');
             const targetNameEl = document.getElementById('targetAgencyName');
+            const draftKey = targetId ? `macau_review_draft:${targetId}` : null;
             
             let currentAgencyName = ''; 
 
@@ -350,26 +353,105 @@
             initStars('sStarGroup', 'metric-speed');
             initStars('aStarGroup', 'metric-attitude');
 
+            function getDraftPayload() {
+                return {
+                    agencyId: targetId,
+                    rating: document.getElementById('ratingValue').value,
+                    transparency: document.getElementById('metric-transparency').value,
+                    speed: document.getElementById('metric-speed').value,
+                    attitude: document.getElementById('metric-attitude').value,
+                    text: document.getElementById('reviewText').value,
+                    consent: document.getElementById('privacyConsent').checked,
+                    tags: Array.from(document.querySelectorAll('.tag-btn.selected')).map(btn => btn.innerText)
+                };
+            }
+
+            function saveDraft() {
+                if (!draftKey) return;
+                localStorage.setItem(draftKey, JSON.stringify(getDraftPayload()));
+            }
+
+            function clearDraft() {
+                if (draftKey) localStorage.removeItem(draftKey);
+            }
+
+            function applyStarValue(groupId, inputId, value, labelId = null, labelsData = null) {
+                const numeric = Math.max(0, Math.min(5, parseInt(value, 10) || 0));
+                const input = document.getElementById(inputId);
+                const group = document.getElementById(groupId);
+                if (input) input.value = String(numeric);
+                if (!group) return;
+
+                group.querySelectorAll('.star-btn').forEach(btn => {
+                    const star = btn.querySelector('span');
+                    if (!star) return;
+                    star.classList.toggle('text-yellow-400', parseInt(btn.dataset.value, 10) <= numeric);
+                    star.classList.toggle('text-slate-200', parseInt(btn.dataset.value, 10) > numeric);
+                });
+
+                const labelEl = labelId ? document.getElementById(labelId) : null;
+                if (labelEl && labelsData && labelsData[numeric]) {
+                    labelEl.classList.remove('hidden');
+                    labelEl.textContent = labelsData[numeric].t;
+                    labelEl.className = `ml-4 text-sm font-bold px-3 py-1 rounded-full ${labelsData[numeric].c} ${labelsData[numeric].b}`;
+                }
+            }
+
+            function applyTagStyle(btn, selected) {
+                const isRedTag = btn.innerText.includes('拒給');
+                btn.classList.toggle('selected', selected);
+                if (selected) {
+                    btn.classList.add('bg-blue-50', 'text-[#003399]', 'font-bold', 'border-blue-200');
+                    btn.classList.remove('border-slate-200', 'text-slate-600', 'border-red-200', 'text-red-600');
+                } else {
+                    btn.classList.remove('bg-blue-50', 'text-[#003399]', 'font-bold', 'border-blue-200');
+                    if (isRedTag) btn.classList.add('border-red-200', 'text-red-600');
+                    else btn.classList.add('border-slate-200', 'text-slate-600');
+                }
+            }
+
+            function restoreDraft() {
+                if (!draftKey) return;
+                let draft = null;
+                try {
+                    draft = JSON.parse(localStorage.getItem(draftKey) || 'null');
+                } catch (_err) {
+                    localStorage.removeItem(draftKey);
+                    return;
+                }
+                if (!draft || draft.agencyId !== targetId) return;
+
+                applyStarValue('mainStarGroup', 'ratingValue', draft.rating, 'ratingText', ratingLabels);
+                applyStarValue('tStarGroup', 'metric-transparency', draft.transparency);
+                applyStarValue('sStarGroup', 'metric-speed', draft.speed);
+                applyStarValue('aStarGroup', 'metric-attitude', draft.attitude);
+                document.getElementById('reviewText').value = draft.text || '';
+                document.getElementById('privacyConsent').checked = Boolean(draft.consent);
+
+                const selectedTags = new Set(Array.isArray(draft.tags) ? draft.tags : []);
+                document.querySelectorAll('.tag-btn').forEach(btn => {
+                    applyTagStyle(btn, selectedTags.has(btn.innerText));
+                });
+            }
+
             document.querySelectorAll('.tag-btn').forEach(btn => {
                 btn.addEventListener('click', () => {
-                    btn.classList.toggle('selected');
-                    const isRedTag = btn.innerText.includes('拒給'); 
-                    if (btn.classList.contains('selected')) {
-                        btn.classList.add('bg-blue-50', 'text-[#003399]', 'font-bold', 'border-blue-200');
-                        btn.classList.remove('border-slate-200', 'text-slate-600', 'border-red-200', 'text-red-600');
-                    } else {
-                        btn.classList.remove('bg-blue-50', 'text-[#003399]', 'font-bold', 'border-blue-200');
-                        if (isRedTag) btn.classList.add('border-red-200', 'text-red-600');
-                        else btn.classList.add('border-slate-200', 'text-slate-600');
-                    }
+                    applyTagStyle(btn, !btn.classList.contains('selected'));
+                    saveDraft();
                 });
             });
+
+            document.querySelectorAll('.star-btn').forEach(btn => btn.addEventListener('click', saveDraft));
+            document.getElementById('reviewText').addEventListener('input', saveDraft);
+            document.getElementById('privacyConsent').addEventListener('change', saveDraft);
+            restoreDraft();
 
             document.getElementById('submitBtn').addEventListener('click', async () => {
                 if (!targetId) return alert('缺少中介 ID');
                 currentSession = window.MacauAuth?.getCurrentSession?.() || await window.MacauAuth?.getSession?.();
                 if (!currentSession?.user) {
-                    alert('評論前請先使用 Google 登入。登入後我們會把此瀏覽器曾提交的匿名評論關聯到你的 Google 帳號。');
+                    saveDraft();
+                    alert('評論已為你暫存。請先使用 Google 登入，登入回來後會自動恢復剛才填寫的內容。');
                     window.MacauAuth?.login?.();
                     return;
                 }
@@ -405,6 +487,7 @@
                 }
 
                 const selectedTags = Array.from(document.querySelectorAll('.tag-btn.selected')).map(btn => btn.innerText);
+                isSubmitting = true;
                 submitBtn.innerHTML = '<span class="material-symbols-rounded animate-spin">autorenew</span> 提交中...';
                 submitBtn.disabled = true;
 
@@ -437,8 +520,11 @@
                         text_length_bucket: text.length === 0 ? '0' : text.length < 50 ? '1_49' : text.length < 200 ? '50_199' : '200_plus'
                     });
                     
+                    clearDraft();
                     alert('提交成功！評價已進入審核隊列，您可在「我的」頁面查看進度。');
-                    window.history.back();
+                    submitBtn.innerHTML = '<span class="material-symbols-rounded text-[20px]">check_circle</span> 已提交';
+                    submitBtn.disabled = false;
+                    window.location.href = 'profile.html';
                 } catch (error) {
                     console.error("提交失敗:", error.message);
                     window.MAPGA4?.track('submit_review_error', {
@@ -448,6 +534,7 @@
                         error_message: String(error?.message || '').slice(0, 80)
                     });
                     alert("提交失敗，請檢查網絡連接。");
+                    isSubmitting = false;
                     refreshSubmitState();
                     submitBtn.disabled = false;
                 }
