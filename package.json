@@ -1,0 +1,8 @@
+{
+  "name": "macau-agency-platform",
+  "version": "1.0.0",
+  "description": "澳門家傭點評網",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.43.0"
+  }
+}

@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" class="light">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>關於我們｜澳門家傭點評網 - 中立透明的澳門搵工人資訊平台</title>
+    <meta name="description" content="了解澳門家傭點評網的成立初衷、平台原則與評價審核機制。我們致力於提供中立、透明的家傭中介資訊，助您安心請工人姐姐。" />
+    <link rel="canonical" href="https://www.macauagencyreview.com/about.html" />
+
+    <link rel="icon" type="image/png" href="/assets/images/logo.png" />
+    <link rel="apple-touch-icon" href="/assets/images/logo.png" />
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#002068",
+                        "primary-brand": "#003399",
+                        "primary-fixed": "#dce1ff",
+                        "on-primary-fixed": "#00164e",
+                        "surface": "#faf8ff",
+                        "on-surface": "#1a1b22",
+                        "surface-container": "#eeedf6",
+                        "surface-container-low": "#f4f3fc",
+                        "surface-container-lowest": "#ffffff",
+                        "on-surface-variant": "#444653",
+                        "outline-variant": "#c4c5d5",
+                    },
+                    fontFamily: { sans: ['Public Sans', 'sans-serif'] },
+                    boxShadow: {
+                        soft: "0 18px 50px rgba(15, 23, 42, 0.07)",
+                        glow: "0 24px 80px rgba(0, 51, 153, 0.14)",
+                        card: "0 1px 0 rgba(255,255,255,0.78), 0 16px 42px rgba(15,23,42,0.055)"
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        :root {
+            --brand: #003399;
+            --brand-deep: #002068;
+            --surface: #faf8ff;
+            --ink: #1a1b22;
+            --muted: #64748b;
+        }
+        html { scroll-behavior: smooth; scrollbar-gutter: stable; }
+        @supports not (scrollbar-gutter: stable) { html { overflow-y: scroll; } }
+        body { font-family: 'Public Sans', sans-serif; min-height: 100dvh; overflow-x: hidden; }
+        a, button { -webkit-tap-highlight-color: transparent; }
+        :where(a, button, [role="button"]):focus-visible { outline: 3px solid rgba(0, 51, 153, 0.22); outline-offset: 3px; }
+        .material-symbols-rounded { font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .glass-card { background: rgba(255,255,255,0.78); backdrop-filter: blur(18px); border: 1px solid rgba(255,255,255,0.7); }
+        .grid-bg {
+            background-image:
+                radial-gradient(circle at 18% 18%, rgba(0,51,153,0.14) 0, transparent 24%),
+                radial-gradient(circle at 86% 12%, rgba(99,102,241,0.14) 0, transparent 24%),
+                linear-gradient(rgba(0,32,104,0.045) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0,32,104,0.045) 1px, transparent 1px);
+            background-size: auto, auto, 28px 28px, 28px 28px;
+        }
+        .soft-mask { mask-image: linear-gradient(to bottom, black 78%, transparent 100%); }
+        .safe-bottom { padding-bottom: max(5.25rem, calc(4.5rem + env(safe-area-inset-bottom))); }
+        .bottom-nav-safe { height: calc(4rem + env(safe-area-inset-bottom)); padding-bottom: max(0.35rem, env(safe-area-inset-bottom)); }
+        @keyframes floatCard { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+        .float-card { animation: floatCard 5.2s ease-in-out infinite; }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; scroll-behavior: auto !important; }
+        }
+    
+
+        /* UI consistency layer: aligned with the refreshed homepage without changing page content or data logic. */
+        :root {
+            --brand: #003399;
+            --brand-deep: #002068;
+            --surface: #faf8ff;
+        }
+        html { scrollbar-gutter: stable; }
+        body {
+            overflow-x: hidden;
+            background:
+                radial-gradient(circle at 8% -8%, rgba(59, 130, 246, .12), transparent 30%),
+                radial-gradient(circle at 94% 4%, rgba(99, 102, 241, .10), transparent 28%),
+                #faf8ff;
+        }
+        .focus-ring:focus-visible,
+        :where(a, button, input, select, textarea, [role="button"]):focus-visible {
+            outline: 3px solid rgba(0, 51, 153, .22);
+            outline-offset: 3px;
+        }
+        .surface-soft {
+            background: rgba(255, 255, 255, .86);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+        }
+        @media (max-width: 767px) {
+            body {
+                background:
+                    radial-gradient(circle at 0% 0%, rgba(59, 130, 246, .14), transparent 34%),
+                    #faf8ff;
+            }
+        }
+    </style>
+
+    <!-- GA4 monitoring core -->
+    <script src="assets/js/ga4-monitor.js" defer></script>
+    <!-- /GA4 monitoring core -->
+</head>
+<body class="bg-surface text-on-surface antialiased selection:bg-blue-200 pb-[calc(72px+env(safe-area-inset-bottom))] md:pb-0">
+
+    <header class="fixed top-0 inset-x-0 z-50 bg-white/88 backdrop-blur-xl border-b border-slate-200/80">
+        <div class="max-w-[1200px] mx-auto px-4 md:px-6 h-14 md:h-[72px] flex items-center justify-between gap-3">
+            <a href="index.html" class="flex items-center gap-2 min-w-0 hover:opacity-85 transition-opacity focus-ring rounded-xl" aria-label="返回首頁">
+                <span class="w-8 h-8 md:w-9 md:h-9 rounded-2xl bg-[#003399] text-white flex items-center justify-center shadow-sm shrink-0">
+                    <span class="material-symbols-rounded text-[19px] md:text-[20px]">account_balance</span>
+                </span>
+                <span class="truncate text-[15px] md:text-lg font-black text-[#003399] tracking-tight">澳門家傭點評網</span>
+            </a>
+
+            <nav class="hidden md:flex items-center gap-1" aria-label="主要導航">
+                <a class="px-4 py-2 rounded-xl text-slate-600 hover:text-[#003399] hover:bg-slate-50 transition-colors font-medium" href="index.html">首頁</a>
+                <a class="px-4 py-2 rounded-xl text-slate-600 hover:text-[#003399] hover:bg-slate-50 transition-colors font-medium" href="agencies.html">中介</a>
+                <a class="px-4 py-2 rounded-xl text-slate-600 hover:text-[#003399] hover:bg-slate-50 transition-colors font-medium" href="ranking.html">排行榜</a>
+                <a class="px-4 py-2 rounded-xl text-slate-600 hover:text-[#003399] hover:bg-slate-50 transition-colors font-medium" href="legal.html">指南</a>
+                <a class="px-4 py-2 rounded-xl bg-blue-50 text-[#003399] font-bold" href="about.html">關於</a>
+            </nav>
+
+            <div class="flex items-center gap-2">
+                <a href="contact.html" class="hidden md:inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-slate-200 text-slate-700 font-bold hover:border-blue-200 hover:bg-blue-50 hover:text-[#003399] transition-colors focus-ring">
+                    <span class="material-symbols-rounded text-[18px]">support_agent</span>
+                    聯繫
+                </a>
+                <a href="profile.html" aria-label="用戶中心" class="w-9 h-9 md:w-10 md:h-10 rounded-full bg-slate-100 flex items-center justify-center border border-slate-200 hover:bg-slate-200 transition-colors focus-ring">
+                    <span class="material-symbols-rounded text-[#003399] text-[19px]">person</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="relative overflow-hidden">
+        <section class="relative pt-24 md:pt-32 pb-10 md:pb-16 px-4 md:px-6">
+            <div class="absolute inset-0 grid-bg soft-mask pointer-events-none"></div>
+            <div class="absolute -top-20 -right-24 w-80 h-80 bg-blue-200/40 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="absolute top-56 -left-24 w-72 h-72 bg-indigo-200/40 rounded-full blur-3xl pointer-events-none"></div>
+
+            <div class="relative max-w-[1280px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+                <div class="lg:col-span-7">
+                    <div class="inline-flex items-center gap-2 bg-white/80 text-[#003399] px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-bold mb-5 border border-blue-100 shadow-sm">
+                        <span class="material-symbols-rounded text-[18px]">verified_user</span>
+                        透明、清晰、以僱主經驗為核心
+                    </div>
+                    <h1 class="text-[2.35rem] leading-[1.05] md:text-6xl md:leading-[1.02] font-black tracking-tight text-slate-900 mb-5">
+                        讓澳門家庭在請家傭前，<span class="text-[#003399]">看見更多真實參考。</span>
+                    </h1>
+                    <p class="text-base md:text-lg text-slate-600 leading-relaxed max-w-2xl mb-7">
+                        澳門家傭點評網是一個面向僱主的家傭中介資訊與點評平台。我們把中介資料、已審核用戶評價、榜單參考與僱主指南整理在同一個地方，幫助家庭在簽約前更清楚地比較服務、收費透明度與實際回饋。
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-3 sm:items-center">
+                        <a href="agencies.html" class="inline-flex items-center justify-center gap-2 bg-[#003399] text-white px-5 py-3 rounded-xl font-bold shadow-glow hover:bg-[#002068] transition-all">
+                            瀏覽中介目錄
+                            <span class="material-symbols-rounded text-[20px]">arrow_forward</span>
+                        </a>
+                        <a href="legal.html" class="inline-flex items-center justify-center gap-2 bg-white text-[#003399] px-5 py-3 rounded-xl font-bold border border-slate-200 hover:bg-blue-50 transition-all">
+                            查看僱主指南
+                            <span class="material-symbols-rounded text-[20px]">menu_book</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-5">
+                    <div class="relative float-card">
+                        <div class="absolute -inset-4 bg-gradient-to-br from-blue-200/50 via-indigo-200/40 to-white rounded-[2.5rem] blur-2xl"></div>
+                        <div class="relative glass-card rounded-[2rem] p-5 md:p-6 shadow-glow">
+                            <div class="bg-[#0f172a] text-white rounded-[1.55rem] p-5 md:p-6 mb-4 overflow-hidden relative">
+                                <div class="absolute -right-8 -top-8 opacity-10">
+                                    <span class="material-symbols-rounded text-[160px]">diversity_3</span>
+                                </div>
+                                <div class="relative z-10">
+                                    <p class="text-blue-200 text-xs font-bold uppercase tracking-[0.2em] mb-3">Our Mission</p>
+                                    <h2 class="text-2xl md:text-3xl font-black leading-tight mb-3">降低資訊不對稱，讓選擇更安心。</h2>
+                                    <p class="text-sm text-slate-300 leading-relaxed">收錄、排序或合作展示均不等同於服務保證；我們做的是把分散資訊整理成可比較、可查閱、可提醒風險的參考，讓僱主自行作出判斷。</p>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-3">
+                                <div class="bg-white rounded-2xl p-4 border border-slate-100 shadow-sm">
+                                    <span class="material-symbols-rounded text-[#003399] mb-2">rate_review</span>
+                                    <p class="font-black text-slate-800 text-sm">已審核評價</p>
+                                    <p class="text-xs text-slate-500 mt-1 leading-relaxed">聚合僱主回饋</p>
+                                </div>
+                                <div class="bg-white rounded-2xl p-4 border border-slate-100 shadow-sm">
+                                    <span class="material-symbols-rounded text-[#003399] mb-2">balance</span>
+                                    <p class="font-black text-slate-800 text-sm">透明標識</p>
+                                    <p class="text-xs text-slate-500 mt-1 leading-relaxed">合作清晰區分</p>
+                                </div>
+                                <div class="bg-white rounded-2xl p-4 border border-slate-100 shadow-sm">
+                                    <span class="material-symbols-rounded text-[#003399] mb-2">shield_person</span>
+                                    <p class="font-black text-slate-800 text-sm">匿名保護</p>
+                                    <p class="text-xs text-slate-500 mt-1 leading-relaxed">保護僱主身份</p>
+                                </div>
+                                <div class="bg-white rounded-2xl p-4 border border-slate-100 shadow-sm">
+                                    <span class="material-symbols-rounded text-[#003399] mb-2">fact_check</span>
+                                    <p class="font-black text-slate-800 text-sm">合規提醒</p>
+                                    <p class="text-xs text-slate-500 mt-1 leading-relaxed">決策前先核對</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="px-4 md:px-6 py-8 md:py-12">
+            <div class="max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-4 gap-3 md:gap-4">
+                <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-card">
+                    <div class="w-11 h-11 rounded-2xl bg-blue-50 text-[#003399] flex items-center justify-center mb-4"><span class="material-symbols-rounded">search</span></div>
+                    <h3 class="font-black text-slate-800 mb-1">更容易查找</h3>
+                    <p class="text-sm text-slate-500 leading-relaxed">把中介名稱、區域、牌照與評價入口集中整理。</p>
+                </div>
+                <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-card">
+                    <div class="w-11 h-11 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center mb-4"><span class="material-symbols-rounded">compare_arrows</span></div>
+                    <h3 class="font-black text-slate-800 mb-1">更方便比較</h3>
+                    <p class="text-sm text-slate-500 leading-relaxed">用評分、標籤、文字評價與榜單呈現不同面向。</p>
+                </div>
+                <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-card">
+                    <div class="w-11 h-11 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center mb-4"><span class="material-symbols-rounded">lock</span></div>
+                    <h3 class="font-black text-slate-800 mb-1">更重視保護</h3>
+                    <p class="text-sm text-slate-500 leading-relaxed">前端匿名展示，避免僱主因分享經驗而承受不必要壓力。</p>
+                </div>
+                <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-card">
+                    <div class="w-11 h-11 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center mb-4"><span class="material-symbols-rounded">warning</span></div>
+                    <h3 class="font-black text-slate-800 mb-1">更清楚風險</h3>
+                    <p class="text-sm text-slate-500 leading-relaxed">提醒僱主核對合同、收費、辦證流程與官方資料。</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="px-4 md:px-6 py-10 md:py-16">
+            <div class="max-w-[1280px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+                <div class="lg:col-span-4 lg:sticky lg:top-24">
+                    <span class="text-[#003399] font-black text-sm tracking-[0.2em] uppercase">Why We Exist</span>
+                    <h2 class="text-3xl md:text-4xl font-black text-slate-900 mt-3 mb-4">為什麼需要這個平台？</h2>
+                    <p class="text-slate-600 leading-relaxed mb-5">請家傭是一項牽涉時間、金錢、照顧安排與家庭信任的決策。單靠宣傳資料或熟人介紹，僱主往往難以全面了解中介的實際服務表現。</p>
+                    <p class="text-slate-600 leading-relaxed">我們希望建立一個更透明的資訊入口，讓每位僱主在比較中介前，都能看到更多來自真實使用情境的參考。</p>
+                </div>
+                <div class="lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <article class="bg-white rounded-[28px] border border-slate-200 p-6 shadow-card hover:-translate-y-1 hover:shadow-soft transition-all">
+                        <div class="flex items-center justify-between mb-8">
+                            <span class="text-5xl font-black text-slate-100">01</span>
+                            <span class="material-symbols-rounded text-[#003399] bg-blue-50 rounded-2xl p-3">business_center</span>
+                        </div>
+                        <h3 class="text-xl font-black text-slate-800 mb-3">中介目錄</h3>
+                        <p class="text-sm text-slate-600 leading-relaxed">協助僱主查找澳門家傭中介資訊，並從評價、標籤、地址與聯絡資訊進入下一步比較。</p>
+                    </article>
+                    <article class="bg-white rounded-[28px] border border-slate-200 p-6 shadow-card hover:-translate-y-1 hover:shadow-soft transition-all">
+                        <div class="flex items-center justify-between mb-8">
+                            <span class="text-5xl font-black text-slate-100">02</span>
+                            <span class="material-symbols-rounded text-[#003399] bg-blue-50 rounded-2xl p-3">leaderboard</span>
+                        </div>
+                        <h3 class="text-xl font-black text-slate-800 mb-3">中介評價榜</h3>
+                        <p class="text-sm text-slate-600 leading-relaxed">以平台已審核評價作為資料基礎，把評分、文字評價與警示提示轉化為更容易理解的參考榜單。</p>
+                    </article>
+                    <article class="bg-white rounded-[28px] border border-slate-200 p-6 shadow-card hover:-translate-y-1 hover:shadow-soft transition-all">
+                        <div class="flex items-center justify-between mb-8">
+                            <span class="text-5xl font-black text-slate-100">03</span>
+                            <span class="material-symbols-rounded text-[#003399] bg-blue-50 rounded-2xl p-3">menu_book</span>
+                        </div>
+                        <h3 class="text-xl font-black text-slate-800 mb-3">僱主指南</h3>
+                        <p class="text-sm text-slate-600 leading-relaxed">整理請家傭流程、續期、解約、保險與常見問題，降低僱主在辦理過程中的資訊落差。</p>
+                    </article>
+                    <article class="bg-white rounded-[28px] border border-slate-200 p-6 shadow-card hover:-translate-y-1 hover:shadow-soft transition-all">
+                        <div class="flex items-center justify-between mb-8">
+                            <span class="text-5xl font-black text-slate-100">04</span>
+                            <span class="material-symbols-rounded text-[#003399] bg-blue-50 rounded-2xl p-3">rate_review</span>
+                        </div>
+                        <h3 class="text-xl font-black text-slate-800 mb-3">匿名評價入口</h3>
+                        <p class="text-sm text-slate-600 leading-relaxed">鼓勵僱主基於真實服務經驗分享回饋，同時透過規則與審核機制減少惡意刷評與人身攻擊。</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="px-4 md:px-6 py-10 md:py-16 bg-white/60 border-y border-slate-200">
+            <div class="max-w-[1120px] mx-auto">
+                <div class="text-center max-w-3xl mx-auto mb-8 md:mb-12">
+                    <div class="inline-flex items-center gap-2 bg-blue-50 text-[#003399] px-4 py-1.5 rounded-full text-sm font-bold mb-4 border border-blue-100">
+                        <span class="material-symbols-rounded text-[18px]">policy</span> 平台信任原則
+                    </div>
+                    <h2 class="text-3xl md:text-4xl font-black text-slate-900 mb-4">我們如何守住「可信」這件事？</h2>
+                    <p class="text-slate-600 leading-relaxed">平台的價值不只是展示評價，而是讓評價、資訊與風險提示以更負責任的方式被使用。</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-5">
+                    <div class="bg-white rounded-[1.75rem] p-6 border border-slate-200 shadow-card">
+                        <div class="w-12 h-12 rounded-2xl bg-blue-50 text-[#003399] flex items-center justify-center mb-5"><span class="material-symbols-rounded">balance</span></div>
+                        <h3 class="text-lg font-black text-slate-800 mb-3">保持資訊透明</h3>
+                        <p class="text-sm text-slate-600 leading-relaxed">平台不把榜單當成官方認證，也不以單一評分替代僱主的獨立判斷；如頁面存在廣告、合作展示或增值服務，應與評價資訊清晰區分，任何資訊都應與合同、牌照與官方資料一併核對。</p>
+                    </div>
+                    <div class="bg-white rounded-[1.75rem] p-6 border border-slate-200 shadow-card">
+                        <div class="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center mb-5"><span class="material-symbols-rounded">admin_panel_settings</span></div>
+                        <h3 class="text-lg font-black text-slate-800 mb-3">治理評價內容</h3>
+                        <p class="text-sm text-slate-600 leading-relaxed">評價需要基於真實經歷；涉及造假、辱罵、隱私洩露、違法內容或惡意競爭的內容，應被限制、拒絕或刪除。</p>
+                    </div>
+                    <div class="bg-white rounded-[1.75rem] p-6 border border-slate-200 shadow-card">
+                        <div class="w-12 h-12 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center mb-5"><span class="material-symbols-rounded">privacy_tip</span></div>
+                        <h3 class="text-lg font-black text-slate-800 mb-3">尊重僱主隱私</h3>
+                        <p class="text-sm text-slate-600 leading-relaxed">平台前端以匿名方式展示評價，不鼓勵公開身份資料；技術資料僅應服務於反作弊、風控與平台安全。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="px-4 md:px-6 py-10 md:py-16">
+            <div class="max-w-[1280px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+                <div class="lg:col-span-5">
+                    <span class="text-[#003399] font-black text-sm tracking-[0.2em] uppercase">Review Governance</span>
+                    <h2 class="text-3xl md:text-4xl font-black text-slate-900 mt-3 mb-4">一條評價，應該怎樣被對待？</h2>
+                    <p class="text-slate-600 leading-relaxed mb-6">我們鼓勵分享真實經歷，但同時明確區分「主觀回饋」與「事實認定」。評價可以提供參考，卻不應成為攻擊、造假或洩露隱私的工具。</p>
+                    <a href="terms.html" class="inline-flex items-center gap-2 text-[#003399] font-black hover:underline underline-offset-4">
+                        查看評價規則與隱私政策
+                        <span class="material-symbols-rounded text-[20px]">arrow_forward</span>
+                    </a>
+                </div>
+                <div class="lg:col-span-7">
+                    <div class="relative bg-[#0f172a] rounded-[2rem] p-5 md:p-8 shadow-glow overflow-hidden">
+                        <div class="absolute -right-10 -top-10 opacity-5 pointer-events-none"><span class="material-symbols-rounded text-[240px]">task_alt</span></div>
+                        <div class="relative z-10 space-y-4">
+                            <div class="flex gap-4 items-start bg-white/6 border border-white/10 rounded-2xl p-4">
+                                <div class="w-9 h-9 rounded-full bg-blue-500 text-white flex items-center justify-center shrink-0 font-black">1</div>
+                                <div>
+                                    <h3 class="font-black text-white mb-1">基於真實服務經歷</h3>
+                                    <p class="text-sm text-slate-300 leading-relaxed">評分與文字內容應來自僱主與中介真實發生的服務接觸。</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-4 items-start bg-white/6 border border-white/10 rounded-2xl p-4">
+                                <div class="w-9 h-9 rounded-full bg-blue-500 text-white flex items-center justify-center shrink-0 font-black">2</div>
+                                <div>
+                                    <h3 class="font-black text-white mb-1">匿名提交與前端展示</h3>
+                                    <p class="text-sm text-slate-300 leading-relaxed">以匿名形式降低僱主分享經驗的顧慮，同時避免暴露敏感個人資料。</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-4 items-start bg-white/6 border border-white/10 rounded-2xl p-4">
+                                <div class="w-9 h-9 rounded-full bg-blue-500 text-white flex items-center justify-center shrink-0 font-black">3</div>
+                                <div>
+                                    <h3 class="font-black text-white mb-1">進入審核與風控</h3>
+                                    <p class="text-sm text-slate-300 leading-relaxed">平台透過規則提示與審核隊列，降低刷評、人身攻擊、違法內容及隱私洩露風險。</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-4 items-start bg-white/6 border border-white/10 rounded-2xl p-4">
+                                <div class="w-9 h-9 rounded-full bg-blue-500 text-white flex items-center justify-center shrink-0 font-black">4</div>
+                                <div>
+                                    <h3 class="font-black text-white mb-1">轉化為參考資訊</h3>
+                                    <p class="text-sm text-slate-300 leading-relaxed">通過評分、標籤、文字回饋與榜單方式呈現，但最終選擇仍需僱主自行核實與判斷。</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="px-4 md:px-6 py-10 md:py-16">
+            <div class="max-w-[1120px] mx-auto bg-white rounded-[2rem] md:rounded-[2.5rem] p-6 md:p-10 border border-slate-200 shadow-soft overflow-hidden relative">
+                <div class="absolute -right-12 -bottom-12 w-56 h-56 rounded-full bg-blue-50 pointer-events-none"></div>
+                <div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                    <div class="lg:col-span-5">
+                        <div class="inline-flex items-center gap-2 bg-rose-50 text-rose-700 px-4 py-1.5 rounded-full text-sm font-bold mb-4 border border-rose-100">
+                            <span class="material-symbols-rounded text-[18px]">do_not_disturb_on</span> 清晰邊界
+                        </div>
+                        <h2 class="text-3xl md:text-4xl font-black text-slate-900 mb-4">我們不做什麼？</h2>
+                        <p class="text-slate-600 leading-relaxed">清楚的邊界，能讓使用者更正確地理解平台資訊，也為未來可能出現的廣告、會員、合作展示或增值服務保留清晰合規的空間，避免把點評網站誤用成官方審批、法律意見或交易擔保。</p>
+                    </div>
+                    <div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <div class="bg-slate-50 rounded-2xl p-5 border border-slate-100">
+                            <span class="material-symbols-rounded text-slate-500 mb-3">block</span>
+                            <h3 class="font-black text-slate-800 mb-2">不作官方認證</h3>
+                            <p class="text-sm text-slate-500 leading-relaxed">牌照與資格狀態應以政府公開資料及最新官方記錄為準。</p>
+                        </div>
+                        <div class="bg-slate-50 rounded-2xl p-5 border border-slate-100">
+                            <span class="material-symbols-rounded text-slate-500 mb-3">handshake</span>
+                            <h3 class="font-black text-slate-800 mb-2">不把合作等同推薦</h3>
+                            <p class="text-sm text-slate-500 leading-relaxed">收錄、排名、廣告或合作展示均不等同於平台推薦、擔保或服務承諾；相關合作應以清晰標識方式呈現。</p>
+                        </div>
+                        <div class="bg-slate-50 rounded-2xl p-5 border border-slate-100">
+                            <span class="material-symbols-rounded text-slate-500 mb-3">gavel</span>
+                            <h3 class="font-black text-slate-800 mb-2">不構成法律建議</h3>
+                            <p class="text-sm text-slate-500 leading-relaxed">具體法律、合約或勞資爭議應諮詢專業人士或相關部門。</p>
+                        </div>
+                        <div class="bg-slate-50 rounded-2xl p-5 border border-slate-100">
+                            <span class="material-symbols-rounded text-slate-500 mb-3">forum</span>
+                            <h3 class="font-black text-slate-800 mb-2">不介入交易糾紛</h3>
+                            <p class="text-sm text-slate-500 leading-relaxed">平台提供資訊參考，不代替僱主與中介協商或處理合同爭議。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="px-4 md:px-6 py-10 md:py-16">
+            <div class="max-w-[1280px] mx-auto rounded-[2rem] md:rounded-[2.5rem] bg-gradient-to-br from-[#003399] to-[#001f5c] text-white p-6 md:p-10 lg:p-12 shadow-glow overflow-hidden relative">
+                <div class="absolute -right-16 -top-16 opacity-10 pointer-events-none"><span class="material-symbols-rounded text-[280px]">account_balance</span></div>
+                <div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                    <div class="lg:col-span-8">
+                        <p class="text-blue-200 font-black tracking-[0.2em] text-xs uppercase mb-4">Start Smart</p>
+                        <h2 class="text-3xl md:text-5xl font-black leading-tight mb-4">選擇中介之前，先做一個更有資料基礎的僱主。</h2>
+                        <p class="text-blue-100 leading-relaxed max-w-3xl">你可以先查找中介、閱讀其他僱主的已審核回饋，再對照僱主指南核對合同、收費、辦證、保險與離職安排。</p>
+                    </div>
+                    <div class="lg:col-span-4 flex flex-col sm:flex-row lg:flex-col gap-3">
+                        <a href="agencies.html" class="inline-flex items-center justify-center gap-2 bg-white text-[#003399] px-5 py-3 rounded-xl font-black hover:bg-blue-50 transition-colors">
+                            立即查找中介
+                            <span class="material-symbols-rounded text-[20px]">search</span>
+                        </a>
+                        <a href="contact.html" class="inline-flex items-center justify-center gap-2 bg-white/10 text-white px-5 py-3 rounded-xl font-black border border-white/20 hover:bg-white/15 transition-colors">
+                            聯繫我們
+                            <span class="material-symbols-rounded text-[20px]">support_agent</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-white border-t border-slate-200 mt-8 md:mt-10 pb-[calc(5rem+env(safe-area-inset-bottom))] md:pb-0">
+        <div class="max-w-[1280px] mx-auto px-4 md:px-6 py-6">
+            <div class="flex flex-col md:grid md:grid-cols-4 gap-6 md:gap-8 mb-6">
+                <div class="md:col-span-2">
+                    <a href="index.html" class="flex items-center gap-1.5 mb-2">
+                        <span class="material-symbols-rounded text-[#003399] text-[18px]">account_balance</span>
+                        <span class="text-base font-bold text-slate-800 tracking-tight">澳門家傭點評網</span>
+                    </a>
+                    <p class="text-xs text-slate-500 leading-normal max-w-sm">
+                        致力於以清晰、透明的方式整理澳門家傭中介評價資訊，幫助僱主降低資訊不對稱，促進行業良性發展。
+                    </p>
+                </div>
+                <div class="hidden md:block">
+                    <h4 class="font-bold text-slate-800 text-sm mb-3">快速鏈接</h4>
+                    <ul class="space-y-2 text-xs text-slate-500">
+                        <li><a href="index.html" class="hover:text-[#003399] transition-colors">首頁</a></li>
+                        <li><a href="agencies.html" class="hover:text-[#003399] transition-colors">中介</a></li>
+                        <li><a href="ranking.html" class="hover:text-[#003399] transition-colors">排行榜</a></li>
+                        <li><a href="legal.html" class="hover:text-[#003399] transition-colors">指南</a></li>
+                    </ul>
+                </div>
+                <div class="w-full mt-2 md:mt-0">
+                    <h4 class="hidden md:block font-bold text-slate-800 text-sm mb-3">關於與合規</h4>
+                    <ul class="flex flex-wrap md:flex-col gap-x-5 gap-y-2 md:gap-y-2 text-xs text-slate-500">
+                        <li><a href="about.html" class="text-[#003399] font-bold transition-colors">關於我們</a></li>
+                        <li><a href="contact.html" class="hover:text-[#003399] transition-colors">聯繫客服</a></li>
+                        <li><a href="terms.html" class="hover:text-[#003399] transition-colors">服務條款 & 隱私政策</a></li>
+                        <li><a href="disclaimer.html" class="hover:text-[#003399] transition-colors">免責聲明</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="pt-4 border-t border-slate-100 flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
+                <p class="text-[11px] text-slate-400">&copy; 2026 澳門家傭點評網. 僅供參考，不構成法律、交易或聘用建議。</p>
+            </div>
+        </div>
+    </footer>
+
+    <nav class="md:hidden fixed bottom-0 left-0 right-0 z-50 h-[calc(64px+env(safe-area-inset-bottom))] pb-[env(safe-area-inset-bottom)] bg-white/95 backdrop-blur-xl border-t border-slate-200 grid grid-cols-4" aria-label="手機底部導航">
+        <a href="index.html" class="flex flex-col items-center justify-center text-slate-400 active:text-[#003399] hover:text-[#003399] transition-colors">
+            <span class="material-symbols-rounded text-[23px]">home</span>
+            <span class="text-[10px] font-bold mt-0.5">首頁</span>
+        </a>
+        <a href="agencies.html" class="flex flex-col items-center justify-center text-slate-400 active:text-[#003399] hover:text-[#003399] transition-colors">
+            <span class="material-symbols-rounded text-[23px]">business_center</span>
+            <span class="text-[10px] font-bold mt-0.5">中介</span>
+        </a>
+        <a href="ranking.html" class="flex flex-col items-center justify-center text-slate-400 active:text-[#003399] hover:text-[#003399] transition-colors">
+            <span class="material-symbols-rounded text-[23px]">leaderboard</span>
+            <span class="text-[10px] font-bold mt-0.5">榜單</span>
+        </a>
+        <a href="legal.html" class="flex flex-col items-center justify-center text-slate-400 active:text-[#003399] hover:text-[#003399] transition-colors">
+            <span class="material-symbols-rounded text-[23px]">menu_book</span>
+            <span class="text-[10px] font-bold mt-0.5">指南</span>
+        </a>
+    </nav>
+
+</body>
+</html>

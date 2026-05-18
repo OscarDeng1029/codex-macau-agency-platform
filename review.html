@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" class="light">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>提交評價 - 澳門家傭點評網</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#002068",
+                        "surface": "#faf8ff",
+                        "surface-container-lowest": "#ffffff",
+                    },
+                    fontFamily: { sans: ['Public Sans', 'sans-serif'], }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Public Sans', sans-serif; min-height: 100dvh; }
+        .material-symbols-rounded { font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+    
+
+        /* UI consistency layer: aligned with the refreshed homepage without changing page content or data logic. */
+        :root {
+            --brand: #003399;
+            --brand-deep: #002068;
+            --surface: #faf8ff;
+        }
+        html { scrollbar-gutter: stable; }
+        body {
+            overflow-x: hidden;
+            background:
+                radial-gradient(circle at 8% -8%, rgba(59, 130, 246, .12), transparent 30%),
+                radial-gradient(circle at 94% 4%, rgba(99, 102, 241, .10), transparent 28%),
+                #faf8ff;
+        }
+        .focus-ring:focus-visible,
+        :where(a, button, input, select, textarea, [role="button"]):focus-visible {
+            outline: 3px solid rgba(0, 51, 153, .22);
+            outline-offset: 3px;
+        }
+        .surface-soft {
+            background: rgba(255, 255, 255, .86);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+        }
+        @media (max-width: 767px) {
+            body {
+                background:
+                    radial-gradient(circle at 0% 0%, rgba(59, 130, 246, .14), transparent 34%),
+                    #faf8ff;
+            }
+        }
+    </style>
+
+    <!-- GA4 monitoring core -->
+    <script src="assets/js/ga4-monitor.js" defer></script>
+    <!-- /GA4 monitoring core -->
+</head>
+<body class="bg-[#faf8ff] text-slate-800 antialiased min-h-screen flex flex-col">
+
+    <header class="fixed top-0 inset-x-0 z-50 bg-white/88 backdrop-blur-xl border-b border-slate-200/80">
+        <div class="max-w-[800px] mx-auto px-4 md:px-6 h-14 md:h-[72px] flex items-center justify-between gap-3">
+            <div class="flex items-center gap-3 min-w-0">
+                <button id="backBtn" class="w-9 h-9 md:w-10 md:h-10 rounded-full bg-slate-100 flex items-center justify-center border border-slate-200 text-slate-500 hover:bg-blue-50 hover:text-[#003399] transition-colors focus-ring" aria-label="返回上一頁">
+                    <span class="material-symbols-rounded text-[21px]">arrow_back</span>
+                </button>
+                <span class="w-8 h-8 md:w-9 md:h-9 rounded-2xl bg-[#003399] text-white flex items-center justify-center shadow-sm shrink-0">
+                    <span class="material-symbols-rounded text-[19px] md:text-[20px]">rate_review</span>
+                </span>
+                <span class="truncate text-[15px] md:text-lg font-black text-[#003399] tracking-tight">提交評價</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow pt-[104px] pb-16 px-4 md:px-6 max-w-[800px] mx-auto w-full">
+        <div class="mb-8">
+            <h1 class="text-3xl font-bold mb-2">評價 
+                <span id="targetAgencyName" class="text-[#003399] inline-flex items-center">
+                    <span class="inline-block w-32 h-8 bg-blue-100/50 animate-pulse rounded align-middle mx-1"></span>
+                </span>
+            </h1>
+            <p class="text-slate-500">您的真實反饋有助於維護澳門家傭點評網的公信力，幫助更多家庭避坑。</p>
+        </div>
+
+        <form id="reviewForm" class="space-y-6">
+            <section class="bg-white rounded-[24px] p-6 shadow-sm border border-slate-100">
+                <h2 class="text-lg font-bold mb-4">整體滿意度 <span class="text-red-500">*</span></h2>
+                <div class="flex items-center gap-2" id="mainStarGroup">
+                    <button type="button" class="star-btn transition-transform active:scale-90" data-value="1"><span class="material-symbols-rounded text-[40px] text-slate-200">star</span></button>
+                    <button type="button" class="star-btn transition-transform active:scale-90" data-value="2"><span class="material-symbols-rounded text-[40px] text-slate-200">star</span></button>
+                    <button type="button" class="star-btn transition-transform active:scale-90" data-value="3"><span class="material-symbols-rounded text-[40px] text-slate-200">star</span></button>
+                    <button type="button" class="star-btn transition-transform active:scale-90" data-value="4"><span class="material-symbols-rounded text-[40px] text-slate-200">star</span></button>
+                    <button type="button" class="star-btn transition-transform active:scale-90" data-value="5"><span class="material-symbols-rounded text-[40px] text-slate-200">star</span></button>
+                    <span id="ratingText" class="ml-4 text-sm font-bold text-slate-400 bg-slate-50 px-3 py-1 rounded-full hidden">請打分</span>
+                </div>
+                <input type="hidden" id="ratingValue" value="0">
+            </section>
+
+            <section class="bg-white rounded-[24px] p-6 shadow-sm border border-slate-100">
+                <h2 class="text-lg font-bold mb-4">細分服務指標 <span class="text-red-500">*</span></h2>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                    <div>
+                        <label class="block text-sm font-medium text-slate-600 mb-1">收費透明度</label>
+                        <div class="flex items-center gap-1" id="tStarGroup">
+                            <button type="button" class="star-btn" data-value="1"><span class="material-symbols-rounded text-[32px] text-slate-200">star</span></button>
+                            <button type="button" class="star-btn" data-value="2"><span class="material-symbols-rounded text-[32px] text-slate-200">star</span></button>
+                            <button type="button" class="star-btn" data-value="3"><span class="material-symbols-rounded text-[32px] text-slate-200">star</span></button>
+                            <button type="button" class="star-btn" data-value="4"><span class="material-symbols-rounded text-[32px] text-slate-200">star</span></button>
+                            <button type="button" class="star-btn" data-value="5"><span class="material-symbols-rounded text-[32px] text-slate-200">star</span></button>
+                        </div>
+                        <input type="hidden" id="metric-transparency" value="0">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-600 mb-1">辦證速度</label>
+                        <div class="flex items-center gap-1" id="sStarGroup">
+                            <button type="button" class="star-btn" data-value="1"><span class="material-symbols-rounded text-[32px] text-slate-200">star</span></button>
+                            <button type="button" class="star-btn" data-value="2"><span class="material-symbols-rounded text-[32px] text-slate-200">star</span></button>
+                            <button type="button" class="star-btn" data-value="3"><span class="material-symbols-rounded text-[32px] text-slate-200">star</span></button>
+                            <button type="button" class="star-btn" data-value="4"><span class="material-symbols-rounded text-[32px] text-slate-200">star</span></button>
+                            <button type="button" class="star-btn" data-value="5"><span class="material-symbols-rounded text-[32px] text-slate-200">star</span></button>
+                        </div>
+                        <input type="hidden" id="metric-speed" value="0">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-600 mb-1">服務態度</label>
+                        <div class="flex items-center gap-1" id="aStarGroup">
+                            <button type="button" class="star-btn" data-value="1"><span class="material-symbols-rounded text-[32px] text-slate-200">star</span></button>
+                            <button type="button" class="star-btn" data-value="2"><span class="material-symbols-rounded text-[32px] text-slate-200">star</span></button>
+                            <button type="button" class="star-btn" data-value="3"><span class="material-symbols-rounded text-[32px] text-slate-200">star</span></button>
+                            <button type="button" class="star-btn" data-value="4"><span class="material-symbols-rounded text-[32px] text-slate-200">star</span></button>
+                            <button type="button" class="star-btn" data-value="5"><span class="material-symbols-rounded text-[32px] text-slate-200">star</span></button>
+                        </div>
+                        <input type="hidden" id="metric-attitude" value="0">
+                    </div>
+                </div>
+            </section>
+
+            <section class="bg-white rounded-[24px] p-6 shadow-sm border border-slate-100">
+                <h2 class="text-lg font-bold mb-1">特徵標籤</h2>
+                <div class="flex flex-wrap gap-3 mt-4" id="tagsContainer">
+                    <button type="button" class="tag-btn text-sm px-5 py-2.5 rounded-full border border-slate-200 text-slate-600 hover:bg-slate-50 transition-colors">專業度高</button>
+                    <button type="button" class="tag-btn text-sm px-5 py-2.5 rounded-full border border-slate-200 text-slate-600 hover:bg-slate-50 transition-colors">溝通順暢</button>
+                    <button type="button" class="tag-btn text-sm px-5 py-2.5 rounded-full border border-slate-200 text-slate-600 hover:bg-slate-50 transition-colors">收費透明</button>
+                    <button type="button" class="tag-btn text-sm px-5 py-2.5 rounded-full border border-slate-200 text-slate-600 hover:bg-slate-50 transition-colors">隱形收費</button>
+                    <button type="button" class="tag-btn text-sm px-5 py-2.5 rounded-full border border-slate-200 text-slate-600 hover:bg-slate-50 transition-colors">積極跟進</button>
+                    <button type="button" class="tag-btn text-sm px-5 py-2.5 rounded-full border border-slate-200 text-slate-600 hover:bg-slate-50 transition-colors">售後負責</button>
+                    <button type="button" class="tag-btn text-sm px-5 py-2.5 rounded-full border border-slate-200 text-slate-600 hover:bg-slate-50 transition-colors">快速響應</button>
+                    <button type="button" class="tag-btn text-sm px-5 py-2.5 rounded-full border border-slate-200 text-slate-600 hover:bg-slate-50 transition-colors">服務態度好</button>
+                    <button type="button" class="tag-btn text-sm px-5 py-2.5 rounded-full border border-slate-200 text-slate-600 hover:bg-slate-50 transition-colors">服務態度差</button>
+                    <button type="button" class="tag-btn text-sm px-5 py-2.5 rounded-full border border-slate-200 text-slate-600 hover:bg-slate-50 transition-colors">工人貨不對板</button>
+                    <button type="button" class="tag-btn text-sm px-5 py-2.5 rounded-full border border-slate-200 text-slate-600 hover:bg-slate-50 transition-colors">工人質素好</button>
+                    <button type="button" class="tag-btn text-sm px-5 py-2.5 rounded-full border border-slate-200 text-slate-600 hover:bg-slate-50 transition-colors">處理問題慢</button>
+                    <button type="button" class="tag-btn text-sm px-5 py-2.5 rounded-full border border-slate-200 text-slate-600 hover:bg-slate-50 transition-colors">推卸責任</button>
+                    <button type="button" class="tag-btn text-sm px-5 py-2.5 rounded-full border border-slate-200 text-slate-600 hover:bg-slate-50 transition-colors">正規發票/轉帳</button>
+                    <button type="button" class="tag-btn text-sm px-5 py-2.5 rounded-full border border-slate-200 text-slate-600 hover:bg-slate-50 transition-colors">只收現金</button>
+                    <button type="button" class="tag-btn text-sm px-5 py-2.5 rounded-full border border-slate-200 text-slate-600 hover:bg-slate-50 transition-colors">拒給正式收據</button>
+                </div>
+            </section>
+
+            <section class="bg-white rounded-[24px] p-6 shadow-sm border border-slate-100">
+                <div class="flex justify-between items-end mb-1">
+                    <label for="reviewText" class="block text-lg font-bold">詳細描述</label>
+                    <span class="text-xs text-slate-400 bg-slate-100 px-2 py-0.5 rounded">選填</span>
+                </div>
+                <textarea id="reviewText" rows="4" class="w-full rounded-xl bg-slate-50 border border-slate-200 p-4 text-sm focus:ring-2 focus:ring-[#003399] mt-2 transition-all resize-y" placeholder="您可以分享您的經歷，幫助其他家庭避坑（不想打字可直接提交）..."></textarea>
+            </section>
+
+            <div class="pt-4">
+                <button type="button" id="submitBtn" class="w-full bg-[#003399] text-white font-bold text-lg py-4 rounded-xl shadow-lg hover:bg-[#002068] active:scale-95 transition-all flex items-center justify-center gap-2">
+                    <span class="material-symbols-rounded text-[20px]">shield</span> 安全提交 (匿名發佈)
+                </button>
+                
+                <div class="flex items-start gap-3 mt-4 px-2">
+                    <input type="checkbox" id="privacyConsent" class="mt-1 w-4 h-4 rounded border-slate-300 text-[#003399] focus:ring-[#003399]" />
+                    <label for="privacyConsent" class="text-sm text-slate-500 cursor-pointer select-none">
+                        我確認此評論代表我的真實經歷，並同意
+                        <button type="button" onclick="openPrivacyModal()" class="text-[#003399] font-bold hover:underline transition-colors focus:outline-none">平台內容發佈與隱私政策</button>。
+                    </label>
+                </div>
+            </div>
+        </form>
+    </main>
+
+    <div id="privacyModal" class="fixed inset-0 bg-slate-900/40 z-[100] hidden flex-col items-center justify-center px-4 backdrop-blur-sm transition-opacity">
+        <div class="bg-white rounded-3xl w-full max-w-lg shadow-2xl overflow-hidden flex flex-col max-h-[85vh] transform transition-transform scale-95 opacity-0" id="privacyModalContent">
+            
+            <div class="px-6 py-5 border-b border-slate-100 flex justify-between items-center bg-white sticky top-0 z-10">
+                <h3 class="text-xl font-bold text-slate-800 flex items-center gap-2">
+                    <span class="material-symbols-rounded text-[#003399]">policy</span> 隱私與內容發佈政策
+                </h3>
+                <button onclick="closePrivacyModal()" class="text-slate-400 hover:text-slate-600 bg-slate-50 hover:bg-slate-100 p-1.5 rounded-full transition-colors">
+                    <span class="material-symbols-rounded block text-[20px]">close</span>
+                </button>
+            </div>
+            
+            <div class="p-6 overflow-y-auto text-[15px] text-slate-600 space-y-5">
+                <p class="leading-relaxed">歡迎您在澳門家傭點評網分享真實經歷。為維護平台生態，保護僱主與合法中介的權益，請您在提交前仔細閱讀並同意以下條款：</p>
+                
+                <div>
+                    <h4 class="font-bold text-slate-800 mb-1">1. 真實性與客觀性承諾</h4>
+                    <p class="leading-relaxed">您保證所發佈的評論均基於您與該中介真實發生的服務經歷。禁止發佈包含捏造事實、惡意誹謗、無中生有或同業惡意競爭的內容。</p>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-slate-800 mb-1">2. 絕對隱私保護</h4>
+                    <p class="leading-relaxed">您的評價將以<strong class="text-slate-800">「匿名」</strong>形式對外展示。平台系統不會在前端展示、也不會向被評價之中介機構主動透露您的個人身份信息、聯絡方式等隱私數據。</p>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-slate-800 mb-1">3. 內容審核機制</h4>
+                    <p class="leading-relaxed">為防止水軍和惡意刷單，所有評價提交後將進入平台「審核隊列」。我們有權拒絕發佈或刪除包含辱罵、人身攻擊、違規廣告、洩露他人隱私等違反法律法規的內容。</p>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-slate-800 mb-1">4. 法律免責聲明</h4>
+                    <p class="leading-relaxed">評論者需對其發佈的所有內容承擔相應的法律責任。澳門家傭點評網僅作為中立的信息存儲與展示空間，不代表平台贊同其觀點或證實其描述。</p>
+                </div>
+            </div>
+
+            <div class="px-6 py-5 border-t border-slate-100 bg-slate-50 flex justify-end gap-3 sticky bottom-0">
+                <button onclick="closePrivacyModal()" class="px-6 py-2.5 rounded-xl font-bold text-slate-500 hover:bg-slate-200 transition-colors">取消</button>
+                <button onclick="acceptPrivacy()" class="bg-[#003399] text-white px-6 py-2.5 rounded-xl font-bold hover:bg-[#002068] transition-colors shadow-md active:scale-95">我已閱讀並同意</button>
+            </div>
+            
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../assets/js/db.js"></script>
+    
+    <script>
+        // 🌟 彈窗控制邏輯
+        window.openPrivacyModal = function() {
+            const modal = document.getElementById('privacyModal');
+            const content = document.getElementById('privacyModalContent');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            setTimeout(() => {
+                content.classList.remove('scale-95', 'opacity-0');
+                content.classList.add('scale-100', 'opacity-100');
+            }, 10);
+        };
+
+        window.closePrivacyModal = function() {
+            const modal = document.getElementById('privacyModal');
+            const content = document.getElementById('privacyModalContent');
+            content.classList.remove('scale-100', 'opacity-100');
+            content.classList.add('scale-95', 'opacity-0');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            }, 200);
+        };
+
+        window.acceptPrivacy = function() {
+            document.getElementById('privacyConsent').checked = true;
+            closePrivacyModal();
+        };
+
+        // 星星打分初始化
+        function initStars(groupId, inputId, labelId = null, labelsData = null) {
+            const group = document.getElementById(groupId);
+            const input = document.getElementById(inputId);
+            const btns = group.querySelectorAll('.star-btn');
+            const labelEl = labelId ? document.getElementById(labelId) : null;
+
+            btns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const val = parseInt(btn.dataset.value);
+                    input.value = val;
+                    
+                    btns.forEach((b, idx) => {
+                        const icon = b.querySelector('span');
+                        if (idx < val) {
+                            icon.classList.remove('text-slate-200');
+                            icon.classList.add('text-amber-400');
+                        } else {
+                            icon.classList.remove('text-amber-400');
+                            icon.classList.add('text-slate-200');
+                        }
+                    });
+
+                    if (labelEl && labelsData && labelsData[val]) {
+                        labelEl.classList.remove('hidden');
+                        labelEl.textContent = labelsData[val].t;
+                        labelEl.className = `ml-4 text-sm font-bold px-3 py-1 rounded-full ${labelsData[val].c} ${labelsData[val].b}`;
+                    }
+                });
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            document.getElementById('backBtn').addEventListener('click', () => window.history.back());
+
+            const urlParams = new URLSearchParams(window.location.search);
+            const targetId = urlParams.get('id');
+            const targetNameEl = document.getElementById('targetAgencyName');
+            
+            let currentAgencyName = ''; 
+
+            if (targetId && typeof fetchAgencyById === 'function') {
+                const agency = await fetchAgencyById(targetId);
+                if (agency) {
+                    targetNameEl.innerText = agency.name;
+                    currentAgencyName = agency.name;
+                } else {
+                    targetNameEl.innerText = "未知中介";
+                }
+            }
+
+            const ratingLabels = { 
+                1:{t:'極差',c:'text-red-500',b:'bg-red-50'}, 
+                2:{t:'較差',c:'text-orange-500',b:'bg-orange-50'}, 
+                3:{t:'一般',c:'text-amber-500',b:'bg-amber-50'}, 
+                4:{t:'滿意',c:'text-green-600',b:'bg-green-50'}, 
+                5:{t:'極力推薦',c:'text-green-600',b:'bg-green-50'} 
+            };
+            
+            initStars('mainStarGroup', 'ratingValue', 'ratingText', ratingLabels);
+            initStars('tStarGroup', 'metric-transparency');
+            initStars('sStarGroup', 'metric-speed');
+            initStars('aStarGroup', 'metric-attitude');
+
+            document.querySelectorAll('.tag-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    btn.classList.toggle('selected');
+                    const isRedTag = btn.innerText.includes('拒給'); 
+                    if (btn.classList.contains('selected')) {
+                        btn.classList.add('bg-blue-50', 'text-[#003399]', 'font-bold', 'border-blue-200');
+                        btn.classList.remove('border-slate-200', 'text-slate-600', 'border-red-200', 'text-red-600');
+                    } else {
+                        btn.classList.remove('bg-blue-50', 'text-[#003399]', 'font-bold', 'border-blue-200');
+                        if (isRedTag) btn.classList.add('border-red-200', 'text-red-600');
+                        else btn.classList.add('border-slate-200', 'text-slate-600');
+                    }
+                });
+            });
+
+            document.getElementById('submitBtn').addEventListener('click', async () => {
+                if (!targetId) return alert('缺少中介 ID');
+                
+                const rating = parseInt(document.getElementById('ratingValue').value);
+                const t_val = parseInt(document.getElementById('metric-transparency').value);
+                const s_val = parseInt(document.getElementById('metric-speed').value);
+                const a_val = parseInt(document.getElementById('metric-attitude').value);
+                
+                const text = document.getElementById('reviewText').value.trim();
+                const consent = document.getElementById('privacyConsent').checked;
+
+                if (rating === 0 || t_val === 0 || s_val === 0 || a_val === 0) {
+                    window.MAPGA4?.track('submit_review_error', {
+                        agency_id: targetId,
+                        agency_name: currentAgencyName,
+                        error_type: 'missing_required_rating',
+                        rating: rating,
+                        transparency: t_val,
+                        speed: s_val,
+                        attitude: a_val
+                    });
+                    return alert('請為整體滿意度和三大服務指標完成打分！');
+                }
+                if (!consent) {
+                    window.MAPGA4?.track('submit_review_error', {
+                        agency_id: targetId,
+                        agency_name: currentAgencyName,
+                        error_type: 'missing_privacy_consent'
+                    });
+                    openPrivacyModal();
+                    return alert('請先閱讀並同意平台內容發佈與隱私政策！');
+                }
+
+                const selectedTags = Array.from(document.querySelectorAll('.tag-btn.selected')).map(btn => btn.innerText);
+                const submitBtn = document.getElementById('submitBtn');
+                submitBtn.innerHTML = '<span class="material-symbols-rounded animate-spin">autorenew</span> 提交中...';
+                submitBtn.disabled = true;
+
+                try {
+                    // 🌟 關鍵修改：加入 .select() 來獲取剛插入的數據 ID
+                    const { data, error } = await supabaseClient.from('reviews').insert([{
+                        agency_id: targetId,
+                        agency_name: currentAgencyName,
+                        rating: rating,
+                        transparency: t_val, 
+                        speed: s_val,        
+                        attitude: a_val,     
+                        tags: selectedTags,
+                        content: text, 
+                        status: 'pending'
+                    }]).select();
+                    
+                    if (error) throw error;
+
+                    window.MAPGA4?.track('submit_review_success', {
+                        agency_id: targetId,
+                        agency_name: currentAgencyName,
+                        rating: rating,
+                        transparency: t_val,
+                        speed: s_val,
+                        attitude: a_val,
+                        tag_count: selectedTags.length,
+                        has_text: text.length > 0,
+                        text_length_bucket: text.length === 0 ? '0' : text.length < 50 ? '1_49' : text.length < 200 ? '50_199' : '200_plus'
+                    });
+                    
+                    // 🌟 LocalStorage 寫入邏輯，保存到本地
+                    if (data && data.length > 0) {
+                        const newReviewId = data[0].id;
+                        const storageKey = 'macau_housekeeping_my_review_ids';
+                        const localIds = JSON.parse(localStorage.getItem(storageKey) || '[]');
+                        localIds.push(newReviewId);
+                        localStorage.setItem(storageKey, JSON.stringify(localIds));
+                    }
+                    
+                    alert('提交成功！評價已進入審核隊列，您可在「我的」頁面查看進度。');
+                    window.history.back();
+                } catch (error) {
+                    console.error("提交失敗:", error.message);
+                    window.MAPGA4?.track('submit_review_error', {
+                        agency_id: targetId,
+                        agency_name: currentAgencyName,
+                        error_type: 'network_or_database_error',
+                        error_message: String(error?.message || '').slice(0, 80)
+                    });
+                    alert("提交失敗，請檢查網絡連接。");
+                    submitBtn.innerHTML = '<span class="material-symbols-rounded text-[20px]">shield</span> 安全提交 (匿名發佈)';
+                    submitBtn.disabled = false;
+                }
+            });
+        });
+    </script>
+</body>
+</html>

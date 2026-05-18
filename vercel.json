@@ -1,0 +1,12 @@
+{
+  "rewrites": [
+    {
+      "source": "/seo/:slug",
+      "destination": "/api/seo?id=:slug"
+    },
+    {
+      "source": "/sitemap.xml",
+      "destination": "/api/sitemap"
+    }
+  ]
+}

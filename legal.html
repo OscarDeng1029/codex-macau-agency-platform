@@ -1,0 +1,1690 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" class="light">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>澳門聘請家傭指南｜請工人姐姐流程、續期、解約與保險懶人包</title>
+    <meta name="description" content="整理澳門聘請家務工作外地僱員（外傭、內地家政）的完整指南。包含首次申請流程、續期手續、解約注意事項、勞工保險及常見問題，澳門搵工人必備。" />
+    <link rel="canonical" href="https://www.macauagencyreview.com/legal.html" />
+    <link rel="icon" type="image/png" href="/assets/images/logo.png" />
+    <link rel="apple-touch-icon" href="/assets/images/logo.png" />
+
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://www.macauagencyreview.com/legal.html" />
+    <meta property="og:title" content="澳門聘請家傭指南｜請工人姐姐流程、續期與解約懶人包" />
+    <meta property="og:description" content="整理澳門聘請外傭的完整指南，包含申請流程、續期、保險及出糧規定。" />
+    <meta property="og:image" content="https://www.macauagencyreview.com/assets/images/share-thumbnailv1.png" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://www.macauagencyreview.com/legal.html" />
+    <meta name="twitter:title" content="澳門聘請家傭指南｜請工人姐姐流程、續期與解約懶人包" />
+    <meta name="twitter:description" content="整理澳門聘請外傭的完整指南，包含申請流程、續期、保險及出糧規定。" />
+    <meta name="twitter:image" content="https://www.macauagencyreview.com/assets/images/share-thumbnailv1.png" />
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;900&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#002068",
+                        "surface": "#faf8ff",
+                        "on-surface": "#1a1b22",
+                    },
+                    fontFamily: { sans: ['Public Sans', 'sans-serif'], }
+                }
+            }
+        }
+    </script>
+    <style>
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Public Sans', sans-serif; min-height: 100dvh; }
+        .material-symbols-rounded { font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; }
+        .faq-item.active .faq-answer { max-height: 800px; transition: max-height 0.5s ease-in; overflow-y: auto; }
+        .faq-item.active .faq-icon { transform: rotate(180deg); }
+        
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        @keyframes highlightCard {
+            0%, 100% { box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); border-color: #e2e8f0; }
+            15%, 50% { box-shadow: 0 0 0 6px rgba(59, 130, 246, 0.3); border-color: #3b82f6; }
+        }
+        
+        @keyframes highlightSection {
+            0%, 100% { background-color: transparent; border-radius: 24px; }
+            15%, 50% { background-color: rgba(219, 234, 254, 0.08); border-radius: 24px; }
+        }
+
+        /* 新增：深色背景卡片專屬的邊緣發光動畫，避免改變背景色 */
+        @keyframes highlightDarkSection {
+            0%, 100% { box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1); }
+            15%, 50% { box-shadow: 0 0 0 6px rgba(96, 165, 250, 0.4); }
+        }
+
+        @keyframes highlightBtn {
+            0%, 100% { transform: scale(1); box-shadow: none; }
+            15%, 50% { transform: scale(1.05); box-shadow: 0 0 0 6px rgba(16, 185, 129, 0.4); }
+        }
+
+        .target-card { animation: highlightCard 2.5s ease-out !important; }
+        .target-section { 
+            animation: highlightSection 2s ease-out; 
+            padding: 16px; 
+            margin: -16px;
+        }
+        .target-dark-section {
+            animation: highlightDarkSection 2s ease-out !important;
+        }
+        .btn-highlight { animation: highlightBtn 2.5s ease-out !important; }
+
+        @media print {
+            header, nav, aside, #showMoreFaq, #faqSearch, .no-print, #mobile-back-bar, #mobile-directory-view, #desktop-global-search-container {
+                display: none !important;
+            }
+
+            body { background: white !important; color: black !important; padding: 0 !important; }
+            main { display: block !important; max-width: none !important; padding: 24px !important; }
+            section { break-inside: avoid; margin-bottom: 28px !important; display: block !important;}
+            .faq-answer { max-height: none !important; overflow: visible !important; }
+            .faq-item { break-inside: avoid; border: 1px solid #d1d5db !important; }
+            a::after { content: " (" attr(href) ")"; font-size: 10px; word-break: break-all; }
+        }
+
+        #desktop-toc .toc-link::before {
+            content: ''; display: none; position: absolute; left: -17px; top: 50%;
+            transform: translateY(-50%); width: 6px; height: 6px; border-radius: 50%;
+            background-color: #003399;
+        }
+        #desktop-toc .toc-link.active-toc::before { display: block; }
+    
+
+        /* UI consistency layer: aligned with the refreshed homepage without changing page content or data logic. */
+        :root {
+            --brand: #003399;
+            --brand-deep: #002068;
+            --surface: #faf8ff;
+        }
+        html { scrollbar-gutter: stable; }
+        body {
+            overflow-x: hidden;
+            background:
+                radial-gradient(circle at 8% -8%, rgba(59, 130, 246, .12), transparent 30%),
+                radial-gradient(circle at 94% 4%, rgba(99, 102, 241, .10), transparent 28%),
+                #faf8ff;
+        }
+        .focus-ring:focus-visible,
+        :where(a, button, input, select, textarea, [role="button"]):focus-visible {
+            outline: 3px solid rgba(0, 51, 153, .22);
+            outline-offset: 3px;
+        }
+        .surface-soft {
+            background: rgba(255, 255, 255, .86);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+        }
+        @media (max-width: 767px) {
+            body {
+                background:
+                    radial-gradient(circle at 0% 0%, rgba(59, 130, 246, .14), transparent 34%),
+                    #faf8ff;
+            }
+        }
+    </style>
+
+    <!-- GA4 monitoring core -->
+    <script src="assets/js/ga4-monitor.js" defer></script>
+    <!-- /GA4 monitoring core -->
+</head>
+<body class="bg-surface text-on-surface antialiased selection:bg-blue-200 pb-[calc(72px+env(safe-area-inset-bottom))] md:pb-0">
+
+    <header class="fixed top-0 inset-x-0 z-50 bg-white/88 backdrop-blur-xl border-b border-slate-200/80">
+        <div class="max-w-[1200px] mx-auto px-4 md:px-6 h-14 md:h-[72px] flex items-center justify-between gap-3">
+            <a href="index.html" class="flex items-center gap-2 min-w-0 hover:opacity-85 transition-opacity focus-ring rounded-xl" aria-label="返回首頁">
+                <span class="w-8 h-8 md:w-9 md:h-9 rounded-2xl bg-[#003399] text-white flex items-center justify-center shadow-sm shrink-0">
+                    <span class="material-symbols-rounded text-[19px] md:text-[20px]">account_balance</span>
+                </span>
+                <span class="truncate text-[15px] md:text-lg font-black text-[#003399] tracking-tight">澳門家傭點評網</span>
+            </a>
+
+            <nav class="hidden md:flex items-center gap-1" aria-label="主要導航">
+                <a class="px-4 py-2 rounded-xl text-slate-600 hover:text-[#003399] hover:bg-slate-50 transition-colors font-medium" href="index.html">首頁</a>
+                <a class="px-4 py-2 rounded-xl text-slate-600 hover:text-[#003399] hover:bg-slate-50 transition-colors font-medium" href="agencies.html">中介</a>
+                <a class="px-4 py-2 rounded-xl text-slate-600 hover:text-[#003399] hover:bg-slate-50 transition-colors font-medium" href="ranking.html">排行榜</a>
+                <a class="px-4 py-2 rounded-xl bg-blue-50 text-[#003399] font-bold" href="legal.html">指南</a>
+                <a class="px-4 py-2 rounded-xl text-slate-600 hover:text-[#003399] hover:bg-slate-50 transition-colors font-medium" href="about.html">關於</a>
+            </nav>
+
+            <div class="flex items-center gap-2">
+                <a href="contact.html" class="hidden md:inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-slate-200 text-slate-700 font-bold hover:border-blue-200 hover:bg-blue-50 hover:text-[#003399] transition-colors focus-ring">
+                    <span class="material-symbols-rounded text-[18px]">support_agent</span>
+                    聯繫
+                </a>
+                <a href="profile.html" aria-label="用戶中心" class="w-9 h-9 md:w-10 md:h-10 rounded-full bg-slate-100 flex items-center justify-center border border-slate-200 hover:bg-slate-200 transition-colors focus-ring">
+                    <span class="material-symbols-rounded text-[#003399] text-[19px]">person</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <div id="mobile-back-bar" class="hidden lg:hidden sticky top-16 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm px-4 py-3 cursor-pointer group" onclick="showMobileDirectory()">
+        <div class="flex items-center gap-2 text-slate-600 group-hover:text-[#003399] transition-colors">
+            <span class="material-symbols-rounded text-[20px]">arrow_back</span>
+            <span class="font-bold text-sm">返回指南目錄</span>
+        </div>
+    </div>
+
+    <main class="max-w-[1280px] mx-auto px-4 md:px-6 pt-24 pb-16 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
+        
+        <div class="lg:col-span-8 space-y-12 md:space-y-16">
+            
+            <section id="intro-section" class="mobile-dir-visible lg:!block">
+                <div class="inline-flex items-center gap-2 bg-blue-50 text-[#003399] px-4 py-1.5 rounded-full text-sm font-bold mb-4 border border-blue-100">
+                    <span class="material-symbols-rounded text-[18px]">verified_user</span> 整理自澳門勞工事務局及政府入口網站｜最後人工校對：2026-04-26
+                </div>
+                <h1 class="text-3xl md:text-4xl font-black text-slate-800 mb-4">僱主指南與常見問題</h1>
+                <p class="text-slate-500 max-w-2xl leading-relaxed">
+                    我們整理了澳門勞工事務局、政府入口網站及相關法規資料，協助僱主理解申請家務工作外地僱員的主要流程、文件、期限及合規風險。內容涵蓋一般外地家傭與內地家傭的政策差異。
+                </p>
+            </section>
+
+            <section id="mobile-directory-view" class="mobile-dir-visible lg:hidden block">
+                
+                <div class="grid grid-cols-4 gap-2 mb-6">
+                    <div onclick="openMobileSection('process')" class="flex flex-col items-center justify-center gap-2 bg-white border border-slate-200 rounded-2xl py-4 shadow-sm cursor-pointer active:bg-blue-50 transition-colors">
+                        <div class="w-10 h-10 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center"><span class="material-symbols-rounded text-[22px]">add_circle</span></div>
+                        <span class="text-xs font-bold text-slate-700">首次申請</span>
+                    </div>
+                    <div onclick="openMobileSection('renewal')" class="flex flex-col items-center justify-center gap-2 bg-white border border-slate-200 rounded-2xl py-4 shadow-sm cursor-pointer active:bg-emerald-50 transition-colors">
+                        <div class="w-10 h-10 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center"><span class="material-symbols-rounded text-[22px]">update</span></div>
+                        <span class="text-xs font-bold text-slate-700">續期指引</span>
+                    </div>
+                    <div onclick="openMobileSection('termination')" class="flex flex-col items-center justify-center gap-2 bg-white border border-slate-200 rounded-2xl py-4 shadow-sm cursor-pointer active:bg-rose-50 transition-colors">
+                        <div class="w-10 h-10 rounded-full bg-rose-50 text-rose-600 flex items-center justify-center"><span class="material-symbols-rounded text-[22px]">do_not_disturb_on</span></div>
+                        <span class="text-xs font-bold text-slate-700">解約離職</span>
+                    </div>
+                    <div onclick="openMobileSection('mainland-helper')" class="flex flex-col items-center justify-center gap-2 bg-white border border-slate-200 rounded-2xl py-4 shadow-sm cursor-pointer active:bg-amber-50 transition-colors">
+                        <div class="w-10 h-10 rounded-full bg-amber-50 text-amber-600 flex items-center justify-center"><span class="material-symbols-rounded text-[22px]">public</span></div>
+                        <span class="text-xs font-bold text-slate-700">內地家傭</span>
+                    </div>
+                </div>
+
+                <div class="relative w-full mb-6">
+                    <span class="material-symbols-rounded absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-xl">search</span>
+                    <input id="global-mobile-search" type="text" placeholder="全局檢索指南內容或常見問題..." class="w-full pl-12 pr-4 py-3.5 bg-white border border-slate-200 rounded-2xl focus:ring-2 focus:ring-[#003399]/30 focus:border-[#003399] transition-all text-sm shadow-sm outline-none">
+                </div>
+
+                <h2 class="text-sm font-black text-slate-400 tracking-wider mb-3 px-2">全部指南板塊</h2>
+                <div id="mobile-directory-list" class="flex flex-col gap-3">
+                    </div>
+
+                <div class="mt-8 bg-[#0f172a] text-white rounded-3xl p-6 shadow-xl relative overflow-hidden">
+                    <div class="absolute -right-10 -top-10 opacity-5 pointer-events-none">
+                        <span class="material-symbols-rounded text-[200px]">map</span>
+                    </div>
+                    <div class="relative z-10">
+                        <h2 class="text-xl font-black mb-6 text-white flex items-center gap-2">
+                            <span class="material-symbols-rounded text-blue-400">location_on</span> 政府辦理地點與諮詢
+                        </h2>
+                        
+                        <div class="flex flex-col gap-6">
+                            <div>
+                                <ul class="space-y-5 text-sm">
+                                    <li class="border-l-2 border-blue-500/30 pl-4 relative">
+                                        <div class="absolute -left-[9px] top-1.5 w-4 h-4 bg-[#0f172a] rounded-full border-2 border-blue-400"></div>
+                                        <p class="font-bold text-white mb-1 text-base">勞工事務局（金龍中心）</p>
+                                        <p class="text-slate-400 mb-1">澳門冼星海大馬路105號金龍中心3樓</p>
+                                        <p class="text-[11px] text-slate-500 bg-white/5 inline-block px-2 py-1 rounded">一至四: 09:00-13:00 / 14:30-17:45 | 五: 09:00-13:00 / 14:30-17:30</p>
+                                    </li>
+                                    <li class="border-l-2 border-blue-500/30 pl-4 relative">
+                                        <div class="absolute -left-[9px] top-1.5 w-4 h-4 bg-[#0f172a] rounded-full border-2 border-slate-600"></div>
+                                        <p class="font-bold text-white mb-1 text-base">勞工事務局總辦事處</p>
+                                        <p class="text-slate-400 mb-1">澳門馬揸度博士大馬路221-279號先進廣場大廈</p>
+                                    </li>
+                                    <li class="border-l-2 border-blue-500/30 pl-4 relative">
+                                        <div class="absolute -left-[9px] top-1.5 w-4 h-4 bg-[#0f172a] rounded-full border-2 border-slate-600"></div>
+                                        <p class="font-bold text-white mb-1 text-base">政府綜合服務中心（黑沙環）</p>
+                                        <p class="text-slate-400 mb-1">澳門慕拉士大馬路222號地下</p>
+                                        <p class="text-[11px] text-slate-500 bg-white/5 inline-block px-2 py-1 rounded">一至五: 09:00-18:00，中午照常辦公</p>
+                                    </li>
+                                    <li class="border-l-2 border-blue-500/30 pl-4 relative">
+                                        <div class="absolute -left-[9px] top-1.5 w-4 h-4 bg-[#0f172a] rounded-full border-2 border-slate-600"></div>
+                                        <p class="font-bold text-white mb-1 text-base">離島政府綜合服務中心（氹仔）</p>
+                                        <p class="text-slate-400 mb-1">氹仔哥英布拉街225號</p>
+                                        <p class="text-[11px] text-slate-500 bg-white/5 inline-block px-2 py-1 rounded">一至五: 09:00-18:00，中午照常辦公</p>
+                                    </li>
+                                </ul>
+                            </div>
+                            
+                            <div class="bg-white/5 backdrop-blur-md p-5 rounded-2xl border border-white/10">
+                                <h4 class="text-blue-400 font-bold mb-4 flex items-center gap-2"><span class="material-symbols-rounded text-[18px]">contact_support</span> 官方諮詢</h4>
+                                <div class="space-y-4">
+                                    <div class="flex items-center gap-4">
+                                        <div class="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center shadow-lg shrink-0"><span class="material-symbols-rounded text-white text-[18px]">call</span></div>
+                                        <div><p class="text-xs text-slate-400 mb-0.5">勞工局諮詢熱線</p><p class="font-bold text-lg text-white">(+853) 2833 6960</p></div>
+                                    </div>
+                                    <div class="flex items-center gap-4">
+                                        <div class="w-10 h-10 rounded-full bg-slate-700 flex items-center justify-center shadow-lg shrink-0"><span class="material-symbols-rounded text-white text-[18px]">mail</span></div>
+                                        <div><p class="text-xs text-slate-400 mb-0.5">外僱事務電郵</p><p class="font-bold text-xs text-white break-all">dsaldctnr@dsal.gov.mo</p></div>
+                                    </div>
+                                    <div class="pt-4 mt-2 border-t border-white/10">
+                                        <a href="https://www.mo.gov.mo/home" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between w-full bg-white text-slate-900 px-4 py-3 rounded-xl font-bold hover:bg-blue-50 transition-colors group">
+                                            <span class="flex items-center gap-2 text-sm">登入「一戶通」辦理 <span class="material-symbols-rounded text-[16px] text-amber-500">bolt</span></span>
+                                            <span class="material-symbols-rounded text-slate-300 group-hover:text-[#003399]">arrow_forward</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="quick-start" class="content-section hidden lg:block scroll-mt-28">
+                <div class="flex items-center justify-between mb-4 md:mb-6">
+                    <h2 class="text-2xl font-bold flex items-center gap-2 text-slate-800">
+                        <span class="material-symbols-rounded text-[#003399]">route</span> 常用情境指引
+                    </h2>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 md:gap-5 py-2">
+                    <div class="bg-white border border-blue-100 rounded-3xl p-5 hover:border-blue-300 hover:shadow-md transition-all cursor-pointer" onclick="document.getElementById('process').scrollIntoView({behavior: 'smooth'})">
+                        <div class="w-10 h-10 rounded-2xl bg-blue-50 text-blue-700 flex items-center justify-center mb-3">
+                            <span class="material-symbols-rounded text-[20px]">add_circle</span>
+                        </div>
+                        <h3 class="font-black text-slate-800 mb-1 text-sm md:text-base">首次申請</h3>
+                        <p class="text-[11px] text-slate-500 mt-1 leading-relaxed">許可、藍咭、合同與保險</p>
+                    </div>
+
+                    <div class="bg-white border border-emerald-100 rounded-3xl p-5 hover:border-emerald-300 hover:shadow-md transition-all cursor-pointer" onclick="document.getElementById('renewal').scrollIntoView({behavior: 'smooth'})">
+                        <div class="w-10 h-10 rounded-2xl bg-emerald-50 text-emerald-700 flex items-center justify-center mb-3">
+                            <span class="material-symbols-rounded text-[20px]">update</span>
+                        </div>
+                        <h3 class="font-black text-slate-800 mb-1 text-sm md:text-base">續期指引</h3>
+                        <p class="text-[11px] text-slate-500 mt-1 leading-relaxed">一般續期與自動續期說明</p>
+                    </div>
+
+                    <div class="bg-white border border-rose-100 rounded-3xl p-5 hover:border-rose-300 hover:shadow-md transition-all cursor-pointer" onclick="document.getElementById('termination').scrollIntoView({behavior: 'smooth'})">
+                        <div class="w-10 h-10 rounded-2xl bg-rose-50 text-rose-700 flex items-center justify-center mb-3">
+                            <span class="material-symbols-rounded text-[20px]">do_not_disturb_on</span>
+                        </div>
+                        <h3 class="font-black text-slate-800 mb-1 text-sm md:text-base">解約與離職</h3>
+                        <p class="text-[11px] text-slate-500 mt-1 leading-relaxed">賠償計算與必須辦理手續</p>
+                    </div>
+
+                    <div class="bg-white border border-amber-100 rounded-3xl p-5 hover:border-amber-300 hover:shadow-md transition-all cursor-pointer" onclick="document.getElementById('mainland-helper').scrollIntoView({behavior: 'smooth'})">
+                        <div class="w-10 h-10 rounded-2xl bg-amber-50 text-amber-700 flex items-center justify-center mb-3">
+                            <span class="material-symbols-rounded text-[20px]">public</span>
+                        </div>
+                        <h3 class="font-black text-slate-800 mb-1 text-sm md:text-base">內地家傭</h3>
+                        <p class="text-[11px] text-slate-500 mt-1 leading-relaxed">年齡、住宿限制與指定機構</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="process" class="content-section hidden lg:block scroll-mt-28">
+                <div class="flex items-center justify-between mb-4 md:mb-6">
+                    <h2 class="text-2xl font-bold flex items-center gap-2 text-slate-800">
+                        <span class="material-symbols-rounded text-[#003399]">timeline</span> 聘請家傭標準流程
+                    </h2>
+                </div>
+
+                <div class="mb-5 bg-blue-50 border border-blue-100 rounded-2xl p-4">
+                    <div class="flex gap-3 items-start">
+                        <span class="material-symbols-rounded text-blue-700 shrink-0 mt-0.5">info</span>
+                        <div>
+                            <h3 class="font-bold text-blue-900 mb-1">首次聘請提醒</h3>
+                            <p class="text-sm text-blue-800/90 leading-relaxed">
+                                第一次聘請家傭時，不應只完成申請和藍咭；家傭正式開工前，亦應同步核對書面合同、銀行出糧安排及勞工保險責任。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 md:gap-6 py-2">
+                    <div class="bg-white p-6 rounded-[28px] border border-slate-200 shadow-sm relative z-10 hover:shadow-md transition-shadow flex flex-col">
+                        <div class="w-12 h-12 bg-blue-600 text-white rounded-2xl flex items-center justify-center font-bold text-xl mb-4 shadow-lg shadow-blue-200">1</div>
+                        <h3 class="font-bold text-lg mb-2 text-slate-800">向勞工局申請許可</h3>
+                        <p class="text-sm text-slate-500 leading-relaxed mb-6">
+                            免費申請。需提交申請表、身份證明、親屬關係、入息證明、工作地點證明及支持申請理由等文件。交齊文件後 <strong class="text-slate-700">5個工作日內</strong> 回覆結果。
+                        </p>
+                        <a href="https://www.gov.mo/zh-hant/services/ps-1401/ps-1401a/" target="_blank" rel="noopener noreferrer" class="mt-auto inline-flex items-center justify-center gap-1 text-xs font-bold text-[#003399] hover:bg-blue-100 bg-blue-50 px-3 py-2 rounded-xl transition-colors">勞工局官方指南 <span class="material-symbols-rounded text-[14px]">open_in_new</span></a>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-[28px] border border-slate-200 shadow-sm relative z-10 hover:shadow-md transition-shadow flex flex-col">
+                        <div class="w-12 h-12 bg-blue-400 text-white rounded-2xl flex items-center justify-center font-bold text-xl mb-4 shadow-lg shadow-blue-100">2</div>
+                        <h3 class="font-bold text-lg mb-2 text-slate-800">辦理「藍咭」</h3>
+                        <p class="text-sm text-slate-500 leading-relaxed mb-6">
+                            獲批許可後 <strong class="text-blue-600">6 個月內</strong>，必須向治安警察局辦理外地僱員「逗留許可」。<strong class="text-red-500">逾期未辦理，聘用許可將自動失效。</strong>
+                        </p>
+                        <a href="https://www.fsm.gov.mo/psp/cht/psp_left_3_SML.html" target="_blank" rel="noopener noreferrer" class="mt-auto inline-flex items-center justify-center gap-1 text-xs font-bold text-[#003399] hover:bg-blue-100 bg-blue-50 px-3 py-2 rounded-xl transition-colors">治安警察局資訊 <span class="material-symbols-rounded text-[14px]">open_in_new</span></a>
+                    </div>
+                    
+                    <div id="step3" class="bg-white p-6 rounded-[28px] border border-slate-200 shadow-sm relative z-10 hover:shadow-md transition-all duration-300 flex flex-col scroll-mt-28">
+                        <div class="w-12 h-12 bg-emerald-500 text-white rounded-2xl flex items-center justify-center font-bold text-xl mb-4 shadow-lg shadow-emerald-100">3</div>
+                        <h3 class="font-bold text-lg mb-2 text-slate-800">簽署合同與銀行出糧</h3>
+                        <p class="text-sm text-slate-500 leading-relaxed mb-6">
+                            家傭獲發逗留許可後方可正式工作。僱主仍須以書面形式與家傭簽訂勞動合同，雙方各執一份，並以僱員名義澳門銀行帳戶支付報酬。
+                        </p>
+                        <a id="contract-btn" href="https://www.dsal.gov.mo/download/pdf/expatriation_laborlawtemp/nb_contracts_housework_c.pdf" target="_blank" rel="noopener noreferrer" class="mt-auto inline-flex items-center justify-center gap-1 text-xs font-bold text-emerald-700 hover:bg-emerald-100 bg-emerald-50 px-3 py-2 rounded-xl transition-all duration-300">下載官方合同範本 <span class="material-symbols-rounded text-[14px]">download</span></a>
+                    </div>
+
+                    <div id="step4-insurance" class="bg-rose-50 p-6 rounded-3xl border border-rose-200 shadow-sm relative z-10 hover:shadow-md transition-all duration-300 flex flex-col scroll-mt-28">
+                        <div class="w-12 h-12 bg-rose-600 text-white rounded-2xl flex items-center justify-center font-bold text-xl mb-4 shadow-lg shadow-rose-100">4</div>
+                        <h3 class="font-bold text-lg mb-2 text-rose-900">確認勞工保險</h3>
+                        <p class="text-sm text-rose-800/90 leading-relaxed mb-6">
+                            首次僱用時，應在家傭正式開工前同步核對工作意外及職業病相關投保責任。保險不是事後補救項，而是用工風險控制項。
+                        </p>
+                        <a href="#insurance" class="mt-auto inline-flex items-center justify-center gap-1 text-xs font-bold text-rose-700 hover:bg-rose-100 bg-white px-3 py-2 rounded-xl transition-all duration-300">查看保險指引 <span class="material-symbols-rounded text-[14px]">arrow_downward</span></a>
+                    </div>
+                </div>
+            </section>
+
+            <section id="checklist" class="content-section hidden lg:block scroll-mt-28">
+                <div class="flex items-center justify-between mb-4 md:mb-6">
+                    <h2 class="text-2xl font-bold flex items-center gap-2 text-slate-800">
+                        <span class="material-symbols-rounded text-[#003399]">checklist</span> 申請文件與開工前清單
+                    </h2>
+                    <span class="hidden md:inline-flex items-center gap-1 text-xs text-slate-500 bg-white border border-slate-200 px-3 py-1 rounded-full">
+                        <span class="material-symbols-rounded text-[14px]">print</span> 可列印核對
+                    </span>
+                </div>
+
+                <div class="bg-white border border-slate-200 rounded-[32px] p-6 md:p-7 shadow-sm">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <h3 class="font-black text-slate-800 mb-4 flex items-center gap-2">
+                                <span class="material-symbols-rounded text-blue-600">folder_open</span> 一般輸入申請
+                            </h3>
+                            <ul class="space-y-3 text-sm text-slate-600">
+                                <li class="flex gap-2"><span class="material-symbols-rounded text-emerald-500 text-[18px] shrink-0">check_circle</span><span>已填妥 DSAL-TNR-XE-CP《聘用家務工作外地僱員申請》表格。</span></li>
+                                <li class="flex gap-2"><span class="material-symbols-rounded text-emerald-500 text-[18px] shrink-0">check_circle</span><span>申請人及家團身份證明文件正背面影印本。</span></li>
+                                <li class="flex gap-2"><span class="material-symbols-rounded text-emerald-500 text-[18px] shrink-0">check_circle</span><span>申請人及家團親屬關係證明，例如出世紙、白咭等。</span></li>
+                                <li class="flex gap-2"><span class="material-symbols-rounded text-emerald-500 text-[18px] shrink-0">check_circle</span><span>申請人及家團最近一個月入息證明影印本。</span></li>
+                                <li class="flex gap-2"><span class="material-symbols-rounded text-emerald-500 text-[18px] shrink-0">check_circle</span><span>家傭工作地點證明，例如水費單、電費單、電話費單影印本。</span></li>
+                                <li class="flex gap-2"><span class="material-symbols-rounded text-emerald-500 text-[18px] shrink-0">check_circle</span><span>支持申請理由的資料，例如醫生證明、懷孕證明等。</span></li>
+                            </ul>
+                        </div>
+
+                        <div>
+                            <h3 class="font-black text-slate-800 mb-4 flex items-center gap-2">
+                                <span class="material-symbols-rounded text-amber-600">rule</span> 特定情況補充文件
+                            </h3>
+                            <ul class="space-y-3 text-sm text-slate-600">
+                                <li class="flex gap-2"><span class="material-symbols-rounded text-amber-500 text-[18px] shrink-0">error</span><span>若申請人或家團入職新公司少於六個月：提交財政局職業稅登記表 M/2 影印本。</span></li>
+                                <li class="flex gap-2"><span class="material-symbols-rounded text-amber-500 text-[18px] shrink-0">error</span><span>若申請人自設公司：提交 M/1 或 M/8，及最近六個月個人銀行存款證明等。</span></li>
+                                <li class="flex gap-2"><span class="material-symbols-rounded text-amber-500 text-[18px] shrink-0">error</span><span>若申請人為專業外地僱員：提交本人藍咭影印本及保證人聲明書。</span></li>
+                                <li class="flex gap-2"><span class="material-symbols-rounded text-amber-500 text-[18px] shrink-0">error</span><span>聘用內地家傭：額外提交《聘用內地家務工作僱員補充文件》表格。</span></li>
+                                <li class="flex gap-2"><span class="material-symbols-rounded text-amber-500 text-[18px] shrink-0">error</span><span>提交入息證明、銀行存摺或其他經濟能力資料時，應攜同正本供核對。</span></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="mt-6 p-4 rounded-2xl bg-rose-50 border border-rose-200 text-sm text-rose-800 leading-relaxed">
+                        <div class="flex gap-3 items-start">
+                            <span class="material-symbols-rounded text-rose-600 shrink-0 mt-0.5">health_and_safety</span>
+                            <div>
+                                <strong class="text-rose-900">首次僱用開工前保險核對：</strong>
+                                提交申請文件與獲批藍咭只是准入流程；在家傭正式工作前，僱主亦應同步核對工作意外及職業病相關投保責任。詳見
+                                <a href="#insurance" class="font-bold underline underline-offset-2 hover:text-rose-900">勞工保險與風險提示</a>。
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-4 p-4 rounded-2xl bg-slate-50 border border-slate-100 text-sm text-slate-600 leading-relaxed">
+                        <strong class="text-slate-800">提醒：</strong>若資料有任何改變，應立即提出更改並遞交最新資料。若申請人未能於 15 天內交齊所需文件，有關申請將不作處理。
+                    </div>
+                </div>
+            </section>
+
+            <section id="deadlines" class="content-section hidden lg:block scroll-mt-28">
+                <h2 class="text-2xl font-bold mb-6 flex items-center gap-2 text-slate-800">
+                    <span class="material-symbols-rounded text-red-600">event_busy</span> 重要期限一覽
+                </h2>
+
+                <div class="bg-white rounded-[32px] border border-slate-200 shadow-sm overflow-hidden">
+                    <div class="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-slate-100">
+                        <div class="p-6 space-y-5">
+                            <div class="flex gap-4 items-start">
+                                <div class="w-12 h-12 rounded-2xl bg-blue-50 text-blue-700 flex items-center justify-center font-black shrink-0">5</div>
+                                <div>
+                                    <h3 class="font-bold text-slate-800">5 個工作日內</h3>
+                                    <p class="text-sm text-slate-500 leading-relaxed">自申請人交齊所需文件翌日起計，勞工局回覆申請結果。</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-4 items-start">
+                                <div class="w-12 h-12 rounded-2xl bg-red-50 text-red-700 flex items-center justify-center font-black shrink-0">6月</div>
+                                <div>
+                                    <h3 class="font-bold text-slate-800">獲批後 6 個月內</h3>
+                                    <p class="text-sm text-slate-500 leading-relaxed">須向治安警察局辦理外地僱員逗留許可；逾期未辦理，聘用許可會自動失效。</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-4 items-start">
+                                <div class="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-700 flex items-center justify-center font-black shrink-0">30</div>
+                                <div>
+                                    <h3 class="font-bold text-slate-800">到期前 30 至 45 日</h3>
+                                    <p class="text-sm text-slate-500 leading-relaxed">未設自動續期條款時，僱主應在工作期限屆滿前提出續期申請。</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-6 space-y-5">
+                            <div class="flex gap-4 items-start">
+                                <div class="w-12 h-12 rounded-2xl bg-amber-50 text-amber-700 flex items-center justify-center font-black shrink-0">15</div>
+                                <div>
+                                    <h3 class="font-bold text-slate-800">資料變更 15 日內</h3>
+                                    <p class="text-sm text-slate-500 leading-relaxed">僱主搬遷、工作地點或家庭狀況變更，須以書面方式通知勞工局。</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-4 items-start">
+                                <div class="w-12 h-12 rounded-2xl bg-slate-100 text-slate-700 flex items-center justify-center font-black shrink-0">15</div>
+                                <div>
+                                    <h3 class="font-bold text-slate-800">補交文件 15 天內</h3>
+                                    <p class="text-sm text-slate-500 leading-relaxed">未能在期限內交齊所需文件，申請將不作處理。</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-4 items-start">
+                                <div class="w-12 h-12 rounded-2xl bg-purple-50 text-purple-700 flex items-center justify-center font-black shrink-0">15/30</div>
+                                <div>
+                                    <h3 class="font-bold text-slate-800">不獲批准後的救濟期限</h3>
+                                    <p class="text-sm text-slate-500 leading-relaxed">可於 15 日內向勞工局提出聲明異議，或於 30 日內向經濟財政司司長提起必要訴願。</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="compliance" class="content-section hidden lg:block scroll-mt-28">
+                <div class="flex items-center justify-between mb-4 md:mb-6">
+                    <h2 class="text-2xl font-bold flex items-center gap-2 text-slate-800"><span class="material-symbols-rounded text-[#003399]">gavel</span> 僱主必知合規紅線</h2>
+                </div>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 py-2">
+                    <div class="bg-red-50 border border-red-200 p-6 rounded-3xl h-full">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="p-2 bg-red-100 rounded-lg text-red-700"><span class="material-symbols-rounded">block</span></div>
+                            <h4 class="font-bold text-red-900">未批准不得開工</h4>
+                        </div>
+                        <p class="text-sm text-red-800/90 leading-relaxed">
+                            未取得聘用許可及外地僱員逗留許可前，不得安排非居民在澳門工作。家傭只有在獲發逗留許可後，方可正式工作。
+                        </p>
+                    </div>
+
+                    <div class="bg-amber-50 border border-amber-200 p-6 rounded-3xl h-full">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="p-2 bg-amber-100 rounded-lg text-amber-700"><span class="material-symbols-rounded">home_work</span></div>
+                            <h4 class="font-bold text-amber-900">住宿與津貼</h4>
+                        </div>
+                        <p class="text-sm text-amber-800/90 leading-relaxed">
+                            僱主須提供符合條件的住宿，或每月支付不少於 <strong class="text-amber-700">500澳門元</strong> 住宿津貼。注意：<strong class="text-red-600 bg-red-100/50 px-1 rounded">內地家傭必須由僱主直接提供住宿</strong>，且住宿與工作地點一致。
+                        </p>
+                    </div>
+
+                    <div class="bg-blue-50 border border-blue-200 p-6 rounded-3xl h-full">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="p-2 bg-blue-100 rounded-lg text-blue-700"><span class="material-symbols-rounded">account_balance_wallet</span></div>
+                            <h4 class="font-bold text-blue-900">強制銀行轉帳</h4>
+                        </div>
+                        <p class="text-sm text-blue-800/90 leading-relaxed">
+                            <strong class="text-blue-900">不應以現金直接支付報酬。</strong>外地僱員報酬僅可透過存入以僱員名義開立的澳門特別行政區銀行帳戶支付，以保留清晰記錄。
+                        </p>
+                    </div>
+
+                    <div class="bg-indigo-50 border border-indigo-200 p-6 rounded-3xl h-full">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="p-2 bg-indigo-100 rounded-lg text-indigo-700"><span class="material-symbols-rounded">location_on</span></div>
+                            <h4 class="font-bold text-indigo-900">不得跨地點工作</h4>
+                        </div>
+                        <p class="text-sm text-indigo-800/90 leading-relaxed">
+                            家傭只能在僱主報稱並經勞工局批准的工作地點工作，不可同時為親戚、朋友或其他未獲批准地點提供服務。
+                        </p>
+                    </div>
+
+                    <div class="bg-purple-50 border border-purple-200 p-6 rounded-3xl h-full">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="p-2 bg-purple-100 rounded-lg text-purple-700"><span class="material-symbols-rounded">edit_document</span></div>
+                            <h4 class="font-bold text-purple-900">須簽書面合同</h4>
+                        </div>
+                        <p class="text-sm text-purple-800/90 leading-relaxed">
+                            雖然申請時毋須向勞工局提交合同，但僱主仍須與家傭以書面形式簽訂勞動合同，一式兩份，雙方各執一份。
+                        </p>
+                    </div>
+
+                    <div class="bg-rose-50 border border-rose-200 p-6 rounded-3xl h-full">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="p-2 bg-rose-100 rounded-lg text-rose-700"><span class="material-symbols-rounded">health_and_safety</span></div>
+                            <h4 class="font-bold text-rose-900">首次僱用須核對保險</h4>
+                        </div>
+                        <p class="text-sm text-rose-800/90 leading-relaxed">
+                            首次聘用家傭時，應在正式開工前同步核對工作意外及職業病相關投保責任，避免出現「人已開工、風險未覆蓋」。
+                        </p>
+                    </div>
+
+                    <div class="bg-slate-50 border border-slate-200 p-6 rounded-3xl h-full sm:col-span-2 lg:col-span-3">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="p-2 bg-slate-100 rounded-lg text-slate-700"><span class="material-symbols-rounded">flight_takeoff</span></div>
+                            <h4 class="font-bold text-slate-900">返程交通費</h4>
+                        </div>
+                        <p class="text-sm text-slate-700 leading-relaxed">
+                            當勞動關係終止時，外地僱員有權獲安排返回原居地，即僱主須支付其返回常居地的交通費。
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="termination" class="content-section hidden lg:block scroll-mt-28">
+                <h2 class="text-2xl font-bold mb-6 flex items-center gap-2 text-slate-800">
+                    <span class="material-symbols-rounded text-rose-600">do_not_disturb_on</span> 解約與離職處理
+                </h2>
+                
+                <p class="text-slate-600 mb-6 leading-relaxed">
+                    在澳門特別行政區，解僱外籍或外地家政人員（法律統稱為<strong>「家務工作外地僱員」</strong>）受到《勞動關係法》（第7/2008號法律）及《聘用外地僱員法》（第21/2009號法律）的嚴格規範。<br>
+                    由於外地僱員的工作合同依法必須屬於<strong class="text-slate-800">具確定期限的合同</strong>，其解約流程與賠償機制具有特殊性。以下是針對解約事宜的賠償標準及核心注意事項。
+                </p>
+
+                <h3 class="font-bold text-lg text-slate-800 mb-4 flex items-center gap-2">
+                    <span class="material-symbols-rounded text-slate-400">compare_arrows</span> 一、 解約情形與賠償責任對比
+                </h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+                    <div class="bg-white border border-slate-200 p-5 rounded-2xl shadow-sm">
+                        <h4 class="font-bold text-slate-800 mb-3 flex items-center gap-2">
+                            <span class="w-2.5 h-2.5 rounded-full bg-slate-400"></span> 試用期內解除合同
+                        </h4>
+                        <ul class="text-sm text-slate-600 space-y-2">
+                            <li><strong class="text-slate-700">前提條件：</strong>處於試用期內</li>
+                            <li><strong class="text-slate-700">預先通知：</strong>無需（除非雙方有書面約定）</li>
+                            <li><strong class="text-slate-700">解僱賠償：</strong>無需支付</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-rose-50 border border-rose-200 p-5 rounded-2xl shadow-sm relative overflow-hidden">
+                        <div class="absolute right-0 top-0 w-2 h-full bg-rose-400"></div>
+                        <h4 class="font-bold text-rose-900 mb-3 flex items-center gap-2">
+                            <span class="w-2.5 h-2.5 rounded-full bg-rose-500"></span> 不以合理理由解除
+                        </h4>
+                        <ul class="text-sm text-rose-800/90 space-y-2">
+                            <li><strong class="text-rose-900">前提條件：</strong>合同期滿前，單方提前解約</li>
+                            <li><strong class="text-rose-900">預先通知：</strong>遵守法定/約定通知期（通常須提前 15日）</li>
+                            <li><strong class="text-rose-900">解僱賠償：</strong><strong class="bg-rose-200/50 px-1 rounded">必須依法支付</strong></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-amber-50 border border-amber-200 p-5 rounded-2xl shadow-sm relative overflow-hidden">
+                        <div class="absolute right-0 top-0 w-2 h-full bg-amber-400"></div>
+                        <h4 class="font-bold text-amber-900 mb-2 flex items-center gap-2">
+                            <span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span> 以合理理由解除 (過失性辭退)
+                        </h4>
+                        <p class="text-xs text-amber-800/80 mb-3 border-b border-amber-100 pb-2">
+                            僱員存在嚴重違規（如屢次曠工、偷竊、暴力等），導致勞動關係無法維持
+                        </p>
+                        <ul class="text-sm text-amber-800/90 space-y-2">
+                            <li><strong class="text-amber-900">預先通知：</strong>無需</li>
+                            <li><strong class="text-amber-900">解僱賠償：</strong>無需支付（但有嚴格程序要求）</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-slate-50 border border-slate-200 p-5 rounded-2xl shadow-sm">
+                        <h4 class="font-bold text-slate-800 mb-3 flex items-center gap-2">
+                            <span class="w-2.5 h-2.5 rounded-full bg-slate-400"></span> 合同期滿不續約
+                        </h4>
+                        <ul class="text-sm text-slate-600 space-y-2">
+                            <li><strong class="text-slate-700">前提條件：</strong>勞動合同自然屆滿</li>
+                            <li><strong class="text-slate-700">預先通知：</strong>無需</li>
+                            <li><strong class="text-slate-700">解僱賠償：</strong>無需支付</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3 class="font-bold text-lg text-slate-800 mb-4 flex items-center gap-2">
+                    <span class="material-symbols-rounded text-slate-400">info</span> 二、 具體賠償計算與核心注意事項
+                </h3>
+                
+                <div class="space-y-6">
+                    <div class="bg-white border border-rose-200 rounded-[24px] p-6 shadow-sm">
+                        <h4 class="font-black text-rose-900 mb-3">1. 不以合理理由解除合同的賠償</h4>
+                        <p class="text-sm text-slate-600 mb-4">
+                            如果僱主在合同到期前，並非因為僱員的嚴重過錯而單方面解約，必須向僱員支付法定賠償。
+                        </p>
+                        
+                        <div class="bg-rose-50 p-4 md:p-5 rounded-xl border border-rose-100 mb-4">
+                            <strong class="text-rose-800 block mb-3 text-sm">計算公式：</strong>
+                            <div class="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4 bg-white p-4 rounded-xl border border-rose-200 text-rose-900 font-bold text-center">
+                                <div class="flex flex-col items-center">
+                                    <span class="text-base">剩餘時間</span>
+                                    <span class="text-[11px] font-normal text-rose-500 mt-0.5">(每滿1個月或不足1個月計1個月)</span>
+                                </div>
+                                <span class="material-symbols-rounded text-rose-300 hidden sm:block">close</span>
+                                <span class="material-symbols-rounded text-rose-300 sm:hidden">close</span>
+                                <span class="text-base">3日</span>
+                                <span class="material-symbols-rounded text-rose-300 hidden sm:block">close</span>
+                                <span class="material-symbols-rounded text-rose-300 sm:hidden">close</span>
+                                <span class="text-base">基本日報酬</span>
+                            </div>
+                            <p class="text-xs text-rose-700 mt-3 flex items-center gap-1">
+                                <span class="material-symbols-rounded text-[14px]">help</span> 
+                                剩餘時間：按「解除日」至「合同到期日」之間的剩餘天數計算。
+                            </p>
+                        </div>
+                        
+                        <div class="text-sm text-slate-600 bg-slate-50 p-4 rounded-xl border border-slate-100">
+                            <strong class="text-slate-800">📝 示例：</strong> 假設家傭月薪為 4,500 澳門元（日薪 150 澳門元），合同還有 4 個月零 5 天到期。<br>
+                            剩餘時間計為 <strong class="text-rose-600">5 個月</strong>（不足 1 個月按 1 個月計）。<br>
+                            賠償金 = 5 個月 × 3 日 × 150 澳門元/日 = <strong class="text-rose-600">2,250 澳門元</strong>。
+                        </div>
+                        <p class="text-sm text-rose-800 mt-4 bg-rose-50/50 p-3 rounded-lg border border-rose-100">
+                            <strong class="text-rose-900">代通知金：</strong> 若僱主未按規定提前通知（通常為 15 日），除上述解僱賠償外，還須額外支付相當於通知期日數的基本報酬作為代通知金。
+                        </p>
+                    </div>
+
+                    <div class="bg-white border border-amber-200 rounded-[24px] p-6 shadow-sm">
+                        <h4 class="font-black text-amber-900 mb-3">2. 以合理理由解除合同的「程序陷阱」</h4>
+                        <p class="text-sm text-slate-600 mb-4">若僱主因家傭犯下嚴重過錯而解僱，雖無需支付解僱賠償，但程序要求極為嚴格。</p>
+                        <div class="flex gap-4 items-start bg-amber-50 p-5 rounded-xl border border-amber-100">
+                            <span class="material-symbols-rounded text-amber-500 text-[28px] mt-0.5">warning</span>
+                            <div class="text-sm text-amber-900">
+                                <strong class="block mb-2 text-base text-amber-950">30日書面通知鐵律</strong>
+                                僱主必須在知悉違規事實之日起 <strong class="text-red-600 bg-red-100 px-1 rounded">30 日內</strong>，以<strong class="underline font-bold">書面方式</strong>通知家傭解除合同的決定，並在通知書中簡述歸責於家傭的具體事實。<br><br>
+                                <strong class="text-red-600 block mb-1">法律後果：</strong> 如果僱主僅口頭辭退，或超過 30 日才發出書面通知，法律上將直接視此次解約為<strong>「不以合理理由解除」</strong>。此時，僱主不僅需要支付常規解僱賠償，甚至可能面臨因未提前通知而產生的額外爭議。
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-blue-50 border border-blue-200 rounded-[24px] p-6 shadow-sm">
+                        <h4 class="font-black text-blue-900 mb-3 flex items-center gap-2">
+                            <span class="material-symbols-rounded text-blue-600">flight_takeoff</span> 3. 必須承擔的遣返費用 (極度重要)
+                        </h4>
+                        <p class="text-sm text-blue-800/90 leading-relaxed">
+                            根據《聘用外地僱員法》第26條規定：<br>
+                            不論以<strong>任何原因</strong>終止勞動關係（包括試用期解約、僱員犯錯被開除、或合同期滿），<strong class="bg-blue-200/50 px-1 rounded text-blue-900">僱主必須支付僱員返回常居地（即原居國家/地區）的交通費用</strong>（通常為單程機票）。<br><br>
+                            <span class="text-red-600 font-bold">僱主不能以「家傭自己做錯事」為由拒絕支付回程交通費。</span>
+                        </p>
+                    </div>
+
+                    <div class="bg-purple-50 border border-purple-200 rounded-[24px] p-6 shadow-sm">
+                        <h4 class="font-black text-purple-900 mb-2 flex items-center gap-2">
+                            <span class="material-symbols-rounded text-purple-600">pregnant_woman</span> 4. 弱勢群體保護 (孕產婦限制)
+                        </h4>
+                        <p class="text-sm text-purple-800/90 leading-relaxed">
+                            除具有極度充分的合理理由外，僱主絕對不得解僱處於懷孕期或分娩後三個月內的女性僱員。<br>
+                            <strong class="text-red-600 block mt-2">違法代價：</strong> 如違法解僱，僱主除需支付正常的解僱賠償外，還必須支付相當於 <strong class="text-red-600 font-bold">70 日基本報酬</strong> 的懲罰性賠償。
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="mainland-helper" class="content-section hidden lg:block scroll-mt-28">
+                <h2 class="text-2xl font-bold mb-6 flex items-center gap-2 text-slate-800">
+                    <span class="material-symbols-rounded text-amber-600">public</span> 內地家傭特別規則
+                </h2>
+
+                <div class="bg-white border border-amber-200 rounded-[32px] p-6 md:p-7 shadow-sm">
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
+                        <div class="bg-amber-50 rounded-2xl p-5 border border-amber-100">
+                            <h3 class="font-black text-amber-900 mb-3 flex items-center gap-2">
+                                <span class="material-symbols-rounded text-amber-700">rule</span> 申請限制
+                            </h3>
+                            <ul class="space-y-2 text-sm text-amber-800/90 leading-relaxed">
+                                <li>• 申請人須為澳門居民。</li>
+                                <li>• 內地家傭年齡須為 35 至 55 歲。</li>
+                                <li>• 與僱主不得存在第二親等內親屬關係。</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-blue-50 rounded-2xl p-5 border border-blue-100">
+                            <h3 class="font-black text-blue-900 mb-3 flex items-center gap-2">
+                                <span class="material-symbols-rounded text-blue-700">home</span> 住宿要求
+                            </h3>
+                            <p class="text-sm text-blue-800/90 leading-relaxed">
+                                內地家傭必須由僱主提供住宿，且住宿地點與工作地點一致；不可僅以住宿津貼替代。
+                            </p>
+                        </div>
+
+                        <div class="bg-emerald-50 rounded-2xl p-5 border border-emerald-100">
+                            <h3 class="font-black text-emerald-900 mb-3 flex items-center gap-2">
+                                <span class="material-symbols-rounded text-emerald-700">business_center</span> 指定辦理
+                            </h3>
+                            <p class="text-sm text-emerald-800/90 leading-relaxed">
+                                內地家傭須透過南粵（澳門）職業介紹所有限公司或福建中福澳門職業介紹所有限公司辦理來澳手續。
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="mt-5 bg-slate-50 border border-slate-100 rounded-2xl p-5">
+                        <h3 class="font-black text-slate-800 mb-3">目前來源地</h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1.5 rounded-full bg-white border border-slate-200 text-sm font-bold text-slate-700">廣東</span>
+                            <span class="px-3 py-1.5 rounded-full bg-white border border-slate-200 text-sm font-bold text-slate-700">福建</span>
+                            <span class="px-3 py-1.5 rounded-full bg-white border border-slate-200 text-sm font-bold text-slate-700">廣西</span>
+                            <span class="px-3 py-1.5 rounded-full bg-white border border-slate-200 text-sm font-bold text-slate-700">湖南</span>
+                            <span class="px-3 py-1.5 rounded-full bg-white border border-slate-200 text-sm font-bold text-slate-700">湖北</span>
+                            <span class="px-3 py-1.5 rounded-full bg-white border border-slate-200 text-sm font-bold text-slate-700">江西</span>
+                            <span class="px-3 py-1.5 rounded-full bg-white border border-slate-200 text-sm font-bold text-slate-700">安徽</span>
+                            <span class="px-3 py-1.5 rounded-full bg-white border border-slate-200 text-sm font-bold text-slate-700">四川</span>
+                            <span class="px-3 py-1.5 rounded-full bg-white border border-slate-200 text-sm font-bold text-slate-700">貴州</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="renewal" class="content-section hidden lg:block scroll-mt-28">
+                <h2 class="text-2xl font-bold mb-6 flex items-center gap-2 text-slate-800">
+                    <span class="material-symbols-rounded text-emerald-600">update</span> 續期、換人與資料變更
+                </h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <div class="bg-white border border-slate-200 rounded-3xl p-6 shadow-sm">
+                        <h3 class="font-black text-slate-800 mb-3 flex items-center gap-2">
+                            <span class="material-symbols-rounded text-emerald-600">calendar_month</span> 一般續期
+                        </h3>
+                        <p class="text-sm text-slate-600 leading-relaxed mb-4">
+                            如聘用許可未設有「自動續期」條款，僱主須於許可批示所定工作期限屆滿前 30 至 45 日向勞工局提出續期申請。
+                        </p>
+                        <a href="https://www.gov.mo/zh-hant/services/ps-1401/ps-1401b/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-xs font-bold text-emerald-700 bg-emerald-50 hover:bg-emerald-100 px-3 py-2 rounded-xl transition-colors">
+                            查看續期官方指南 <span class="material-symbols-rounded text-[14px]">open_in_new</span>
+                        </a>
+                    </div>
+
+                    <div id="auto-renewal" class="bg-white border border-slate-200 rounded-3xl p-6 shadow-sm scroll-mt-28">
+                        <h3 class="font-black text-slate-800 mb-3 flex items-center gap-2">
+                            <span class="material-symbols-rounded text-indigo-600">autorenew</span> 自動續期
+                        </h3>
+                        <p class="text-sm text-slate-600 leading-relaxed mb-4">
+                            如批示已列明「自動續期」，僱主一般毋須再向勞工局提出續期申請，只須直接前往治安警察局為家傭辦理藍咭手續。
+                        </p>
+                        <div class="text-xs text-red-700 bg-red-50 border border-red-100 rounded-xl p-3 leading-relaxed">
+                            注意：自獲得聘用許可或續期起計 6 個月內從未申請逗留許可，或家傭離職後名額連續超過 6 個月未使用，聘用許可可能失效。
+                        </div>
+                    </div>
+
+                    <div class="bg-white border border-slate-200 rounded-3xl p-6 shadow-sm">
+                        <h3 class="font-black text-slate-800 mb-3 flex items-center gap-2">
+                            <span class="material-symbols-rounded text-blue-600">sync_alt</span> 更換家傭
+                        </h3>
+                        <p class="text-sm text-slate-600 leading-relaxed">
+                            如永久性居民僱主打算更換家傭，通常應先到治安警察局取消前家傭藍咭，再按實際情況向勞工局提交自動續期申請或辦理替換手續。
+                        </p>
+                    </div>
+
+                    <div class="bg-white border border-slate-200 rounded-3xl p-6 shadow-sm">
+                        <h3 class="font-black text-slate-800 mb-3 flex items-center gap-2">
+                            <span class="material-symbols-rounded text-amber-600">edit_location_alt</span> 搬遷或變更工作地點
+                        </h3>
+                        <p class="text-sm text-slate-600 leading-relaxed">
+                            申請人資料、家庭狀況或家傭工作地點有任何變更，須於 15 日內以書面形式通知勞工局，並按情況提交親屬關係、工作地點證明及資料變更聲明書。
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="insurance" class="content-section hidden lg:block scroll-mt-28">
+                <h2 class="text-2xl font-bold mb-6 flex items-center gap-2 text-slate-800">
+                    <span class="material-symbols-rounded text-rose-600">health_and_safety</span> 
+                    勞工保險與首次僱用風險提示
+                </h2>
+                <div class="bg-rose-50 border border-rose-200 p-6 rounded-[32px] shadow-sm">
+                    <div class="mb-5 bg-white border border-rose-100 rounded-2xl p-5 text-sm text-rose-900 leading-relaxed">
+                        <div class="flex gap-3 items-start">
+                            <span class="material-symbols-rounded text-rose-600 shrink-0 mt-0.5">priority_high</span>
+                            <div>
+                                <h3 class="font-black text-rose-900 mb-1">首次聘用時，保險應與開工前準備強關聯</h3>
+                                <p class="text-rose-800/90">
+                                    家傭獲發逗留許可後才可工作；而在正式工作前，僱主也應同步核對工作意外及職業病相關投保責任。建議把保險與合同、銀行出糧安排一起列為「開工前核對項」。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-stretch">
+                        <div class="bg-white rounded-2xl p-6 border border-rose-100 flex flex-col justify-between h-full shadow-sm">
+                            <div>
+                                <h3 class="text-lg font-black text-rose-900 mb-3 flex items-center gap-2">
+                                    <span class="material-symbols-rounded text-rose-600 text-[20px]">policy</span> 法定強制要求
+                                </h3>
+                                <p class="text-sm text-slate-600 leading-relaxed mb-4">
+                                    根據工作意外及職業病損害彌補制度，僱主應將工作意外及職業病的彌補責任轉移予獲許可經營的保險公司，即購買相應勞工保險。
+                                </p>
+                            </div>
+                            <div class="bg-rose-50/50 rounded-xl p-4 border border-rose-100 mt-4">
+                                <p class="text-[13px] font-bold text-red-600 flex items-start gap-2 leading-relaxed">
+                                    <span class="material-symbols-rounded text-[18px] shrink-0 mt-0.5">warning</span>
+                                    <span>若未依法投保，一旦發生工作意外或職業病，僱主可能面臨罰款及自行承擔相關醫療、賠償等責任。</span>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded-2xl p-6 border border-rose-100 flex flex-col justify-between h-full shadow-sm">
+                            <div>
+                                <h4 class="font-bold text-slate-800 text-sm mb-4">🛡️ 法定保險保障與常見限制</h4>
+                                <ul class="text-[13px] text-slate-600 space-y-3">
+                                    <li class="flex gap-2 items-start">
+                                        <span class="material-symbols-rounded text-emerald-500 text-[18px] shrink-0 mt-0.5">check_circle</span> 
+                                        <span><strong>工作意外：</strong>主要保障因工作意外或職業病引致的醫療、休假及相關法定補償。</span>
+                                    </li>
+                                    <li class="flex gap-2 items-start">
+                                        <span class="material-symbols-rounded text-emerald-500 text-[18px] shrink-0 mt-0.5">check_circle</span> 
+                                        <span><strong>病假補償：</strong>如屬依法認定的工作意外或職業病，補償標準須按相關法例及認定結果處理。</span>
+                                    </li>
+                                    <li class="flex gap-2 items-start">
+                                        <span class="material-symbols-rounded text-rose-500 text-[18px] shrink-0 mt-0.5">cancel</span> 
+                                        <span><strong>非因工疾病：</strong>一般非因工作意外或職業病導致的疾病，未必屬法定勞工保險保障範圍，須按事實、醫學證明、法律認定及保單條款判斷。</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="bg-blue-50 rounded-xl p-4 border border-blue-200 mt-5 relative overflow-hidden">
+                                <h4 class="font-bold text-blue-900 text-[13px] mb-1.5 relative z-10 flex items-center gap-1">
+                                    <span class="material-symbols-rounded text-[16px]">verified</span> 可考慮比較「家傭綜合保險」
+                                </h4>
+                                <p class="text-[12px] text-blue-800/90 leading-relaxed relative z-10">
+                                    僱主可按自身風險承受能力，比較是否另行購買家傭綜合保險，以補充非因工疾病、住院、遣返等風險；實際保障須以具體保單條款、免責事項及賠償上限為準。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-6 bg-white border border-rose-100 rounded-2xl p-5">
+                        <h3 class="font-black text-slate-800 mb-3 flex items-center gap-2">
+                            <span class="material-symbols-rounded text-rose-600">task_alt</span> 首次僱用保險核對建議
+                        </h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-sm">
+                            <div class="bg-slate-50 rounded-xl p-4 border border-slate-100">
+                                <strong class="block text-slate-800 mb-1">1. 開工前確認</strong>
+                                <p class="text-slate-500 leading-relaxed">不要等到發生事故後才補查保險，應與合同、出糧安排一起核對。</p>
+                            </div>
+                            <div class="bg-slate-50 rounded-xl p-4 border border-slate-100">
+                                <strong class="block text-slate-800 mb-1">2. 核對保障範圍</strong>
+                                <p class="text-slate-500 leading-relaxed">分清工作意外、職業病、非因工疾病、住院、遣返等保障差異。</p>
+                            </div>
+                            <div class="bg-slate-50 rounded-xl p-4 border border-slate-100">
+                                <strong class="block text-slate-800 mb-1">3. 保留憑證</strong>
+                                <p class="text-slate-500 leading-relaxed">保存保單、付款紀錄、僱員資料及保險生效日期，以便日後查核。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="faq" class="content-section hidden lg:block scroll-mt-28">
+                <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6">
+                    <div>
+                        <h2 class="text-2xl font-bold mb-2 flex items-center gap-2 text-slate-800"><span class="material-symbols-rounded text-[#003399]">quiz</span> 僱主常見問題</h2>
+                        <p class="text-slate-500 text-sm">包含官方申請問答與延伸勞動權益提示；輸入關鍵字（如：解僱、保險、內地、續期、藍咭）快速檢索。</p>
+                    </div>
+                    <div class="relative w-full md:w-72">
+                        <span class="material-symbols-rounded absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-xl">search</span>
+                        <input id="faqSearch" type="text" placeholder="模糊檢索問題或內容..." class="w-full pl-12 pr-4 py-3 bg-white border border-slate-200 rounded-xl focus:ring-2 focus:ring-[#003399]/30 focus:border-[#003399] transition-all text-sm shadow-sm outline-none">
+                    </div>
+                </div>
+
+                <div id="faqContainer" class="space-y-4"></div>
+
+                <div class="mt-8 text-center">
+                    <button id="showMoreFaq" class="inline-flex items-center gap-2 px-8 py-3 bg-white border border-slate-200 text-[#003399] font-bold rounded-xl hover:bg-blue-50 hover:border-blue-200 transition-all text-sm shadow-sm">
+                        展開全部官方及延伸問答 <span class="material-symbols-rounded text-[18px]">expand_more</span>
+                    </button>
+                </div>
+            </section>
+
+            <section id="locations" class="content-section hidden lg:block bg-[#0f172a] text-white rounded-[32px] p-8 md:p-10 overflow-hidden relative shadow-xl scroll-mt-28">
+                <div class="absolute -right-10 -top-10 opacity-5 pointer-events-none">
+                    <span class="material-symbols-rounded text-[300px]">map</span>
+                </div>
+                <div class="relative z-10">
+                    <h2 class="text-2xl md:text-3xl font-black mb-8 text-white flex items-center gap-3">
+                        <span class="material-symbols-rounded text-blue-400 text-3xl">location_on</span> 政府辦理地點與諮詢
+                    </h2>
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+                        <div>
+                            <h4 class="text-blue-400 font-bold mb-6 flex items-center gap-2 text-lg"><span class="material-symbols-rounded">business</span> 線下服務窗口</h4>
+                            <ul class="space-y-6 text-sm">
+                                <li class="border-l-2 border-blue-500/30 pl-4 relative">
+                                    <div class="absolute -left-[9px] top-1.5 w-4 h-4 bg-[#0f172a] rounded-full border-2 border-blue-400"></div>
+                                    <p class="font-bold text-white mb-1 text-base">勞工事務局（金龍中心）</p>
+                                    <p class="text-slate-400 mb-1">澳門冼星海大馬路105號金龍中心3樓</p>
+                                    <p class="text-[11px] text-slate-500 bg-white/5 inline-block px-2 py-1 rounded">一至四: 09:00-13:00 / 14:30-17:45 | 五: 09:00-13:00 / 14:30-17:30</p>
+                                </li>
+                                <li class="border-l-2 border-blue-500/30 pl-4 relative">
+                                    <div class="absolute -left-[9px] top-1.5 w-4 h-4 bg-[#0f172a] rounded-full border-2 border-slate-600"></div>
+                                    <p class="font-bold text-white mb-1 text-base">勞工事務局總辦事處</p>
+                                    <p class="text-slate-400 mb-1">澳門馬揸度博士大馬路221-279號先進廣場大廈</p>
+                                </li>
+                                <li class="border-l-2 border-blue-500/30 pl-4 relative">
+                                    <div class="absolute -left-[9px] top-1.5 w-4 h-4 bg-[#0f172a] rounded-full border-2 border-slate-600"></div>
+                                    <p class="font-bold text-white mb-1 text-base">政府綜合服務中心（黑沙環）</p>
+                                    <p class="text-slate-400 mb-1">澳門慕拉士大馬路222號地下</p>
+                                    <p class="text-[11px] text-slate-500 bg-white/5 inline-block px-2 py-1 rounded">一至五: 09:00-18:00，中午照常辦公</p>
+                                </li>
+                                <li class="border-l-2 border-blue-500/30 pl-4 relative">
+                                    <div class="absolute -left-[9px] top-1.5 w-4 h-4 bg-[#0f172a] rounded-full border-2 border-slate-600"></div>
+                                    <p class="font-bold text-white mb-1 text-base">離島政府綜合服務中心（氹仔）</p>
+                                    <p class="text-slate-400 mb-1">氹仔哥英布拉街225號</p>
+                                    <p class="text-[11px] text-slate-500 bg-white/5 inline-block px-2 py-1 rounded">一至五: 09:00-18:00，中午照常辦公</p>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="bg-white/5 backdrop-blur-md p-6 rounded-3xl border border-white/10 h-fit">
+                            <h4 class="text-blue-400 font-bold mb-6 flex items-center gap-2"><span class="material-symbols-rounded">contact_support</span> 官方諮詢</h4>
+                            <div class="space-y-5">
+                                <div class="flex items-center gap-4">
+                                    <div class="w-12 h-12 rounded-full bg-blue-600 flex items-center justify-center shadow-lg"><span class="material-symbols-rounded text-white">call</span></div>
+                                    <div><p class="text-xs text-slate-400 mb-0.5">勞工局諮詢熱線</p><p class="font-bold text-xl text-white">(+853) 2833 6960</p></div>
+                                </div>
+                                <div class="flex items-center gap-4">
+                                    <div class="w-12 h-12 rounded-full bg-slate-700 flex items-center justify-center shadow-lg"><span class="material-symbols-rounded text-white">mail</span></div>
+                                    <div><p class="text-xs text-slate-400 mb-0.5">外僱事務電郵</p><p class="font-bold text-sm text-white break-all">dsaldctnr@dsal.gov.mo</p></div>
+                                </div>
+                                <div class="pt-6 mt-2 border-t border-white/10">
+                                    <a href="https://www.mo.gov.mo/home" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between w-full bg-white text-slate-900 px-5 py-3.5 rounded-xl font-bold hover:bg-blue-50 transition-colors group">
+                                        <span class="flex items-center gap-2">登入「一戶通」網上辦理 <span class="material-symbols-rounded text-[18px] text-amber-500">bolt</span></span>
+                                        <span class="material-symbols-rounded text-slate-300 group-hover:text-[#003399]">arrow_forward</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="regulations" class="content-section hidden lg:block bg-white border border-slate-200 rounded-[32px] p-6 md:p-7 shadow-sm scroll-mt-28">
+                <h2 class="text-2xl font-bold mb-4 flex items-center gap-2 text-slate-800">
+                    <span class="material-symbols-rounded text-[#003399]">local_library</span> 相關法律法規
+                </h2>
+                <p class="text-sm text-slate-600 leading-relaxed mb-5">
+                    本指南依據公開官方資料整理。以下為處理家務工作外地僱員相關事宜的核心法規原文，可點擊查閱澳門印務局官方發佈版本：
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
+                    <a href="https://bo.dsaj.gov.mo/bo/i/2009/43/lei21_cn.asp" target="_blank" rel="noopener noreferrer" class="p-4 rounded-2xl border border-slate-200 hover:border-blue-300 hover:bg-blue-50 transition-colors flex items-start gap-3">
+                        <span class="material-symbols-rounded text-blue-500 mt-0.5">description</span>
+                        <div>
+                            <strong class="block text-slate-800 text-base">《聘用外地僱員法》</strong>
+                            <span class="text-xs text-slate-500 block mt-1">第21/2009號法律</span>
+                        </div>
+                    </a>
+                    <a href="https://bo.dsaj.gov.mo/bo/i/2010/16/regadm08_cn.asp" target="_blank" rel="noopener noreferrer" class="p-4 rounded-2xl border border-slate-200 hover:border-blue-300 hover:bg-blue-50 transition-colors flex items-start gap-3">
+                        <span class="material-symbols-rounded text-blue-500 mt-0.5">description</span>
+                        <div>
+                            <strong class="block text-slate-800 text-base">《聘用外地僱員法施行細則》</strong>
+                            <span class="text-xs text-slate-500 block mt-1">第8/2010號行政法規</span>
+                        </div>
+                    </a>
+                    <a href="https://bo.dsaj.gov.mo/bo/i/2008/33/lei07_cn.asp" target="_blank" rel="noopener noreferrer" class="p-4 rounded-2xl border border-slate-200 hover:border-blue-300 hover:bg-blue-50 transition-colors flex items-start gap-3">
+                        <span class="material-symbols-rounded text-blue-500 mt-0.5">description</span>
+                        <div>
+                            <strong class="block text-slate-800 text-base">《勞動關係法》</strong>
+                            <span class="text-xs text-slate-500 block mt-1">第7/2008號法律</span>
+                        </div>
+                    </a>
+                    <a href="https://bo.dsaj.gov.mo/bo/i/95/33/declei40_cn.asp" target="_blank" rel="noopener noreferrer" class="p-4 rounded-2xl border border-slate-200 hover:border-rose-300 hover:bg-rose-50 transition-colors flex items-start gap-3">
+                        <span class="material-symbols-rounded text-rose-500 mt-0.5">policy</span>
+                        <div>
+                            <strong class="block text-rose-900 text-base">《工作意外及職業病損害彌補制度》</strong>
+                            <span class="text-xs text-rose-700 block mt-1">第40/95/M號法令</span>
+                        </div>
+                    </a>
+                </div>
+            </section>
+        </div> 
+        
+        <aside class="lg:col-span-4 hidden lg:block">
+            <div id="right-sidebar" class="sticky top-[88px] flex flex-col gap-6 max-h-[calc(100vh-100px)] overflow-y-auto hide-scrollbar overscroll-contain pb-8 relative">
+                
+                <div id="desktop-global-search-container" class="relative z-50 p-1.5 -m-1.5">
+                    <span class="material-symbols-rounded absolute left-5 top-1/2 -translate-y-1/2 text-slate-400 text-xl">search</span>
+                    <input id="desktop-global-search" type="text" placeholder="全局檢索指南板塊..." class="w-full pl-12 pr-4 py-3.5 bg-white border border-slate-200 rounded-3xl focus:ring-2 focus:ring-[#003399]/30 focus:border-[#003399] transition-all text-sm shadow-sm outline-none">
+                    
+                    <div id="desktop-search-results" class="absolute top-[calc(100%-4px)] left-1.5 right-1.5 mt-2 bg-white border border-slate-200 rounded-2xl shadow-xl hidden max-h-[60vh] overflow-y-auto flex flex-col gap-1 p-2">
+                        </div>
+                </div>
+
+                <div class="bg-white border border-slate-200 rounded-3xl p-6 shadow-sm mt-0">
+                    <h3 class="font-black text-lg text-slate-800 mb-4 flex items-center gap-2">
+                        <span class="material-symbols-rounded text-[#003399]">format_list_bulleted</span> 本頁導航
+                    </h3>
+                    <ul class="space-y-1 text-sm border-l-2 border-slate-100 ml-2 pl-3" id="desktop-toc">
+                        <li><a href="#quick-start" class="toc-link block py-1.5 transition-colors relative text-slate-500 hover:text-[#003399]">常用情境</a></li>
+                        <li><a href="#process" class="toc-link block py-1.5 transition-colors relative text-slate-500 hover:text-[#003399]">標準流程</a></li>
+                        <li><a href="#checklist" class="toc-link block py-1.5 transition-colors relative text-slate-500 hover:text-[#003399]">申請清單</a></li>
+                        <li><a href="#deadlines" class="toc-link block py-1.5 transition-colors relative text-slate-500 hover:text-[#003399]">重要期限</a></li>
+                        <li><a href="#compliance" class="toc-link block py-1.5 transition-colors relative text-slate-500 hover:text-[#003399]">合規紅線</a></li>
+                        <li><a href="#termination" class="toc-link block py-1.5 transition-colors relative text-slate-500 hover:text-[#003399]">解約與離職</a></li>
+                        <li><a href="#mainland-helper" class="toc-link block py-1.5 transition-colors relative text-slate-500 hover:text-[#003399]">內地家傭專區</a></li>
+                        <li><a href="#renewal" class="toc-link block py-1.5 transition-colors relative text-slate-500 hover:text-[#003399]">續期與變更</a></li>
+                        <li><a href="#insurance" class="toc-link block py-1.5 transition-colors relative text-slate-500 hover:text-[#003399]">勞工保險提示</a></li>
+                        <li><a href="#faq" class="toc-link block py-1.5 transition-colors relative text-slate-500 hover:text-[#003399]">常見問題 (FAQ)</a></li>
+                        <li><a href="#regulations" class="toc-link block py-1.5 transition-colors relative text-slate-500 hover:text-[#003399]">相關法律法規</a></li>
+                    </ul>
+                </div>
+
+                <div class="bg-white border border-slate-200 rounded-3xl p-6 shadow-sm">
+                    <h3 class="font-black text-lg text-slate-800 mb-2 flex items-center gap-2">
+                        <span class="material-symbols-rounded text-[#003399]">local_library</span> 相關法律法規
+                    </h3>
+                    <p class="text-xs text-slate-500 mb-6 leading-relaxed">
+                        本指南依據公開官方資料整理。以下連結可用於核對法規原文。
+                    </p>
+
+                    <ul class="space-y-4">
+                        <li>
+                            <a href="https://bo.dsaj.gov.mo/bo/i/2009/43/lei21_cn.asp" target="_blank" rel="noopener noreferrer" class="block group p-3 -mx-3 rounded-xl hover:bg-blue-50 transition-colors border border-transparent hover:border-blue-100">                                
+                                <div class="flex gap-3">
+                                    <div class="mt-0.5"><span class="material-symbols-rounded text-slate-300 group-hover:text-blue-500">description</span></div>
+                                    <div>
+                                        <h4 class="font-bold text-sm text-slate-800 group-hover:text-[#003399] transition-colors line-clamp-2">《聘用外地僱員法》</h4>
+                                        <p class="text-[11px] text-slate-500 mt-1">第21/2009號法律</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://bo.dsaj.gov.mo/bo/i/2010/16/regadm08_cn.asp" target="_blank" rel="noopener noreferrer" class="block group p-3 -mx-3 rounded-xl hover:bg-blue-50 transition-colors border border-transparent hover:border-blue-100">                                
+                                <div class="flex gap-3">
+                                    <div class="mt-0.5"><span class="material-symbols-rounded text-slate-300 group-hover:text-blue-500">description</span></div>
+                                    <div>
+                                        <h4 class="font-bold text-sm text-slate-800 group-hover:text-[#003399] transition-colors line-clamp-2">《聘用外地僱員法施行細則》</h4>
+                                        <p class="text-[11px] text-slate-500 mt-1">第8/2010號行政法規</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                             <a href="https://bo.dsaj.gov.mo/bo/i/2008/33/lei07_cn.asp" target="_blank" rel="noopener noreferrer" class="block group p-3 -mx-3 rounded-xl hover:bg-blue-50 transition-colors border border-transparent hover:border-blue-100">                                
+                                 <div class="flex gap-3">
+                                    <div class="mt-0.5"><span class="material-symbols-rounded text-slate-300 group-hover:text-blue-500">description</span></div>
+                                    <div>
+                                        <h4 class="font-bold text-sm text-slate-800 group-hover:text-[#003399] transition-colors line-clamp-2">《勞動關係法》</h4>
+                                        <p class="text-[11px] text-slate-500 mt-1">第7/2008號法律</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://bo.dsaj.gov.mo/bo/i/95/33/declei40_cn.asp" target="_blank" rel="noopener noreferrer" class="block group p-3 -mx-3 rounded-xl hover:bg-rose-50 transition-colors border border-transparent hover:border-rose-100">                                
+                                <div class="flex gap-3">
+                                    <div class="mt-0.5"><span class="material-symbols-rounded text-slate-300 group-hover:text-rose-500">policy</span></div>
+                                    <div>
+                                        <h4 class="font-bold text-sm text-slate-800 group-hover:text-rose-700 transition-colors line-clamp-2">《工作意外及職業病損害彌補制度》</h4>
+                                        <p class="text-[11px] text-slate-500 mt-1">第40/95/M號法令</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="bg-gradient-to-br from-[#003399] to-blue-800 rounded-3xl p-6 text-white shadow-md">
+                    <span class="material-symbols-rounded text-white/30 text-4xl mb-2 block">info</span>
+                    <h4 class="font-bold mb-2">遇到爭議或不確定？</h4>
+                    <p class="text-xs text-blue-100 leading-relaxed mb-4">如涉及解僱、薪資、保險、工作地點、取消藍咭或申請被拒等複雜情況，建議直接致電勞工局或親臨辦事處核實。</p>
+                    <a href="tel:28336960" class="block text-center w-full bg-white text-[#003399] text-sm font-bold py-2.5 rounded-lg hover:bg-blue-50 transition-colors">
+                        撥打 (853) 2833 6960
+                    </a>
+                </div>
+            </div>
+        </aside>
+    </main>
+
+    <footer class="bg-white border-t border-slate-200 mt-8 md:mt-10 pb-20 md:pb-0">
+        <div class="max-w-[1280px] mx-auto px-6 py-6">
+            <div class="flex flex-col md:grid md:grid-cols-4 gap-6 md:gap-8 mb-6">
+                
+                <div class="md:col-span-2">
+                    <a href="index.html" class="flex items-center gap-1.5 mb-2">
+                        <span class="material-symbols-rounded text-[#003399] text-[18px]">account_balance</span>
+                        <span class="text-base font-bold text-slate-800 tracking-tight">澳門家傭點評網</span>
+                    </a>
+                    <p class="text-xs text-slate-500 leading-normal max-w-sm">
+                        致力於提供透明、客觀的澳門家傭中介評價資訊，幫助僱主避坑，促進行業良性發展。
+                    </p>
+                </div>
+                
+                <div class="hidden md:block">
+                    <h4 class="font-bold text-slate-800 text-sm mb-3">快速鏈接</h4>
+                    <ul class="space-y-2 text-xs text-slate-500">
+                        <li><a href="index.html" class="hover:text-[#003399] transition-colors">首頁</a></li>
+                        <li><a href="agencies.html" class="hover:text-[#003399] transition-colors">中介</a></li>
+                        <li><a href="ranking.html" class="hover:text-[#003399] transition-colors">排行榜</a></li>
+                        <li><a href="legal.html" class="hover:text-[#003399] transition-colors">指南</a></li>
+                    </ul>
+                </div>
+                
+                <div class="w-full mt-2 md:mt-0">
+                    <h4 class="hidden md:block font-bold text-slate-800 text-sm mb-3">關於與合規</h4>
+                    <ul class="flex flex-wrap md:flex-col gap-x-5 gap-y-2 md:gap-y-2 text-xs text-slate-500">
+                        <li><a href="about.html" class="hover:text-[#003399] transition-colors">關於我們</a></li>
+                        <li><a href="contact.html" class="hover:text-[#003399] transition-colors">聯繫客服</a></li>
+                        <li><a href="terms.html" class="hover:text-[#003399] transition-colors">服務條款 & 隱私政策</a></li>
+                        <li><a href="disclaimer.html" class="hover:text-[#003399] transition-colors">免責聲明</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="pt-4 border-t border-slate-100 flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
+                <p class="text-[11px] text-slate-400">
+                    &copy; 2026 澳門家傭點評網. 僅供參考，不構成法律建議。
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <nav class="md:hidden fixed bottom-0 left-0 right-0 z-50 h-[calc(64px+env(safe-area-inset-bottom))] pb-[env(safe-area-inset-bottom)] bg-white/95 backdrop-blur-xl border-t border-slate-200 grid grid-cols-4" aria-label="手機底部導航">
+        <a href="index.html" class="flex flex-col items-center justify-center text-slate-400 active:text-[#003399] hover:text-[#003399] transition-colors">
+            <span class="material-symbols-rounded text-[23px]">home</span>
+            <span class="text-[10px] font-bold mt-0.5">首頁</span>
+        </a>
+        <a href="agencies.html" class="flex flex-col items-center justify-center text-slate-400 active:text-[#003399] hover:text-[#003399] transition-colors">
+            <span class="material-symbols-rounded text-[23px]">business_center</span>
+            <span class="text-[10px] font-bold mt-0.5">中介</span>
+        </a>
+        <a href="ranking.html" class="flex flex-col items-center justify-center text-slate-400 active:text-[#003399] hover:text-[#003399] transition-colors">
+            <span class="material-symbols-rounded text-[23px]">leaderboard</span>
+            <span class="text-[10px] font-bold mt-0.5">榜單</span>
+        </a>
+        <a href="legal.html" class="flex flex-col items-center justify-center text-[#003399]">
+            <span class="material-symbols-rounded text-[23px]">menu_book</span>
+            <span class="text-[10px] font-black mt-0.5">指南</span>
+        </a>
+    </nav>
+
+    <script>
+        let lastWindowWidth = window.innerWidth;
+        let currentActiveSectionId = null;
+
+        const mobileDirectoryData = [
+            { id: 'process', title: '聘請家傭標準流程', icon: 'timeline', desc: '向勞工局申請許可、辦理藍咭、簽合同與銀行出糧。', colorInfo: { bg: 'bg-blue-50', iconTxt: 'text-blue-600', border: 'border-blue-100', hoverGrp: 'group-hover:text-blue-700' } },
+            { id: 'checklist', title: '申請文件與開工前清單', icon: 'checklist', desc: '一般申請表格、特定情況補充文件、保單核對建議。', colorInfo: { bg: 'bg-emerald-50', iconTxt: 'text-emerald-600', border: 'border-emerald-100', hoverGrp: 'group-hover:text-emerald-700' } },
+            { id: 'deadlines', title: '重要期限一覽', icon: 'event_busy', desc: '5日回覆、6月辦藍咭、提前30至45日續期、15日資料變更。', colorInfo: { bg: 'bg-red-50', iconTxt: 'text-red-600', border: 'border-red-100', hoverGrp: 'group-hover:text-red-700' } },
+            { id: 'compliance', title: '僱主必知合規紅線', icon: 'gavel', desc: '未批不得開工、強制銀行轉帳、住宿與津貼、不得跨地點。', colorInfo: { bg: 'bg-amber-50', iconTxt: 'text-amber-600', border: 'border-amber-100', hoverGrp: 'group-hover:text-amber-700' } },
+            { id: 'termination', title: '解約與離職處理', icon: 'do_not_disturb_on', desc: '試用期解約、不合理解僱賠償風險及取消藍咭步驟。', colorInfo: { bg: 'bg-rose-50', iconTxt: 'text-rose-600', border: 'border-rose-100', hoverGrp: 'group-hover:text-rose-700' } },
+            { id: 'mainland-helper', title: '內地家傭特別規則', icon: 'public', desc: '年齡限制、必須提供住宿、9個來源地及指定辦理機構。', colorInfo: { bg: 'bg-orange-50', iconTxt: 'text-orange-600', border: 'border-orange-100', hoverGrp: 'group-hover:text-orange-700' } },
+            { id: 'renewal', title: '續期、換人與資料變更', icon: 'update', desc: '一般續期與自動續期操作差異、更換家傭及搬遷通知。', colorInfo: { bg: 'bg-indigo-50', iconTxt: 'text-indigo-600', border: 'border-indigo-100', hoverGrp: 'group-hover:text-indigo-700' } },
+            { id: 'insurance', title: '勞工保險與風險提示', icon: 'health_and_safety', desc: '工作意外、職業病、非因工疾病差異及開工前核對事項。', colorInfo: { bg: 'bg-fuchsia-50', iconTxt: 'text-fuchsia-600', border: 'border-fuchsia-100', hoverGrp: 'group-hover:text-fuchsia-700' } },
+            { id: 'faq', title: '僱主常見問題 (FAQ)', icon: 'quiz', desc: '解僱賠償、試用期、合同期限、旅遊證件問題等官方問答。', colorInfo: { bg: 'bg-slate-50', iconTxt: 'text-slate-600', border: 'border-slate-200', hoverGrp: 'group-hover:text-slate-800' } },
+            { id: 'regulations', title: '相關法律法規', icon: 'local_library', desc: '《勞動關係法》、《聘用外地僱員法》等核心法規原文。', colorInfo: { bg: 'bg-slate-100', iconTxt: 'text-slate-700', border: 'border-slate-300', hoverGrp: 'group-hover:text-slate-900' } }
+        ];
+
+        function renderMobileDirectory(query = "") {
+            const list = document.getElementById('mobile-directory-list');
+            if(!list) return;
+            list.innerHTML = "";
+            const q = query.toLowerCase().trim();
+            let hasResults = false;
+
+            mobileDirectoryData.forEach(sec => {
+                const el = document.getElementById(sec.id);
+                if (!el) return;
+                const textContent = el.innerText || el.textContent;
+
+                const titleMatch = sec.title.toLowerCase().includes(q);
+                const contentMatch = textContent.toLowerCase().includes(q);
+
+                if (!q || titleMatch || contentMatch) {
+                    hasResults = true;
+                    let snippetHtml = `<p class="text-xs text-slate-500 mt-1 leading-relaxed">${sec.desc}</p>`;
+
+                    if (q && !titleMatch && contentMatch) {
+                        const idx = textContent.toLowerCase().indexOf(q);
+                        const start = Math.max(0, idx - 15);
+                        const end = Math.min(textContent.length, idx + 40);
+                        let snippet = textContent.substring(start, end).replace(/\n/g, ' ');
+                        
+                        const reg = new RegExp(q, 'gi');
+                        snippet = snippet.replace(reg, match => `<span class="text-[#003399] font-bold bg-blue-100 px-0.5 rounded">${match}</span>`);
+                        snippetHtml = `<div class="mt-3 bg-white p-2.5 rounded-xl border border-slate-100 shadow-sm text-xs text-slate-600 leading-relaxed">...${snippet}...</div>`;
+                    }
+
+                    const c = sec.colorInfo;
+                    list.innerHTML += `
+                        <div onclick="openMobileSection('${sec.id}')" class="${c.bg} border ${c.border} rounded-2xl p-4 md:p-5 shadow-sm active:opacity-70 transition-colors cursor-pointer group">
+                            <div class="flex items-center justify-between mb-1">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 rounded-full bg-white shadow-sm ${c.iconTxt} flex items-center justify-center shrink-0">
+                                        <span class="material-symbols-rounded text-[20px]">${sec.icon}</span>
+                                    </div>
+                                    <h3 class="font-bold text-slate-800 text-[15px] ${c.hoverGrp} transition-colors">${sec.title}</h3>
+                                </div>
+                                <span class="material-symbols-rounded text-slate-300">chevron_right</span>
+                            </div>
+                            <div class="pl-13 ml-13">
+                                ${snippetHtml}
+                            </div>
+                        </div>
+                    `;
+                }
+            });
+
+            if(!hasResults) {
+                list.innerHTML = `
+                    <div class="text-center py-12 bg-white rounded-2xl border border-slate-200 shadow-sm">
+                        <span class="material-symbols-rounded text-slate-300 text-5xl mb-3">search_off</span>
+                        <p class="text-slate-500 text-sm font-medium">沒有找到匹配內容，請嘗試更換關鍵詞</p>
+                    </div>
+                `;
+            }
+        }
+
+        function openMobileSection(id) {
+            if (window.innerWidth >= 1024) return;
+            currentActiveSectionId = id;
+            document.querySelectorAll('.mobile-dir-visible').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.content-section').forEach(el => el.classList.add('hidden'));
+            
+            document.getElementById(id).classList.remove('hidden');
+            document.getElementById('mobile-back-bar').classList.remove('hidden');
+            window.scrollTo(0, 0);
+        }
+
+        function showMobileDirectory() {
+            if (window.innerWidth >= 1024) return;
+            currentActiveSectionId = null;
+            document.querySelectorAll('.content-section').forEach(el => el.classList.add('hidden'));
+            document.getElementById('mobile-back-bar').classList.add('hidden');
+            
+            document.querySelectorAll('.mobile-dir-visible').forEach(el => el.classList.remove('hidden'));
+            window.scrollTo(0, 0);
+        }
+
+        document.getElementById('global-mobile-search')?.addEventListener('input', (e) => {
+            renderMobileDirectory(e.target.value);
+        });
+
+        // ==========================================
+        // 桌面端全局檢索邏輯
+        // ==========================================
+        const desktopSearchInput = document.getElementById('desktop-global-search');
+        const desktopSearchResults = document.getElementById('desktop-search-results');
+
+        if (desktopSearchInput && desktopSearchResults) {
+            desktopSearchInput.addEventListener('input', (e) => {
+                const query = e.target.value.toLowerCase().trim();
+                if (!query) {
+                    desktopSearchResults.classList.add('hidden');
+                    return;
+                }
+                
+                desktopSearchResults.classList.remove('hidden');
+                desktopSearchResults.innerHTML = '';
+                let hasResults = false;
+
+                mobileDirectoryData.forEach(sec => {
+                    const el = document.getElementById(sec.id);
+                    if (!el) return;
+                    const textContent = el.innerText || el.textContent;
+
+                    const titleMatch = sec.title.toLowerCase().includes(query);
+                    const contentMatch = textContent.toLowerCase().includes(query);
+
+                    if (titleMatch || contentMatch) {
+                        hasResults = true;
+                        let snippetHtml = `<p class="text-xs text-slate-500 mt-1 line-clamp-2 leading-relaxed">${sec.desc}</p>`;
+
+                        if (!titleMatch && contentMatch) {
+                            const idx = textContent.toLowerCase().indexOf(query);
+                            const start = Math.max(0, idx - 15);
+                            const end = Math.min(textContent.length, idx + 40);
+                            let snippet = textContent.substring(start, end).replace(/\n/g, ' ');
+                            
+                            const reg = new RegExp(query, 'gi');
+                            snippet = snippet.replace(reg, match => `<span class="text-[#003399] font-bold bg-blue-100 px-0.5 rounded">${match}</span>`);
+                            snippetHtml = `<div class="mt-2 bg-slate-50 p-2.5 rounded-lg border border-slate-100 text-[11px] text-slate-600 leading-relaxed">...${snippet}...</div>`;
+                        }
+
+                        const c = sec.colorInfo;
+                        desktopSearchResults.innerHTML += `
+                            <div onclick="document.getElementById('${sec.id}').scrollIntoView({behavior: 'smooth'}); document.getElementById('desktop-search-results').classList.add('hidden');" 
+                                 class="p-3 hover:bg-slate-50 rounded-xl cursor-pointer transition-colors border border-transparent hover:border-slate-200 group">
+                                <div class="flex items-center gap-2 mb-1">
+                                    <span class="material-symbols-rounded text-[18px] ${c.iconTxt}">${sec.icon}</span>
+                                    <h4 class="font-bold text-slate-800 text-sm group-hover:text-[#003399] transition-colors">${sec.title}</h4>
+                                </div>
+                                ${snippetHtml}
+                            </div>
+                        `;
+                    }
+                });
+
+                if (!hasResults) {
+                    desktopSearchResults.innerHTML = `
+                        <div class="text-center py-8">
+                            <span class="material-symbols-rounded text-slate-300 text-3xl mb-2 block">search_off</span>
+                            <p class="text-slate-500 text-xs">沒有找到匹配內容，請嘗試更換關鍵詞</p>
+                        </div>
+                    `;
+                }
+            });
+
+            // 點擊外部隱藏搜索結果
+            document.addEventListener('click', (e) => {
+                if (!desktopSearchInput.contains(e.target) && !desktopSearchResults.contains(e.target)) {
+                    desktopSearchResults.classList.add('hidden');
+                }
+            });
+        }
+
+        const rawFaqData = [
+            { cat: "申請與審批", q: "如想聘請家傭，需要辦理甚麼手續？何時可正式工作？", a: "必須先向勞工事務局獲得「聘用許可」。獲批後，再到治安警察局為僱員申請「逗留許可」(藍咭)。家傭只有在獲發逗留許可後方可在澳門工作。", hot: true },
+            { cat: "申請與審批", q: "辦理家傭申請應在那裡提交？", a: "家務工作外地僱員申請可於勞工局金龍中心、先進廣場總辦事處，以及黑沙環、氹仔的政府綜合服務中心提交；亦可按官方指引透過一戶通辦理。", hot: false },
+            { cat: "申請與審批", q: "申請家傭需要提交甚麼文件？", a: "申請人須提交已填妥的專用表格及所需文件，包括身份證明、親屬關係、入息證明、工作地點證明及支持申請理由的資料等。內地家傭須另交補充文件。", hot: false },
+            { cat: "申請與審批", q: "申請家傭需要交付費用嗎？", a: "外地僱員的聘用許可申請是免費的。", hot: true },
+            { cat: "申請與審批", q: "可以申請家傭照顧不同住的家人嗎？", a: "可以提出申請，並需在申請表上清楚填寫家務工作外地僱員的實際工作地點及說明理由。", hot: false },
+            { cat: "申請與審批", q: "家傭申請為甚麼必須提供申請人的經濟狀況證明文件？如不能提供入息證明，應怎辦？", a: "法律要求僱主具備履行對僱員義務的經濟能力。若無法提供入息證明，可提交最近6個月的個人銀行存款證明影印本或其他反映經濟能力的資料，並攜同正本核對。", hot: false },
+            { cat: "申請與審批", q: "假如家傭的僱主為個人企業主或法人股東，須提交甚麼經濟狀況證明文件？", a: "需提交最新的財政局營業稅開業/更改申請表(M/1)或營業稅徵稅憑單(M/8)影印本，及最近6個月銀行存款證明或其他可證明經濟能力的資料。", hot: false },
+            { cat: "申請與審批", q: "M/2 表格是不是聘請家傭後的報稅步驟？", a: "不是一般『聘請家傭後必做』的報稅步驟。官方資料中，M/2 主要是在申請人或其家團入職新公司少於六個月時，作為申請文件中的補充證明提交。", hot: true },
+            { cat: "申請與審批", q: "提交申請後，怎樣才知道申請進度？", a: "由勞工事務局發出正式收據翌日起計一個工作天後，可瀏覽局方網頁輸入收件編號查詢，或致電(853)28336960了解。", hot: false },
+            { cat: "申請與審批", q: "已遞交輸入家傭申請，但遺失了收據，能否領取該申請結果？", a: "若選擇短訊/電郵通知，收到通知後攜帶身份證明文件親臨領取即可。若需他人代領，需由申請人簽署委託信函，並提供申請人及代領人身份證明文件副本。", hot: false },
+            { cat: "申請與審批", q: "若申請不獲批准時，可以怎樣做？", a: "申請人可於領取申請結果翌日起計15日內向勞工局提出「聲明異議」，或30日內向經濟財政司司長提起「必要訴願」。", hot: false },
+
+            { cat: "解僱與辭職", q: "試用期內解僱或辭職，需要提前通知或賠償嗎？", a: "根據《勞動關係法》的一般規則，具期限合同的試用期通常為30日。在試用期內，任何一方均可單方面終止勞動關係，通常無須提前通知，亦無須支付賠償；但仍應核對雙方合同是否有另行書面約定。", hot: true },
+            { cat: "解僱與辭職", q: "如何辦理合理解僱，需不需要賠償？", a: "若僱員嚴重違反勞動義務，僱主可按《勞動關係法》的一般規則主張合理解僱。這類個案高度依賴事實及證據，建議以書面形式記錄違規情況，並在行動前向勞工局查詢。", hot: true },
+            { cat: "解僱與辭職", q: "如果是不合理解僱，代通知金及賠償如何計算？", a: "具期限合同如被提前終止，可能涉及通知期、代通知金及解僱賠償等問題。實際金額須視合同、工作年期、薪酬、終止理由及法律認定而定，建議直接向勞工局核實。", hot: true },
+            { cat: "解僱與辭職", q: "家傭離職或解僱後，如何辦理取消「藍咭」手續？", a: "勞動關係終止後，僱主應向治安警察局辦理取消外地僱員逗留許可。常見所需資料包括僱主及僱員身份證明文件、藍咭及終止勞動關係相關文件；實際要求以治安警察局最新指引為準。", hot: true },
+
+            { cat: "合同、薪酬與保險", q: "法律有規定僱主必須向家傭提供住宿嗎？", a: "有。僱主可直接提供符合條件的住宿，或向每名外僱每月支付不少於 500 澳門元的住宿津貼。注意：聘用內地家傭必須直接提供住宿，且住宿與工作地點一致。", hot: true },
+            { cat: "合同、薪酬與保險", q: "可以現金方式直接向家傭支付報酬嗎？", a: "不可以。根據《聘用外地僱員法》，外地僱員報酬的支付，僅可透過存入以僱員名義開立的澳門特別行政區銀行帳戶。", hot: true },
+            { cat: "合同、薪酬與保險", q: "法律有否規定申請家傭的聘用期限？", a: "根據《勞動關係法》規定，具期限合同不得超過兩年；僱主可根據實際需要，在工作期限屆滿前的30至45日申請續期。", hot: true },
+            { cat: "合同、薪酬與保險", q: "僱主除了須提供家傭的住宿外，還需負責甚麼特別的費用？", a: "當勞動關係終止時，外地僱員有權獲安排返回原居地，即僱主須支付其返回常居地的交通費。", hot: true },
+            { cat: "合同、薪酬與保險", q: "第一次聘請家傭，保險應該何時處理？", a: "建議在家傭正式開工前同步核對工作意外及職業病相關投保責任。首次僱用時，保險應與書面合同、銀行出糧安排及藍咭一併列入開工前核對清單。", hot: true },
+            { cat: "合同、薪酬與保險", q: "家傭的勞工保險不買會怎樣？", a: "僱主應依法處理工作意外及職業病相關投保責任。若未依法投保，一旦發生工作意外或職業病，可能面臨罰款及自行承擔醫療、補償等責任。", hot: true },
+            { cat: "合同、薪酬與保險", q: "只買法定勞工保險夠嗎？", a: "法定勞工保險主要處理工作意外及職業病相關責任。僱主可按自身風險承受能力比較家傭綜合保險，但實際保障、免責事項及賠償上限須以具體保單條款為準。", hot: true },
+            { cat: "合同、薪酬與保險", q: "合同的生效日期及終止日期應如何計算？", a: "合同生效日應自僱主獲得聘用許可且該名外地僱員獲發逗留許可時開始計算，而合同終止日應以聘用許可的有效期限為止。", hot: false },
+            { cat: "合同、薪酬與保險", q: "現在申請家傭仍需向勞工局提交合同嗎？", a: "申請僱主毋須向勞工局提交合同。然而，僱主必須以書面形式與受聘外地僱員簽訂勞動合同，合同為一式兩份，勞資雙方各執一份為據。", hot: false },
+
+            { cat: "內地家傭專區", q: "申請內地家傭與外籍家傭有甚麼不同限制？", a: "申請人必須為澳門居民；僱主必須直接為其提供住宿，且住宿地點與工作地點必須一致。此外，內地家傭年齡須在35至55歲之間，且與僱主不能有第二親等內的親屬關係。", hot: true },
+            { cat: "內地家傭專區", q: "內地家傭的來源地有哪些省份？", a: "目前開放9個省份/自治區：廣東、福建、廣西、湖南、湖北、江西、安徽、四川及貴州。且必須透過南粵或福建中福兩家特定職介所辦理手續。", hot: true },
+            { cat: "內地家傭專區", q: "如果我已獲批內地家傭，可選擇直接聘用其他省份的人選嗎？", a: "倘批示上已列明來源地為廣東或福建，需向勞工局提交更新來源地聲明書。若已獲續期且批示無列明來源地，則可自由選擇這9個省份/自治區的家傭。", hot: false },
+            { cat: "內地家傭專區", q: "我現時已聘有一名外籍家傭，可以再多聘一名內地家傭嗎？", a: "可以。申請人可按家庭實際需要遞交輸入內地家傭的申請文件，勞工局會按法律規定實事求是作出審批。", hot: false },
+
+            { cat: "續期與變更", q: "什麼是「自動續期」？", a: "若獲批的批示中設有「自動續期」條款，僱主無須再向勞工局提出續期申請，只需直接前往治安警察局為家傭辦理「藍咭」續期手續即可。", hot: true },
+            { cat: "續期與變更", q: "我是永久性居民，家傭仍未到期可申請自動續期嗎？", a: "無須急於辦理。只需在現有批示到期前30至45日向勞工局提出續期申請，經批准後，將為你轉為「自動續期」模式。", hot: false },
+            { cat: "續期與變更", q: "我打算換家傭，可否申請自動續期？", a: "需先前往治安警察局為前家傭取消「藍咭」，再向勞工局提交「自動續期申請」。獲批後，可前往治安警察局辦理新家傭手續。", hot: false },
+            { cat: "續期與變更", q: "我是非永久性居民或專業外地僱員，獲批的批示會是自動續期嗎？", a: "不會。外僱許可期限不可超過給予僱主居留或工作許可的期限。該等僱主將維持現時模式，按規定設定家傭的工作期限。", hot: false },
+            { cat: "續期與變更", q: "我的家傭可否同時為我的親戚或朋友工作？", a: "絕對不可以。家務工作外地僱員只能在僱主報稱並經勞工局批准的地點工作，否則屬非法違規行為。", hot: true },
+            { cat: "續期與變更", q: "家傭的旅遊證件有效期較合同期短應怎麼辦？", a: "勞資雙方仍須依法訂定一年或兩年合同期限。之後待家傭換領新旅遊證件或延長有效期後，再到治安警察局辦理補期申請以更新「藍咭」。", hot: false },
+            { cat: "續期與變更", q: "續期申請若不獲批准，家傭是否需要即時離境？", a: "不需要。有關外地僱員仍可合法留澳工作，直至原批示的工作期限屆滿為止。", hot: false },
+            { cat: "續期與變更", q: "僱主搬遷或更改家傭工作地點，是否需要通知勞工局？", a: "必須通知。申請人資料如有任何變更，必須在15日內以書面形式通知勞工事務局，並按情況提交工作地點證明及相關聲明書。", hot: false }
+        ];
+
+        let showAll = false;
+        const faqContainer = document.getElementById('faqContainer');
+        const faqSearch = document.getElementById('faqSearch');
+        const showMoreBtn = document.getElementById('showMoreFaq');
+
+        function renderFaq(filter = "") {
+            faqContainer.innerHTML = "";
+            const q = filter.toLowerCase().trim();
+            
+            let filtered = rawFaqData.filter(item => 
+                item.q.toLowerCase().includes(q) || 
+                item.a.toLowerCase().includes(q)
+            );
+
+            let displayList = (showAll || q !== "") ? filtered : filtered.filter(f => f.hot);
+
+            if (displayList.length === 0) {
+                faqContainer.innerHTML = `
+                    <div class="text-center py-10 bg-slate-50 rounded-2xl border border-slate-100 border-dashed">
+                        <span class="material-symbols-rounded text-slate-300 text-4xl mb-2">search_off</span>
+                        <p class="text-slate-500 text-sm">沒有找到相關問題，請嘗試換個關鍵字。</p>
+                    </div>`;
+                return;
+            }
+
+            const groupedFaq = displayList.reduce((acc, obj) => {
+                let key = obj.cat;
+                if (!acc[key]) acc[key] = [];
+                acc[key].push(obj);
+                return acc;
+            }, {});
+
+            for (const [category, items] of Object.entries(groupedFaq)) {
+                const catHeader = document.createElement('div');
+                catHeader.className = "text-sm font-black text-slate-400 tracking-wider pt-4 pb-2 px-2 flex items-center gap-2";
+                let iconStr = "assignment";
+                if(category === "解僱與辭職") iconStr = "do_not_disturb_on";
+                if(category === "合同、薪酬與保險") iconStr = "health_and_safety";
+                if(category === "內地家傭專區") iconStr = "public";
+                if(category === "續期與變更") iconStr = "update";
+                
+                catHeader.innerHTML = `<span class="material-symbols-rounded text-[18px]">${iconStr}</span> ${category}`;
+                faqContainer.appendChild(catHeader);
+
+                items.forEach((item) => {
+                    const div = document.createElement('div');
+                    div.className = "faq-item bg-white border border-slate-100 rounded-2xl overflow-hidden cursor-pointer hover:border-blue-300 transition-colors group shadow-sm";
+                    
+                    let displayQ = item.q;
+                    let displayA = item.a;
+                    let searchSnippetHtml = "";
+
+                    if (q) {
+                        const reg = new RegExp(q, 'gi');
+                        displayQ = item.q.replace(reg, match => `<span class="bg-blue-100 text-[#003399] rounded px-0.5">${match}</span>`);
+                        displayA = item.a.replace(reg, match => `<span class="bg-blue-100 text-[#003399] rounded px-0.5">${match}</span>`);
+                        
+                        if (item.a.toLowerCase().includes(q)) {
+                            const idx = item.a.toLowerCase().indexOf(q);
+                            const start = Math.max(0, idx - 15);
+                            const end = Math.min(item.a.length, idx + 25);
+                            let snippet = item.a.substring(start, end).replace(/\n/g, ' ');
+                            snippet = snippet.replace(reg, match => `<span class="bg-blue-100 text-[#003399] rounded px-0.5 font-bold">${match}</span>`);
+                            searchSnippetHtml = `<div class="mt-2 text-xs text-slate-500 bg-slate-50 p-2 rounded-lg line-clamp-1 border border-slate-100 group-[.active]:hidden">...${snippet}...</div>`;
+                        }
+                    }
+
+                    div.innerHTML = `
+                        <div class="px-5 md:px-6 py-4 md:py-5 flex items-start justify-between gap-4">
+                            <div class="flex-1">
+                                <div class="flex items-start gap-3">
+                                    <span class="text-blue-600 font-black text-lg leading-none mt-0.5">Q</span>
+                                    <h4 class="font-bold text-slate-800 text-sm md:text-base leading-snug">${displayQ}</h4>
+                                </div>
+                                ${searchSnippetHtml}
+                            </div>
+                            <span class="faq-icon material-symbols-rounded text-slate-300 group-hover:text-blue-600 transition-all flex-shrink-0 mt-0.5">expand_more</span>
+                        </div>
+                        <div class="faq-answer bg-slate-50/80">
+                            <div class="px-5 md:px-6 py-4 md:py-5 border-t border-slate-100 text-sm text-slate-600 leading-relaxed flex items-start gap-3">
+                                <span class="text-emerald-600 font-black text-lg leading-none mt-0.5 flex-shrink-0">A</span>
+                                <div>${displayA}</div>
+                            </div>
+                        </div>
+                    `;
+                    div.onclick = () => div.classList.toggle('active');
+                    faqContainer.appendChild(div);
+                });
+            }
+
+            if (showAll || q !== "" || filtered.length <= displayList.length) {
+                showMoreBtn.classList.add('hidden');
+            } else {
+                showMoreBtn.classList.remove('hidden');
+            }
+        }
+
+        faqSearch?.addEventListener('input', (e) => renderFaq(e.target.value));
+        showMoreBtn?.addEventListener('click', () => { showAll = true; renderFaq(faqSearch.value); });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderFaq();
+            renderMobileDirectory();
+
+            const handleHashChange = () => {
+                const hash = window.location.hash;
+                if (hash) {
+                    document.querySelectorAll('.target-section').forEach(el => el.classList.remove('target-section'));
+                    document.querySelectorAll('.target-dark-section').forEach(el => el.classList.remove('target-dark-section'));
+                    document.querySelectorAll('.target-card').forEach(el => el.classList.remove('target-card'));
+                    document.querySelectorAll('.btn-highlight').forEach(el => el.classList.remove('btn-highlight'));
+                    
+                    const target = document.querySelector(hash);
+                    if (target) {
+                        if (window.innerWidth < 1024 && target.classList.contains('content-section')) {
+                            openMobileSection(target.id);
+                        } else if (window.innerWidth < 1024) {
+                            const parentSection = target.closest('.content-section');
+                            if(parentSection) openMobileSection(parentSection.id);
+                        }
+
+                        void target.offsetWidth; 
+                        if (target.tagName.toLowerCase() === 'section') {
+                            if (target.id === 'locations') {
+                                target.classList.add('target-dark-section');
+                            } else {
+                                target.classList.add('target-section');
+                            }
+                        } else {
+                            target.classList.add('target-card');
+                        }
+
+                        if (hash === '#step3') {
+                            const btn = document.getElementById('contract-btn');
+                            if (btn) {
+                                void btn.offsetWidth;
+                                btn.classList.add('btn-highlight');
+                            }
+                        }
+                    }
+                }
+            };
+
+            setTimeout(handleHashChange, 300);
+            window.addEventListener('hashchange', handleHashChange);
+
+            let isProgrammaticScroll = false;
+            let scrollTimeout;
+
+            document.querySelectorAll('#desktop-toc .toc-link').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    isProgrammaticScroll = true;
+                    clearTimeout(scrollTimeout);
+                    
+                    document.querySelectorAll('#desktop-toc .toc-link').forEach(l => {
+                        l.classList.remove('active-toc', 'text-[#003399]', 'font-bold');
+                        l.classList.add('text-slate-500');
+                    });
+                    link.classList.remove('text-slate-500');
+                    link.classList.add('active-toc', 'text-[#003399]', 'font-bold');
+
+                    scrollTimeout = setTimeout(() => { isProgrammaticScroll = false; }, 1000); 
+                });
+            });
+
+            const sections = document.querySelectorAll('main section.content-section, #intro-section');
+            const tocLinks = document.querySelectorAll('#desktop-toc .toc-link');
+            
+            const observerOptions = {
+                root: null,
+                rootMargin: '-20% 0px -70% 0px',
+                threshold: 0
+            };
+
+            const sectionObserver = new IntersectionObserver((entries) => {
+                if (isProgrammaticScroll) return; 
+
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && entry.target.id !== 'intro-section') {
+                        const currentId = entry.target.getAttribute('id');
+                        currentActiveSectionId = currentId;
+
+                        tocLinks.forEach(link => {
+                            link.classList.remove('active-toc', 'text-[#003399]', 'font-bold');
+                            link.classList.add('text-slate-500');
+                        });
+
+                        const activeLink = document.querySelector(`#desktop-toc .toc-link[href="#${currentId}"]`);
+                        if (activeLink) {
+                            activeLink.classList.remove('text-slate-500');
+                            activeLink.classList.add('active-toc', 'text-[#003399]', 'font-bold');
+                        }
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => sectionObserver.observe(section));
+
+            const rightSidebar = document.getElementById('right-sidebar');
+            const sidebarEdgeSync = (() => {
+                let ticking = false; let activeEdge = null; let edgeStartScrollTop = 0; let lastPageScrollY = 0;
+                const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+                const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
+                const easeOutCubic = (value) => 1 - Math.pow(1 - value, 3);
+
+                const sync = () => {
+                    ticking = false;
+                    if (!rightSidebar || window.innerWidth < 1024) return;
+
+                    const page = document.scrollingElement || document.documentElement;
+                    const scrollY = page.scrollTop;
+                    const maxScrollY = Math.max(0, page.scrollHeight - window.innerHeight);
+                    const maxSidebarScroll = Math.max(0, rightSidebar.scrollHeight - rightSidebar.clientHeight);
+                    const previousPageScrollY = lastPageScrollY;
+                    lastPageScrollY = scrollY;
+
+                    if (maxScrollY <= 0 || maxSidebarScroll <= 0) return;
+
+                    const edgeDistance = reducedMotion.matches ? 10 : Math.min(360, maxScrollY);
+                    const distanceFromBottom = maxScrollY - scrollY;
+                    const scrollingUp = scrollY < previousPageScrollY;
+                    const scrollingDown = scrollY > previousPageScrollY;
+
+                    if (scrollY <= edgeDistance && (scrollingUp || scrollY === 0)) {
+                        if (activeEdge !== 'top') { activeEdge = 'top'; edgeStartScrollTop = rightSidebar.scrollTop; }
+                        const progress = easeOutCubic(clamp(1 - scrollY / edgeDistance, 0, 1));
+                        rightSidebar.scrollTop = edgeStartScrollTop * (1 - progress);
+                        return;
+                    }
+
+                    if (distanceFromBottom <= edgeDistance && (scrollingDown || scrollY >= maxScrollY)) {
+                        if (activeEdge !== 'bottom') { activeEdge = 'bottom'; edgeStartScrollTop = rightSidebar.scrollTop; }
+                        const progress = easeOutCubic(clamp(1 - distanceFromBottom / edgeDistance, 0, 1));
+                        rightSidebar.scrollTop = edgeStartScrollTop + (maxSidebarScroll - edgeStartScrollTop) * progress;
+                        return;
+                    }
+                    activeEdge = null;
+                };
+
+                return () => { if (!ticking) { ticking = true; requestAnimationFrame(sync); } };
+            })();
+
+            window.addEventListener('scroll', sidebarEdgeSync, { passive: true });
+            window.addEventListener('resize', () => {
+                sidebarEdgeSync();
+
+                const currentWidth = window.innerWidth;
+
+                if (currentWidth !== lastWindowWidth) {
+                    const isNowDesktop = currentWidth >= 1024;
+                    lastWindowWidth = currentWidth;
+
+                    if (isNowDesktop) {
+                        document.querySelectorAll('.content-section').forEach(el => el.classList.remove('hidden'));
+                        document.getElementById('mobile-back-bar')?.classList.add('hidden');
+
+                        if (currentActiveSectionId) {
+                            const targetEl = document.getElementById(currentActiveSectionId);
+                            if (targetEl) {
+                                setTimeout(() => {
+                                    targetEl.scrollIntoView({ behavior: 'instant', block: 'start' });
+                                }, 10);
+                            }
+                        }
+                    } else {
+                        if (currentActiveSectionId && currentActiveSectionId !== 'intro-section') {
+                            openMobileSection(currentActiveSectionId);
+                        } else {
+                            showMobileDirectory();
+                        }
+                    }
+                }
+            }, { passive: true });
+        });
+    </script>
+</body>
+</html>

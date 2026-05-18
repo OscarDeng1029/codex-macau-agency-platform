@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /profile.html
+Disallow: /review.html
+Disallow: /terms.html
+Disallow: /disclaimer.html
+
+Sitemap: https://www.macauagencyreview.com/sitemap.xml

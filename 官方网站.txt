@@ -1,0 +1,31 @@
+家務工作外地僱員申請 輸入：
+
+https://www.gov.mo/zh-hant/services/ps-1401/ps-1401a/#1
+
+勞動合同 （家務工作外地僱員） 範本
+
+https://www.dsal.gov.mo/download/pdf/expatriation_laborlawtemp/nb_contracts_housework_c.pdf
+
+家務工作外地僱員申請須知
+
+https://www.dsal.gov.mo/zh_tw/standard/nrworker_faq_home.html
+
+supabase
+
+https://dvhwdirwpraorehlzdar.supabase.co/agencies
+
+
+21
+https://bo.dsaj.gov.mo/bo/i/2009/43/lei21_cn.asp
+
+7
+https://bo.dsaj.gov.mo/bo/i/2008/33/lei07_cn.asp
+
+8
+https://bo.dsaj.gov.mo/bo/i/2010/16/regadm08_cn.asp
+
+蓝卡
+https://www.fsm.gov.mo/psp/cht/psp_left_3_SML.html
+
+google call back
+https://dvhwdirwpraorehlzdar.supabase.co/auth/v1/callback

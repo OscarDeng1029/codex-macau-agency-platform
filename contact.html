@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" class="light">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>聯繫我們｜提交中介資料更正與客服查詢 - 澳門家傭點評網</title>
+    <meta name="description" content="如需提交澳門家傭中介資料更正、評價查詢、合作或提供平台意見，歡迎聯繫澳門家傭點評網團隊。" />
+    <link rel="canonical" href="https://www.macauagencyreview.com/contact.html" />
+    
+    <link rel="icon" type="image/png" href="/assets/images/logo.png" />
+    <link rel="apple-touch-icon" href="/assets/images/logo.png" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;900&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#002068",
+                        "surface": "#faf8ff",
+                        "on-surface": "#1a1b22",
+                    },
+                    fontFamily: { sans: ['Public Sans', 'sans-serif'], }
+                }
+            }
+        }
+    </script>
+    <style>
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Public Sans', sans-serif; min-height: 100dvh; overflow-x: hidden; }
+        .material-symbols-rounded { font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        .qr-box { width: min(68vw, 14rem); aspect-ratio: 1 / 1; height: auto; }
+        .bottom-nav-safe { padding-bottom: max(0.35rem, env(safe-area-inset-bottom)); height: calc(4rem + env(safe-area-inset-bottom)); }
+
+        @media (min-width: 768px) {
+            .qr-box { width: min(100%, 14rem); max-width: 14rem; }
+        }
+
+        @media (max-width: 767px) {
+            .mobile-card-shadow { box-shadow: 0 12px 30px rgba(15, 23, 42, 0.06); }
+        }
+    
+
+        /* UI consistency layer: aligned with the refreshed homepage without changing page content or data logic. */
+        :root {
+            --brand: #003399;
+            --brand-deep: #002068;
+            --surface: #faf8ff;
+        }
+        html { scrollbar-gutter: stable; }
+        body {
+            overflow-x: hidden;
+            background:
+                radial-gradient(circle at 8% -8%, rgba(59, 130, 246, .12), transparent 30%),
+                radial-gradient(circle at 94% 4%, rgba(99, 102, 241, .10), transparent 28%),
+                #faf8ff;
+        }
+        .focus-ring:focus-visible,
+        :where(a, button, input, select, textarea, [role="button"]):focus-visible {
+            outline: 3px solid rgba(0, 51, 153, .22);
+            outline-offset: 3px;
+        }
+        .surface-soft {
+            background: rgba(255, 255, 255, .86);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+        }
+        @media (max-width: 767px) {
+            body {
+                background:
+                    radial-gradient(circle at 0% 0%, rgba(59, 130, 246, .14), transparent 34%),
+                    #faf8ff;
+            }
+        }
+    </style>
+
+    <!-- GA4 monitoring core -->
+    <script src="assets/js/ga4-monitor.js" defer></script>
+    <!-- /GA4 monitoring core -->
+</head>
+<body class="bg-surface text-on-surface antialiased selection:bg-blue-200 pb-[calc(72px+env(safe-area-inset-bottom))] md:pb-0">
+
+    <!-- Header 導航 -->
+    <header class="fixed top-0 inset-x-0 z-50 bg-white/88 backdrop-blur-xl border-b border-slate-200/80">
+        <div class="max-w-[1200px] mx-auto px-4 md:px-6 h-14 md:h-[72px] flex items-center justify-between gap-3">
+            <a href="index.html" class="flex items-center gap-2 min-w-0 hover:opacity-85 transition-opacity focus-ring rounded-xl" aria-label="返回首頁">
+                <span class="w-8 h-8 md:w-9 md:h-9 rounded-2xl bg-[#003399] text-white flex items-center justify-center shadow-sm shrink-0">
+                    <span class="material-symbols-rounded text-[19px] md:text-[20px]">account_balance</span>
+                </span>
+                <span class="truncate text-[15px] md:text-lg font-black text-[#003399] tracking-tight">澳門家傭點評網</span>
+            </a>
+
+            <nav class="hidden md:flex items-center gap-1" aria-label="主要導航">
+                <a class="px-4 py-2 rounded-xl text-slate-600 hover:text-[#003399] hover:bg-slate-50 transition-colors font-medium" href="index.html">首頁</a>
+                <a class="px-4 py-2 rounded-xl text-slate-600 hover:text-[#003399] hover:bg-slate-50 transition-colors font-medium" href="agencies.html">中介</a>
+                <a class="px-4 py-2 rounded-xl text-slate-600 hover:text-[#003399] hover:bg-slate-50 transition-colors font-medium" href="ranking.html">排行榜</a>
+                <a class="px-4 py-2 rounded-xl text-slate-600 hover:text-[#003399] hover:bg-slate-50 transition-colors font-medium" href="legal.html">指南</a>
+                <a class="px-4 py-2 rounded-xl text-slate-600 hover:text-[#003399] hover:bg-slate-50 transition-colors font-medium" href="about.html">關於</a>
+            </nav>
+
+            <div class="flex items-center gap-2">
+                <a href="contact.html" class="hidden md:inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-blue-100 bg-blue-50 text-[#003399] font-black transition-colors focus-ring">
+                    <span class="material-symbols-rounded text-[18px]">support_agent</span>
+                    聯繫
+                </a>
+                <a href="profile.html" aria-label="用戶中心" class="w-9 h-9 md:w-10 md:h-10 rounded-full bg-slate-100 flex items-center justify-center border border-slate-200 hover:bg-slate-200 transition-colors focus-ring">
+                    <span class="material-symbols-rounded text-[#003399] text-[19px]">person</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- 頁面主體 -->
+    <main class="max-w-[1280px] mx-auto px-4 sm:px-5 md:px-6 pt-20 md:pt-28 pb-10 md:pb-16">
+        
+        <div class="text-center max-w-2xl mx-auto mb-8 md:mb-12">
+            <div class="inline-flex items-center gap-1.5 bg-blue-50 text-[#003399] px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-bold mb-3 md:mb-4 border border-blue-100">
+                <span class="material-symbols-rounded text-[18px]">support_agent</span> 官方客服中心
+            </div>
+            <h1 class="text-[28px] leading-tight md:text-4xl font-black text-slate-800 mb-3 md:mb-4">聯繫我們</h1>
+            <p class="text-sm md:text-base text-slate-500 leading-relaxed max-w-[34rem] mx-auto">
+                無論是尋求幫助、反饋意見，還是洽談中介入駐合作，我們都隨時為您準備好解答。請透過下方微信與我們取得聯繫。
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-[minmax(0,360px)_minmax(0,1fr)] gap-5 md:gap-8 lg:gap-12 max-w-5xl mx-auto items-start">
+            
+            <!-- 左側：微信二維碼卡片 -->
+            <div class="min-w-0 bg-white border border-slate-200 rounded-[28px] md:rounded-[32px] p-5 sm:p-6 md:p-10 shadow-sm mobile-card-shadow relative overflow-hidden text-center lg:sticky lg:top-24">
+                <div class="hidden sm:block absolute -right-10 -top-10 opacity-5 pointer-events-none">
+                    <span class="material-symbols-rounded text-[250px]">wechat</span>
+                </div>
+                
+                <div class="relative z-10">
+                    <div class="w-14 h-14 md:w-16 md:h-16 mx-auto bg-green-50 text-green-600 rounded-2xl flex items-center justify-center font-bold text-3xl mb-4 md:mb-6 shadow-sm border border-green-100">
+                        <span class="material-symbols-rounded text-[32px]">qr_code_scanner</span>
+                    </div>
+                    
+                    <h2 class="text-xl md:text-2xl font-black text-slate-800 mb-2">添加微信客服</h2>
+                    <p class="text-sm text-slate-500 mb-5 md:mb-8">截圖或掃描下方二維碼添加官方專屬客服</p>
+                    
+                    <!-- 二維碼佔位圖：請替換 src 屬性為你真實的二維碼圖片 -->
+                    <div class="qr-box mx-auto bg-slate-50 border-2 border-dashed border-slate-200 rounded-2xl flex flex-col items-center justify-center p-3 mb-5 md:mb-6">
+                        <img src="../assets/images/contact.jpg" alt="微信二維碼" class="w-full h-full object-contain rounded-xl" />
+                        
+                    </div>
+
+                    <div class="bg-slate-50 rounded-2xl p-4 border border-slate-100 text-left w-full">
+                        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1.5">
+                            <span class="text-xs text-slate-500 font-bold">服務時間</span>
+                            <span class="text-sm font-bold text-slate-700">週一至週日 09:00 - 18:00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 右側：常見聯繫原因與說明 -->
+            <div class="min-w-0 space-y-4 md:space-y-6">
+                <h3 class="text-lg md:text-xl font-bold flex items-center gap-2 text-slate-800 mb-1 md:mb-2">
+                    <span class="material-symbols-rounded text-[#003399]">help_clinic</span> 常見諮詢與服務
+                </h3>
+                
+                <div class="bg-white border border-blue-100 rounded-[22px] md:rounded-[24px] p-4 md:p-6 shadow-sm mobile-card-shadow hover:shadow-md transition-shadow">
+                    <div class="flex gap-3 md:gap-4 items-start">
+                        <div class="w-10 h-10 md:w-12 md:h-12 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0 mt-0.5">
+                            <span class="material-symbols-rounded text-[22px] md:text-2xl">business_center</span>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-base md:text-lg text-slate-800 mb-1.5 md:mb-2">中介入駐與合作</h4>
+                            <p class="text-sm text-slate-600 leading-relaxed mb-3">
+                                如果您是合規的澳門家傭職業介紹所，希望在我們的平台上展示您的服務、認領店鋪或更新門店信息，請隨時聯繫我們。
+                            </p>
+                            <span class="inline-block text-xs text-blue-700 bg-blue-50 px-2 py-1 rounded font-medium border border-blue-100">準備資料：商業登記、職介所准照</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white border border-rose-100 rounded-[22px] md:rounded-[24px] p-4 md:p-6 shadow-sm mobile-card-shadow hover:shadow-md transition-shadow">
+                    <div class="flex gap-3 md:gap-4 items-start">
+                        <div class="w-10 h-10 md:w-12 md:h-12 rounded-2xl bg-rose-50 text-rose-600 flex items-center justify-center shrink-0 mt-0.5">
+                            <span class="material-symbols-rounded text-[22px] md:text-2xl">gavel</span>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-base md:text-lg text-slate-800 mb-1.5 md:mb-2">投訴或舉報不實信息</h4>
+                            <p class="text-sm text-slate-600 leading-relaxed">
+                                平台致力於提供真實客觀的評價。如果您發現惡意刷單、虛假評價、或是中介信息與事實嚴重不符，請聯繫客服進行申訴，我們將介入核實並處理。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white border border-emerald-100 rounded-[22px] md:rounded-[24px] p-4 md:p-6 shadow-sm mobile-card-shadow hover:shadow-md transition-shadow">
+                    <div class="flex gap-3 md:gap-4 items-start">
+                        <div class="w-10 h-10 md:w-12 md:h-12 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0 mt-0.5">
+                            <span class="material-symbols-rounded text-[22px] md:text-2xl">edit_note</span>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-base md:text-lg text-slate-800 mb-1.5 md:mb-2">修改或刪除評價</h4>
+                            <p class="text-sm text-slate-600 leading-relaxed">
+                                僱主若因誤操作或希望補充/撤回先前的評價，請提供您的賬號信息及評價截圖，客服將協助您進行後續的修改流程。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white border border-amber-100 rounded-[22px] md:rounded-[24px] p-4 md:p-6 shadow-sm mobile-card-shadow hover:shadow-md transition-shadow">
+                    <div class="flex gap-3 md:gap-4 items-start">
+                        <div class="w-10 h-10 md:w-12 md:h-12 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center shrink-0 mt-0.5">
+                            <span class="material-symbols-rounded text-[22px] md:text-2xl">bug_report</span>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-base md:text-lg text-slate-800 mb-1.5 md:mb-2">網站錯誤與建議反饋</h4>
+                            <p class="text-sm text-slate-600 leading-relaxed">
+                                使用過程中遇到頁面錯誤、無法登入，或者您對平台功能有任何優化建議，都歡迎告訴我們。您的每一個反饋都是我們進步的動力。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-slate-200 mt-6 md:mt-10 pb-[calc(5rem+env(safe-area-inset-bottom))] md:pb-0">
+        <div class="max-w-[1280px] mx-auto px-4 md:px-6 py-6">
+            <div class="flex flex-col md:grid md:grid-cols-4 gap-6 md:gap-8 mb-6">
+                
+                <div class="md:col-span-2">
+                    <a href="index.html" class="flex items-center gap-1.5 mb-2">
+                        <span class="material-symbols-rounded text-[#003399] text-[18px]">account_balance</span>
+                        <span class="text-base font-bold text-slate-800 tracking-tight">澳門家傭點評網</span>
+                    </a>
+                    <p class="text-xs text-slate-500 leading-normal max-w-sm">
+                        致力於提供透明、客觀的澳門家傭中介評價資訊，幫助僱主避坑，促進行業良性發展。
+                    </p>
+                </div>
+                
+                <div class="hidden md:block">
+                    <h4 class="font-bold text-slate-800 text-sm mb-3">快速鏈接</h4>
+                    <ul class="space-y-2 text-xs text-slate-500">
+                        <li><a href="index.html" class="hover:text-[#003399] transition-colors">首頁</a></li>
+                        <li><a href="agencies.html" class="hover:text-[#003399] transition-colors">中介</a></li>
+                        <li><a href="ranking.html" class="hover:text-[#003399] transition-colors">排行榜</a></li>
+                        <li><a href="legal.html" class="hover:text-[#003399] transition-colors">指南</a></li>
+                    </ul>
+                </div>
+                
+                <div class="w-full mt-2 md:mt-0">
+                    <h4 class="hidden md:block font-bold text-slate-800 text-sm mb-3">關於與合規</h4>
+                    <ul class="flex flex-wrap md:flex-col gap-x-5 gap-y-2 md:gap-y-2 text-xs text-slate-500">
+                        <li><a href="about.html" class="hover:text-[#003399] transition-colors">關於我們</a></li>
+                        <li><a href="contact.html" class="text-[#003399] font-bold transition-colors">聯繫客服</a></li>
+                        <li><a href="terms.html" class="hover:text-[#003399] transition-colors">服務條款 & 隱私政策</a></li>
+                        <li><a href="disclaimer.html" class="hover:text-[#003399] transition-colors">免責聲明</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="pt-4 border-t border-slate-100 flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
+                <p class="text-[11px] text-slate-400">
+                    &copy; 2026 澳門家傭點評網. 僅供參考，不構成法律建議。
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 移動端底部導航 -->
+    <nav class="md:hidden fixed bottom-0 left-0 right-0 z-50 h-[calc(64px+env(safe-area-inset-bottom))] pb-[env(safe-area-inset-bottom)] bg-white/95 backdrop-blur-xl border-t border-slate-200 grid grid-cols-4" aria-label="手機底部導航">
+        <a href="index.html" class="flex flex-col items-center justify-center text-slate-400 active:text-[#003399] hover:text-[#003399] transition-colors">
+            <span class="material-symbols-rounded text-[23px]">home</span>
+            <span class="text-[10px] font-bold mt-0.5">首頁</span>
+        </a>
+        <a href="agencies.html" class="flex flex-col items-center justify-center text-slate-400 active:text-[#003399] hover:text-[#003399] transition-colors">
+            <span class="material-symbols-rounded text-[23px]">business_center</span>
+            <span class="text-[10px] font-bold mt-0.5">中介</span>
+        </a>
+        <a href="ranking.html" class="flex flex-col items-center justify-center text-slate-400 active:text-[#003399] hover:text-[#003399] transition-colors">
+            <span class="material-symbols-rounded text-[23px]">leaderboard</span>
+            <span class="text-[10px] font-bold mt-0.5">榜單</span>
+        </a>
+        <a href="legal.html" class="flex flex-col items-center justify-center text-slate-400 active:text-[#003399] hover:text-[#003399] transition-colors">
+            <span class="material-symbols-rounded text-[23px]">menu_book</span>
+            <span class="text-[10px] font-bold mt-0.5">指南</span>
+        </a>
+    </nav>
+
+
+</body>
+</html>

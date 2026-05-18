@@ -1,0 +1,1448 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" class="light">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>加載中... - 澳門家傭點評網</title>
+    
+    <link rel="icon" type="image/png" href="/assets/images/logo.png" />
+    <link rel="apple-touch-icon" href="/assets/images/logo.png" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    
+    <script src="https://cdn.jsdelivr.net/npm/qrious@4.0.2/dist/qrious.min.js"></script>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#002068",
+                        "primary-fixed": "#dce1ff",
+                        "on-primary-fixed": "#00164e",
+                        "surface": "#faf8ff",
+                        "on-surface": "#1a1b22",
+                        "surface-container": "#eeedf6",
+                        "surface-container-low": "#f4f3fc",
+                        "surface-container-lowest": "#ffffff",
+                        "on-surface-variant": "#444653",
+                        "outline-variant": "#c4c5d5",
+                    },
+                    fontFamily: { sans: ['Public Sans', 'sans-serif'], }
+                }
+            }
+        }
+    </script>
+    <style>
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Public Sans', sans-serif; min-height: 100dvh; } 
+        .material-symbols-rounded { font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24; } 
+        .shadow-ambient { box-shadow: 0 12px 32px -12px rgba(0, 32, 104, 0.08); }
+        
+        .star-container { position: relative; display: inline-block; line-height: 1; vertical-align: middle; }
+        .star-bg { color: #e2e8f0; }
+        .star-fg { 
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            overflow: hidden; 
+            white-space: nowrap; 
+            color: #fbbf24;
+        }
+
+        .map-placeholder {
+            background-image: linear-gradient(rgba(0,32,104,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(0,32,104,0.05) 1px, transparent 1px);
+            background-size: 20px 20px;
+            background-color: #f8fafc;
+        }
+
+        .agency-title {
+            overflow-wrap: anywhere;
+            word-break: break-word;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.001ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.001ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+    
+
+        /* UI consistency layer: aligned with the refreshed homepage without changing page content or data logic. */
+        :root {
+            --brand: #003399;
+            --brand-deep: #002068;
+            --surface: #faf8ff;
+        }
+        html { scrollbar-gutter: stable; }
+        body {
+            overflow-x: hidden;
+            background:
+                radial-gradient(circle at 8% -8%, rgba(59, 130, 246, .12), transparent 30%),
+                radial-gradient(circle at 94% 4%, rgba(99, 102, 241, .10), transparent 28%),
+                #faf8ff;
+        }
+        .focus-ring:focus-visible,
+        :where(a, button, input, select, textarea, [role="button"]):focus-visible {
+            outline: 3px solid rgba(0, 51, 153, .22);
+            outline-offset: 3px;
+        }
+        .surface-soft {
+            background: rgba(255, 255, 255, .86);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+        }
+        @media (max-width: 767px) {
+            body {
+                background:
+                    radial-gradient(circle at 0% 0%, rgba(59, 130, 246, .14), transparent 34%),
+                    #faf8ff;
+            }
+        }
+    
+
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        #sharePosterModal.show { display: flex; }
+        .share-poster-panel {
+            display: flex;
+            flex-direction: column;
+            max-height: min(94dvh, 900px);
+            overflow: hidden;
+        }
+        .share-poster-body {
+            flex: 1 1 auto;
+            min-height: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .share-poster-preview-box {
+            flex: 1 1 auto;
+            min-height: 0;
+            height: min(58dvh, 560px);
+        }
+        .share-poster-actions,
+        #sharePosterStatus {
+            flex: 0 0 auto;
+        }
+        #posterPreviewImage {
+            display: none;
+            width: auto;
+            max-width: 100%;
+            height: auto;
+            max-height: 100%;
+            object-fit: contain;
+            border-radius: 22px;
+            box-shadow: 0 24px 64px -28px rgba(0, 32, 104, 0.45);
+            background: #eef4ff;
+        }
+        @media (max-width: 767px) {
+            .share-poster-panel {
+                max-height: 96dvh;
+                border-bottom-left-radius: 0;
+                border-bottom-right-radius: 0;
+            }
+            .share-poster-body {
+                gap: 10px;
+            }
+            .share-poster-preview-box {
+                height: min(62dvh, calc(100dvh - 205px));
+                min-height: 260px;
+            }
+            #posterPreviewImage {
+                border-radius: 18px;
+            }
+        }
+        @media (max-height: 680px) {
+            .share-poster-preview-box {
+                height: calc(100dvh - 215px);
+                min-height: 220px;
+            }
+            #posterPreviewImage {
+                border-radius: 16px;
+            }
+        }
+
+    </style>
+
+    <!-- GA4 monitoring core -->
+    <script src="assets/js/ga4-monitor.js" defer></script>
+    <!-- /GA4 monitoring core -->
+</head>
+<body class="bg-[#faf8ff] text-[#1a1b22] antialiased">
+
+    <header class="fixed top-0 inset-x-0 z-50 bg-white/88 backdrop-blur-xl border-b border-slate-200/80">
+        <div class="max-w-[1120px] mx-auto px-4 md:px-6 h-14 md:h-[72px] flex items-center justify-between gap-3">
+            <div class="flex items-center gap-3 min-w-0">
+                <button onclick="window.history.length > 1 ? window.history.back() : window.location.href='agencies.html'" class="w-9 h-9 md:w-10 md:h-10 rounded-full bg-slate-100 flex items-center justify-center border border-slate-200 text-slate-500 hover:bg-blue-50 hover:text-[#003399] transition-colors focus-ring" aria-label="返回上一頁">
+                    <span class="material-symbols-rounded text-[21px]">arrow_back</span>
+                </button>
+                <a href="index.html" class="flex items-center gap-2 min-w-0 hover:opacity-85 transition-opacity focus-ring rounded-xl" aria-label="返回首頁">
+                    <span class="w-8 h-8 md:w-9 md:h-9 rounded-2xl bg-[#003399] text-white flex items-center justify-center shadow-sm shrink-0">
+                        <span class="material-symbols-rounded text-[19px] md:text-[20px]">account_balance</span>
+                    </span>
+                    <span class="truncate text-[15px] md:text-lg font-black text-[#003399] tracking-tight">澳門家傭點評網</span>
+                </a>
+            </div>
+            <button onclick="shareAgency()" class="w-9 h-9 md:w-10 md:h-10 rounded-full bg-slate-100 flex items-center justify-center border border-slate-200 text-slate-500 hover:bg-blue-50 hover:text-[#003399] transition-colors active:scale-95 focus-ring" aria-label="分享中介海報">
+                <span class="material-symbols-rounded text-[21px]">share</span>
+            </button>
+        </div>
+    </header>
+
+    <main class="pt-24 pb-[160px] md:pb-16 px-4 md:px-6 max-w-[1120px] mx-auto">
+        
+        <div id="skeleton-view" class="space-y-4 md:space-y-6 animate-pulse">
+            <div class="bg-white rounded-3xl border-l-4 border-slate-200 p-5 md:p-8 flex flex-col md:flex-row gap-6 items-start justify-between">
+                <div class="flex gap-4 md:gap-6 w-full">
+                    <div class="w-14 h-14 md:w-20 md:h-20 rounded-xl md:rounded-2xl bg-slate-200 shrink-0 mt-0.5 md:mt-1"></div>
+                    <div class="flex-1 space-y-3 py-1">
+                        <div class="h-5 md:h-6 bg-slate-200 rounded w-2/3"></div>
+                        <div class="flex items-center gap-2">
+                            <div class="h-4 bg-slate-200 rounded w-1/4"></div>
+                            <div class="h-5 bg-slate-200 rounded w-16 md:hidden"></div>
+                        </div>
+                        <div class="h-10 bg-slate-200 rounded w-full lg:hidden mt-3"></div>
+                        <div class="h-12 md:h-16 bg-slate-200 rounded w-full md:w-5/6 mt-2 md:mt-4"></div>
+                    </div>
+                </div>
+                <div class="hidden md:block w-56 h-32 bg-slate-200 rounded-2xl shrink-0"></div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4">
+                <div class="bg-white rounded-[20px] h-20 md:h-24 bg-slate-100"></div>
+                <div class="bg-white rounded-[20px] h-20 md:h-24 bg-slate-100 hidden md:block"></div>
+                <div class="bg-white rounded-[20px] h-20 md:h-24 bg-slate-100 hidden md:block"></div>
+            </div>
+        </div>
+
+        <div id="real-content" class="hidden">
+            <section class="bg-white rounded-3xl shadow-ambient border border-slate-100 border-l-4 border-l-[#003399] p-5 md:p-8 mb-5 md:mb-6 flex flex-col md:flex-row justify-between items-start gap-6 md:gap-8">
+                
+                <div class="flex items-start gap-4 sm:gap-6 flex-1 min-w-0">
+                    <div class="w-14 h-14 sm:w-20 sm:h-20 rounded-xl sm:rounded-2xl bg-blue-50 flex flex-shrink-0 items-center justify-center text-[#003399] border border-blue-100 mt-0.5 md:mt-1">
+                        <span class="material-symbols-rounded text-[28px] sm:text-[40px]">storefront</span>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <div class="flex flex-col sm:flex-row sm:flex-wrap sm:items-center gap-1.5 sm:gap-2 md:gap-3 mb-1.5 md:mb-2 min-w-0 max-w-full">
+                            <h1 id="detail-name" class="agency-title text-xl sm:text-3xl font-bold text-slate-800 leading-tight min-w-0 max-w-full"></h1>
+                            <span id="licensed-badge" class="hidden bg-emerald-50 text-emerald-600 text-[10px] md:text-xs font-bold px-1.5 md:px-2 py-0.5 md:py-1 rounded border border-emerald-100 shrink-0 w-fit">勞工局持牌</span>
+                        </div>
+                        
+                        <div class="flex items-center gap-3 mb-1 md:mb-4 flex-wrap">
+                            <p id="detail-license" class="text-slate-500 text-xs md:text-sm font-medium"></p>
+                            
+                            <div class="md:hidden flex items-center gap-1 bg-amber-50 px-2 py-0.5 rounded-md border border-amber-100/50">
+                                <span class="material-symbols-rounded text-[14px] text-amber-500">star</span>
+                                <span id="detail-rating-mobile" class="text-xs font-bold text-amber-600">0.0</span>
+                                <span id="detail-count-mobile" class="text-[10px] text-amber-600/70 ml-0.5 pl-1.5 border-l border-amber-200/50">0評分</span>
+                            </div>
+                        </div>
+                        
+                        <div class="lg:hidden mt-3 mb-3">
+                            <a onclick="openAmap()" class="inline-flex items-start gap-1 bg-blue-50/50 hover:bg-blue-50 border border-blue-100 p-2 rounded-xl transition-colors cursor-pointer active:scale-95 w-full">
+                                <span class="material-symbols-rounded text-[16px] text-[#003399] shrink-0 mt-0.5">location_on</span>
+                                <span id="detail-address-mobile" class="text-xs text-[#003399] leading-snug flex-1 pt-0.5"></span>
+                                <div class="flex items-center gap-1 text-white bg-[#003399] px-2 py-1 rounded-lg shrink-0 ml-1 shadow-sm">
+                                    <span class="text-[10px] font-bold whitespace-nowrap">導航</span>
+                                    <span class="material-symbols-rounded text-[12px]">navigation</span>
+                                </div>
+                            </a>
+                        </div>
+                        
+                        <p id="detail-desc" class="text-slate-600 text-xs md:text-sm leading-relaxed max-w-2xl"></p>
+                    </div>
+                </div>
+
+                <div class="hidden md:flex w-56 bg-slate-50 rounded-2xl p-5 flex-col items-center justify-center border border-slate-100 shrink-0">
+                    <span class="text-[11px] text-slate-500 font-bold mb-1.5 tracking-widest uppercase text-center w-full">用戶綜合評分</span>
+                    <div class="flex items-baseline gap-1 text-[#003399]">
+                        <span id="detail-rating" class="text-4xl font-black">0.0</span>
+                        <span class="text-lg font-bold text-slate-400">/ 5</span>
+                    </div>
+                    <div class="flex items-center gap-1 my-2 h-4" id="star-display"></div>
+                    <span id="detail-count" class="text-xs text-slate-400 font-medium text-center w-full">基於 0 個評分</span>
+                </div>
+
+            </section>
+
+            <section class="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4 mb-6 md:mb-8">
+                <div class="bg-white rounded-[20px] md:rounded-2xl p-4 md:p-5 shadow-ambient border border-slate-100 flex md:block items-center justify-between md:justify-start">
+                    <div class="flex items-center gap-2 mb-0 md:mb-3">
+                        <span class="material-symbols-rounded text-slate-400 text-[18px] md:text-[20px] hidden md:inline-block">visibility</span>
+                        <h3 class="font-bold text-slate-700 text-sm">收費透明度</h3>
+                    </div>
+                    <div class="flex items-center md:block gap-4 md:gap-0 w-1/2 md:w-auto">
+                        <div class="text-lg md:text-2xl font-black text-slate-800 mb-0 md:mb-2 w-12 md:w-auto text-right md:text-left" id="score-t">暫無</div>
+                        <div class="h-1.5 bg-slate-100 rounded-full overflow-hidden flex-1 md:w-full">
+                            <div id="bar-t" class="h-full bg-[#003399] rounded-full transition-all duration-1000" style="width: 0%;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-[20px] md:rounded-2xl p-4 md:p-5 shadow-ambient border border-slate-100 flex md:block items-center justify-between md:justify-start">
+                    <div class="flex items-center gap-2 mb-0 md:mb-3">
+                        <span class="material-symbols-rounded text-slate-400 text-[18px] md:text-[20px] hidden md:inline-block">bolt</span>
+                        <h3 class="font-bold text-slate-700 text-sm">辦證速度</h3>
+                    </div>
+                    <div class="flex items-center md:block gap-4 md:gap-0 w-1/2 md:w-auto">
+                        <div class="text-lg md:text-2xl font-black text-slate-800 mb-0 md:mb-2 w-12 md:w-auto text-right md:text-left" id="score-s">暫無</div>
+                        <div class="h-1.5 bg-slate-100 rounded-full overflow-hidden flex-1 md:w-full">
+                            <div id="bar-s" class="h-full bg-[#003399] rounded-full transition-all duration-1000" style="width: 0%;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-[20px] md:rounded-2xl p-4 md:p-5 shadow-ambient border border-slate-100 flex md:block items-center justify-between md:justify-start">
+                    <div class="flex items-center gap-2 mb-0 md:mb-3">
+                        <span class="material-symbols-rounded text-slate-400 text-[18px] md:text-[20px] hidden md:inline-block">support_agent</span>
+                        <h3 class="font-bold text-slate-700 text-sm">服務態度</h3>
+                    </div>
+                    <div class="flex items-center md:block gap-4 md:gap-0 w-1/2 md:w-auto">
+                        <div class="text-lg md:text-2xl font-black text-slate-800 mb-0 md:mb-2 w-12 md:w-auto text-right md:text-left" id="score-a">暫無</div>
+                        <div class="h-1.5 bg-slate-100 rounded-full overflow-hidden flex-1 md:w-full">
+                            <div id="bar-a" class="h-full bg-[#003399] rounded-full transition-all duration-1000" style="width: 0%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-8">
+                <div class="lg:col-span-8">
+                    <div class="flex items-center justify-between mb-2 md:mb-3">
+                        <h2 class="text-lg md:text-xl font-bold flex items-center gap-2">
+                            <span class="material-symbols-rounded text-slate-400">forum</span> 僱主評價
+                        </h2>
+                        <a id="reviewBtn" href="#" class="text-white font-bold text-xs md:text-sm hover:bg-[#002068] bg-[#003399] px-4 md:px-5 py-2 md:py-2.5 rounded-xl transition-colors shadow-md">我要點評</a>
+                    </div>
+                    <p class="text-xs text-slate-500 mb-4 md:mb-6">
+                        僅顯示平台已審核文字評價；無文字評分仍會計入用戶綜合評分。
+                    </p>
+                    <div id="reviews-list" class="space-y-3 md:space-y-4"></div>
+                </div>
+
+                <div class="hidden lg:block lg:col-span-4">
+                    <aside id="desktop-sidebar" class="sticky top-24 space-y-6 max-h-[calc(100vh-7rem)] overflow-y-auto pr-1 pb-2 overscroll-contain hide-scrollbar">
+                        <div class="bg-white rounded-3xl p-6 shadow-ambient border border-slate-100">
+                            <h3 class="text-lg font-bold mb-5 flex items-center gap-2">
+                                <span class="material-symbols-rounded text-slate-800">contact_page</span> 聯絡方式
+                            </h3>
+                            <ul class="space-y-4">
+                                <li class="flex items-start gap-3">
+                                    <span class="material-symbols-rounded text-slate-400 text-[20px] mt-0.5 shrink-0">location_on</span>
+                                    <span id="detail-address-sidebar" class="text-sm text-slate-600 leading-relaxed"></span>
+                                </li>
+                                <li id="detail-email-sidebar" class="flex items-center gap-3">
+                                    <span class="material-symbols-rounded text-slate-400 text-[20px] shrink-0">mail</span>
+                                    <a id="email-link" href="#" class="text-sm text-[#003399] hover:underline truncate">獲取中...</a>
+                                </li>
+                            </ul>
+                            <div id="phone-reveal-container" class="mt-6 pt-6 border-t border-slate-100">
+                                <button id="reveal-phones-btn" onclick="revealPhones()" class="w-full bg-[#003399]/5 text-[#003399] font-bold text-sm py-4 rounded-xl hover:bg-[#003399]/10 transition-all flex items-center justify-center gap-2 border border-dashed border-[#003399]/30">
+                                    <span class="material-symbols-rounded text-[18px]">call</span> 顯示電話號碼
+                                </button>
+                                <div id="desktop-phones-container" class="hidden space-y-3 animate-in fade-in slide-in-from-top-2 duration-300">
+                                </div>
+                            </div>
+
+                            <div class="mt-6 pt-6 border-t border-slate-100">
+                                <a id="claim-link-sidebar" href="contact.html?type=agency-claim" class="inline-flex items-center gap-1 text-xs font-medium text-slate-400 hover:text-[#003399] transition-colors">
+                                    <span class="material-symbols-rounded text-[16px]">edit_note</span>
+                                    我是該機構，申請更正資料或回應評價
+                                </a>
+                            </div>
+                        </div>
+
+                        <div id="map-card" onclick="openAmap()" class="group bg-white rounded-3xl overflow-hidden shadow-ambient border border-slate-100 cursor-pointer hover:shadow-xl transition-all active:scale-[0.98]">
+                            <div class="map-placeholder h-32 w-full flex items-center justify-center relative">
+                                <div class="absolute inset-0 bg-[#003399]/5 group-hover:bg-transparent transition-colors"></div>
+                                <div class="bg-white p-3 rounded-full shadow-lg z-10 text-[#003399] group-hover:scale-110 transition-transform">
+                                    <span class="material-symbols-rounded text-[32px]">map</span>
+                                </div>
+                            </div>
+                            <div class="p-5 flex justify-between items-center bg-slate-50/50">
+                                <div>
+                                    <h4 class="font-bold text-slate-800">位置與導航</h4>
+                                    <p class="text-xs text-slate-500 mt-0.5">點擊前往高德地圖查看詳情</p>
+                                </div>
+                                <div class="w-8 h-8 rounded-full bg-[#003399] text-white flex items-center justify-center">
+                                    <span class="material-symbols-rounded text-[18px]">near_me</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded-3xl p-5 shadow-ambient border border-slate-100">
+                            <h3 class="font-bold text-slate-800 mb-2 flex items-center gap-2">
+                                <span class="material-symbols-rounded text-slate-400 text-[20px]">info</span>
+                                資料提示
+                            </h3>
+                            <p class="text-xs text-slate-500 leading-relaxed">
+                                中介名稱、地址、電話及牌照資料由平台按官方持牌名單及公開資料整理；如有出入，請以政府部門或中介正式文件為準。
+                            </p>
+                        </div>
+                    </aside>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <div class="lg:hidden fixed bottom-6 left-0 w-full px-4 z-40 pointer-events-none">
+        <div class="max-w-[1024px] mx-auto flex justify-center">
+            <div class="bg-white/90 backdrop-blur-xl rounded-2xl p-3 shadow-[0_20px_40px_-10px_rgba(0,32,104,0.15)] border border-slate-200 pointer-events-auto grid grid-cols-2 gap-2 w-full">
+                <button onclick="openPhoneModal()" class="bg-[#003399] text-white font-bold rounded-xl px-3 py-3 hover:bg-[#002068] active:scale-[0.98] transition-all flex flex-col items-center justify-center gap-1">
+                    <span class="material-symbols-rounded text-[20px]">call</span>
+                    <span class="text-xs">電話</span>
+                </button>
+                <a id="mobileReviewBtn" href="#" class="bg-slate-50 text-slate-700 font-bold rounded-xl px-3 py-3 hover:bg-slate-100 active:scale-[0.98] transition-all flex flex-col items-center justify-center gap-1 border border-slate-200">
+                    <span class="material-symbols-rounded text-[20px]">rate_review</span>
+                    <span class="text-xs">點評</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div id="phoneModal" class="fixed inset-0 bg-black/40 z-[100] hidden flex-col items-center justify-end px-4 pb-6 backdrop-blur-sm transition-opacity">
+        <div class="bg-white rounded-t-3xl p-6 w-full max-w-sm shadow-2xl transform transition-transform translate-y-full" id="phoneModalContent">
+            <div class="flex justify-between items-center mb-2">
+                <h3 class="text-xl font-bold text-slate-800">撥打電話預約</h3>
+                <button onclick="closePhoneModal()" class="text-slate-400 hover:text-slate-600"><span class="material-symbols-rounded">close</span></button>
+            </div>
+            <p class="text-sm text-slate-500 mb-6">點擊下方號碼將直接拉起您的撥號面板</p>
+            <div id="phoneList" class="space-y-3"></div>
+        </div>
+    </div>
+
+
+
+    <div id="sharePosterModal" class="fixed inset-0 bg-slate-950/65 z-[120] hidden items-end md:items-center justify-center px-0 md:px-4 backdrop-blur-sm">
+        <div class="absolute inset-0" onclick="closeSharePosterModal()"></div>
+        <div class="share-poster-panel relative w-full md:w-[460px] bg-white rounded-t-[24px] md:rounded-[28px] shadow-2xl border border-white/70">
+            <div class="flex items-center justify-between gap-3 px-4 md:px-5 py-3 border-b border-slate-100 bg-white/95 backdrop-blur z-10 shrink-0">
+                <div>
+                    <h3 class="text-lg font-black text-slate-800">分享中介海報</h3>
+                    <p class="text-xs text-slate-500 mt-1">掃碼進入詳情頁，查看完整資料與評價。</p>
+                </div>
+                <button onclick="closeSharePosterModal()" class="w-9 h-9 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 flex items-center justify-center transition-colors" aria-label="關閉分享海報">
+                    <span class="material-symbols-rounded">close</span>
+                </button>
+            </div>
+
+            <div class="share-poster-body p-3 md:p-5">
+                <div class="share-poster-preview-box rounded-2xl md:rounded-3xl bg-slate-50 border border-slate-200 p-2.5 md:p-3 flex items-center justify-center overflow-hidden">
+                    <div id="posterPreviewLoading" class="text-center py-8">
+                        <span class="material-symbols-rounded text-[#003399] text-3xl md:text-4xl animate-spin">progress_activity</span>
+                        <p class="text-xs md:text-sm font-bold text-slate-600 mt-2">正在生成海報...</p>
+                    </div>
+                    <img id="posterPreviewImage" alt="中介分享海報預覽" />
+                </div>
+
+                <div id="sharePosterStatus" class="hidden rounded-xl border px-3 py-2 text-xs md:text-sm font-medium"></div>
+
+                <div class="share-poster-actions grid grid-cols-2 gap-2 md:gap-3">
+                    <button id="savePosterBtn" onclick="downloadSharePoster()" class="w-full bg-[#003399] text-white font-bold rounded-xl md:rounded-2xl px-3 md:px-4 py-3 hover:bg-[#002068] active:scale-[0.99] transition-all shadow-lg shadow-blue-900/15 flex items-center justify-center gap-1.5 md:gap-2">
+                        <span class="material-symbols-rounded text-[20px]">download</span>
+                        <span>保存海報</span>
+                    </button>
+                    <button onclick="copyAgencyLink()" class="w-full bg-slate-50 text-slate-700 font-bold rounded-xl md:rounded-2xl px-3 md:px-4 py-3 hover:bg-slate-100 active:scale-[0.99] transition-all border border-slate-200 flex items-center justify-center gap-1.5 md:gap-2">
+                        <span class="material-symbols-rounded text-[20px]">link</span>
+                        <span>複製鏈接</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../assets/js/db.js"></script>
+
+    <script>
+        const NO_TEXT_MSG = '該僱主僅進行了評分與打標籤，未留下詳細文字說明。';
+        let currentAgencyData = null;
+        let currentAgencyStats = null;
+        let currentPosterDataUrl = '';
+        let isPosterRendering = false;
+
+        function escapeHTML(value = '') {
+            return String(value)
+                .replaceAll('&', '&amp;')
+                .replaceAll('<', '&lt;')
+                .replaceAll('>', '&gt;')
+                .replaceAll('"', '&quot;')
+                .replaceAll("'", '&#039;');
+        }
+
+        function parseMaybeJsonArray(value) {
+            if (Array.isArray(value)) return value;
+            if (typeof value === 'string') {
+                try {
+                    const parsed = JSON.parse(value);
+                    return Array.isArray(parsed) ? parsed : (value.trim() ? [value] : []);
+                } catch(e) {
+                    return value.trim() ? [value] : [];
+                }
+            }
+            return [];
+        }
+
+        function normalizePhone(phone = '') {
+            return String(phone).replace(/[^\d+]/g, '');
+        }
+
+        function safeNumber(value, fallback = 0) {
+            const num = Number(value);
+            return Number.isFinite(num) ? num : fallback;
+        }
+
+        function hasLicenseNumber(agency = {}) {
+            return !!(agency && agency.license_no && String(agency.license_no).trim() !== '');
+        }
+
+        function setText(id, value) {
+            const el = document.getElementById(id);
+            if (el) el.innerText = value ?? '';
+        }
+
+        function setHref(id, value) {
+            const el = document.getElementById(id);
+            if (el) el.href = value;
+        }
+
+        function generatePreciseStars(rating, size = '24px') {
+            let html = '';
+            const numericRating = Math.max(0, Math.min(5, parseFloat(rating) || 0));
+
+            for (let i = 1; i <= 5; i++) {
+                if (i <= Math.floor(numericRating)) {
+                    html += `<span class="material-symbols-rounded text-amber-400" style="font-size: ${size};">star</span>`;
+                } else if (i === Math.ceil(numericRating) && numericRating % 1 > 0) {
+                    const percentage = (numericRating % 1) * 100;
+                    html += `<div class="star-container" style="width: ${size}; height: ${size};"><span class="material-symbols-rounded star-bg" style="font-size: ${size};">star</span><div class="star-fg" style="width: ${percentage}%;"><span class="material-symbols-rounded" style="font-size: ${size};">star</span></div></div>`;
+                } else {
+                    html += `<span class="material-symbols-rounded text-slate-200" style="font-size: ${size};">star</span>`;
+                }
+            }
+            return html;
+        }
+
+        function timeAgo(dateString) {
+            if (!dateString) return '剛剛';
+            const date = new Date(dateString);
+            const now = new Date();
+            const seconds = Math.floor((now - date) / 1000);
+            
+            let interval = seconds / 31536000;
+            if (interval >= 1) return Math.floor(interval) + ' 年前';
+            interval = seconds / 2592000;
+            if (interval >= 1) return Math.floor(interval) + ' 個月前';
+            interval = seconds / 604800;
+            if (interval >= 1) return Math.floor(interval) + ' 週前';
+            interval = seconds / 86400;
+            if (interval >= 1) return Math.floor(interval) + ' 天前';
+            interval = seconds / 3600;
+            if (interval >= 1) return Math.floor(interval) + ' 小時前';
+            interval = seconds / 60;
+            if (interval >= 1) return Math.floor(interval) + ' 分鐘前';
+            return '剛剛';
+        }
+
+        function renderLoadError(title = '無法載入中介資料', message = '請檢查網絡或稍後重試。') {
+            const skeleton = document.getElementById('skeleton-view');
+            const realContent = document.getElementById('real-content');
+            if (realContent) realContent.classList.add('hidden');
+            if (skeleton) {
+                skeleton.classList.remove('animate-pulse');
+                skeleton.innerHTML = `
+                    <div class="bg-white rounded-3xl border border-red-100 p-8 text-center shadow-ambient">
+                        <span class="material-symbols-rounded text-red-400 text-5xl mb-3">cloud_off</span>
+                        <p class="text-red-600 font-bold mb-2">${escapeHTML(title)}</p>
+                        <p class="text-sm text-slate-500 mb-5">${escapeHTML(message)}</p>
+                        <a href="agencies.html" class="inline-flex px-5 py-3 rounded-xl bg-[#003399] text-white font-bold text-sm hover:bg-[#002068] transition-colors">返回中介列表</a>
+                    </div>
+                `;
+            }
+        }
+
+        function setMetric(prefix, value) {
+            const scoreEl = document.getElementById(`score-${prefix}`);
+            const barEl = document.getElementById(`bar-${prefix}`);
+
+            if (value === null || value === undefined) {
+                if (scoreEl) {
+                    scoreEl.innerText = '暫無';
+                    scoreEl.classList.add('text-slate-400');
+                    scoreEl.classList.remove('text-slate-800');
+                }
+                if (barEl) {
+                    barEl.style.width = '0%';
+                    barEl.classList.remove('bg-[#003399]');
+                    barEl.classList.add('bg-slate-300');
+                }
+                return;
+            }
+
+            const safeValue = Math.max(0, Math.min(100, Number(value) || 0));
+            if (scoreEl) {
+                scoreEl.innerText = safeValue + '%';
+                scoreEl.classList.remove('text-slate-400');
+                scoreEl.classList.add('text-slate-800');
+            }
+            if (barEl) {
+                barEl.style.width = safeValue + '%';
+                barEl.classList.remove('bg-slate-300');
+                barEl.classList.add('bg-[#003399]');
+            }
+        }
+
+        function calculateReviewStats(reviews = [], agency = {}) {
+            const ratingReviews = reviews.filter(r => safeNumber(r.rating, 0) > 0);
+            const textReviews = reviews.filter(r => r.content && r.content !== NO_TEXT_MSG && String(r.content).trim() !== '');
+
+            let sumRating = 0;
+            let sumT = 0, countT = 0;
+            let sumS = 0, countS = 0;
+            let sumA = 0, countA = 0;
+
+            ratingReviews.forEach(r => {
+                sumRating += safeNumber(r.rating, 0);
+
+                const t = safeNumber(r.transparency, 0);
+                const s = safeNumber(r.speed, 0);
+                const a = safeNumber(r.attitude, 0);
+
+                if (t > 0) { sumT += t; countT += 1; }
+                if (s > 0) { sumS += s; countS += 1; }
+                if (a > 0) { sumA += a; countA += 1; }
+            });
+
+            const totalCount = ratingReviews.length;
+            const avgRating = totalCount > 0
+                ? (sumRating / totalCount).toFixed(1)
+                : (agency.rating > 0 ? Number(agency.rating).toFixed(1) : '0.0');
+
+            return {
+                totalCount,
+                textReviews,
+                textCount: textReviews.length,
+                avgRating,
+                avgT: countT ? Math.round((sumT / countT) * 20) : null,
+                avgS: countS ? Math.round((sumS / countS) * 20) : null,
+                avgA: countA ? Math.round((sumA / countA) * 20) : null
+            };
+        }
+
+        window.openAmap = function() {
+            if (!currentAgencyData) return;
+            const query = encodeURIComponent(`${currentAgencyData.name || ''} ${currentAgencyData.address || currentAgencyData.region || ''}`.trim());
+            window.open(`https://www.amap.com/search?query=${query}`, '_blank', 'noopener,noreferrer');
+        };
+
+        function posterFont(size, weight = 700) {
+            return `${weight} ${size}px "Public Sans", -apple-system, BlinkMacSystemFont, "PingFang TC", "Microsoft JhengHei", "Noto Sans TC", Arial, sans-serif`;
+        }
+
+        function roundedRect(ctx, x, y, width, height, radius) {
+            const r = Math.min(radius, width / 2, height / 2);
+            ctx.beginPath();
+            ctx.moveTo(x + r, y);
+            ctx.arcTo(x + width, y, x + width, y + height, r);
+            ctx.arcTo(x + width, y + height, x, y + height, r);
+            ctx.arcTo(x, y + height, x, y, r);
+            ctx.arcTo(x, y, x + width, y, r);
+            ctx.closePath();
+        }
+
+        function fillRoundedRect(ctx, x, y, width, height, radius, fillStyle) {
+            ctx.save();
+            roundedRect(ctx, x, y, width, height, radius);
+            ctx.fillStyle = fillStyle;
+            ctx.fill();
+            ctx.restore();
+        }
+
+        function strokeRoundedRect(ctx, x, y, width, height, radius, strokeStyle, lineWidth = 1) {
+            ctx.save();
+            roundedRect(ctx, x, y, width, height, radius);
+            ctx.strokeStyle = strokeStyle;
+            ctx.lineWidth = lineWidth;
+            ctx.stroke();
+            ctx.restore();
+        }
+
+        function truncateByWidth(ctx, text, maxWidth) {
+            const source = String(text || '');
+            if (ctx.measureText(source).width <= maxWidth) return source;
+            let output = source;
+            while (output.length > 0 && ctx.measureText(output + '…').width > maxWidth) {
+                output = output.slice(0, -1);
+            }
+            return output + '…';
+        }
+
+        function drawWrappedText(ctx, text, x, y, maxWidth, lineHeight, maxLines = 2) {
+            const source = String(text || '').replace(/\s+/g, ' ').trim();
+            if (!source) return y;
+            const chars = [...source];
+            const lines = [];
+            let line = '';
+
+            chars.forEach(char => {
+                const testLine = line + char;
+                if (ctx.measureText(testLine).width > maxWidth && line) {
+                    lines.push(line);
+                    line = char;
+                } else {
+                    line = testLine;
+                }
+            });
+            if (line) lines.push(line);
+
+            const displayLines = lines.slice(0, maxLines);
+            if (lines.length > maxLines) {
+                displayLines[maxLines - 1] = truncateByWidth(ctx, displayLines[maxLines - 1], maxWidth);
+            }
+
+            displayLines.forEach((lineText, index) => {
+                ctx.fillText(lineText, x, y + index * lineHeight);
+            });
+            return y + displayLines.length * lineHeight;
+        }
+
+        function drawPosterStarRating(ctx, rating, x, y, size = 30) {
+            const safeRating = Math.max(0, Math.min(5, Number(rating) || 0));
+            ctx.save();
+            ctx.font = posterFont(size, 700);
+            ctx.textBaseline = 'top';
+            ctx.fillStyle = '#dbe3f0';
+            ctx.fillText('★★★★★', x, y);
+            ctx.fillStyle = '#f59e0b';
+            const starWidth = ctx.measureText('★').width;
+            ctx.save();
+            ctx.beginPath();
+            ctx.rect(x, y, starWidth * safeRating, size + 6);
+            ctx.clip();
+            ctx.fillText('★★★★★', x, y);
+            ctx.restore();
+            ctx.restore();
+        }
+
+        async function drawStoreIcon(ctx, x, y, size) {
+            try {
+                if (document.fonts && document.fonts.load) {
+                    await document.fonts.load(`${size}px "Material Symbols Rounded"`);
+                }
+
+                ctx.save();
+                ctx.fillStyle = '#003399';
+                ctx.font = `400 ${size}px "Material Symbols Rounded"`;
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+
+                ctx.fillText('storefront', x + size / 2, y + size / 2);
+
+                ctx.restore();
+            } catch (error) {
+                console.warn('Material Symbols storefront icon render failed:', error);
+            }
+        }
+
+        function drawPosterBrandLogo(ctx, x, y, size) {
+            ctx.save();
+
+            // 白色底
+            fillRoundedRect(
+                ctx,
+                x,
+                y,
+                size,
+                size,
+                Math.round(size * 0.4),
+                'rgba(255,255,255,0.96)'
+            );
+
+            // 先畫 account_balance 圖標
+            ctx.fillStyle = '#003399';
+            ctx.font = `400 ${Math.round(size * 0.62)}px "Material Symbols Rounded"`;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('account_balance', x + size / 2, y + size / 2 + 1);
+
+            // 再疊加一個實心三角形，覆蓋屋頂位置
+            ctx.beginPath();
+            ctx.moveTo(x + size * 0.50, y + size * 0.18); // 頂點
+            ctx.lineTo(x + size * 0.26, y + size * 0.34); // 左下
+            ctx.lineTo(x + size * 0.74, y + size * 0.34); // 右下
+            ctx.closePath();
+            ctx.fillStyle = '#003399';
+            ctx.fill();
+
+            ctx.restore();
+        }
+
+        function getShareUrl() {
+            return window.location.href;
+        }
+
+        function posterMetricLabel(value) {
+            if (value === null || value === undefined) return '暫無';
+            return `${Math.max(0, Math.min(100, Number(value) || 0))}%`;
+        }
+
+        // 彻底摒弃网络请求，使用本地纯前端生成二维码
+        function createQrCanvas(url, size = 230) {
+            return new Promise((resolve) => {
+                try {
+                    if (typeof QRious === 'undefined') {
+                        console.warn('QRious 库未加载，将使用空白占位');
+                        throw new Error('QRious library missing');
+                    }
+                    // 利用本地 CPU 瞬间计算出二维码 Canvas
+                    const canvas = document.createElement('canvas');
+                    new QRious({
+                        element: canvas,
+                        value: url,
+                        size: size,
+                        level: 'L', // H 代表最高容错率 (30%)，确保扫码秒识别
+                        padding: 0
+                    });
+                    resolve(canvas);
+                } catch (err) {
+                    // 严谨降级：万一库没加载成功，生成一个白板，绝不让整张海报的渲染卡死崩溃
+                    const fallbackCanvas = document.createElement('canvas');
+                    fallbackCanvas.width = size;
+                    fallbackCanvas.height = size;
+                    const ctx = fallbackCanvas.getContext('2d');
+                    ctx.fillStyle = '#f8fafc';
+                    ctx.fillRect(0, 0, size, size);
+                    resolve(fallbackCanvas);
+                }
+            });
+        }
+
+        async function generateSharePosterDataUrl() {
+            if (!currentAgencyData) return '';
+            if (isPosterRendering) return currentPosterDataUrl;
+            isPosterRendering = true;
+
+            const loadingEl = document.getElementById('posterPreviewLoading');
+            const imgEl = document.getElementById('posterPreviewImage');
+            if (loadingEl) loadingEl.classList.remove('hidden');
+            if (imgEl) imgEl.style.display = 'none';
+
+            try {
+                if (document.fonts && document.fonts.ready) {
+                    await document.fonts.ready.catch(() => {});
+                }
+
+                const stats = currentAgencyStats || {
+                    totalCount: 0,
+                    textCount: 0,
+                    avgRating: safeNumber(currentAgencyData.rating, 0).toFixed(1),
+                    avgT: null,
+                    avgS: null,
+                    avgA: null
+                };
+
+                const W = 900;
+                const H = 1320;
+                const canvas = document.createElement('canvas');
+                canvas.width = W;
+                canvas.height = H;
+                const ctx = canvas.getContext('2d');
+
+                const bg = ctx.createLinearGradient(0, 0, 0, H);
+                bg.addColorStop(0, '#eef5ff');
+                bg.addColorStop(0.45, '#ffffff');
+                bg.addColorStop(1, '#eaf1ff');
+                ctx.fillStyle = bg;
+                ctx.fillRect(0, 0, W, H);
+
+                const top = ctx.createLinearGradient(0, 0, W, 360);
+                top.addColorStop(0, '#002068');
+                top.addColorStop(0.55, '#003399');
+                top.addColorStop(1, '#2563eb');
+                ctx.fillStyle = top;
+                ctx.fillRect(0, 0, W, 350);
+
+                ctx.save();
+                ctx.globalAlpha = 0.09;
+                for (let x = 0; x < W; x += 56) {
+                    for (let y = 0; y < 350; y += 56) {
+                        ctx.fillStyle = ((x + y) / 56) % 2 === 0 ? '#ffffff' : '#60a5fa';
+                        ctx.fillRect(x, y, 56, 56);
+                    }
+                }
+                ctx.restore();
+
+                ctx.save();
+                ctx.globalAlpha = 0.12;
+                ctx.fillStyle = '#ffffff';
+                ctx.beginPath();
+                ctx.arc(830, 0, 180, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.fillStyle = '#67e8f9';
+                ctx.beginPath();
+                ctx.arc(48, 312, 120, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+
+                ctx.textAlign = 'left';
+                ctx.textBaseline = 'top';
+                drawPosterBrandLogo(ctx, 48, 44, 58);
+                ctx.fillStyle = '#ffffff';
+                ctx.font = posterFont(36, 900);
+                ctx.fillText('澳門家傭點評網', 122, 53);
+
+                fillRoundedRect(ctx, 48, 214, 804, 208, 44, '#ffffff');
+                strokeRoundedRect(ctx, 48, 214, 804, 208, 44, '#dbe7f6', 2);
+
+                fillRoundedRect(ctx, 86, 266, 100, 100, 28, '#eef5ff');
+                strokeRoundedRect(ctx, 86, 266, 100, 100, 28, '#c9dafd', 1.5);
+                await drawStoreIcon(ctx, 107, 292, 58);
+
+                const posterHasLicense = hasLicenseNumber(currentAgencyData);
+                fillRoundedRect(ctx, 216, 258, 120, 38, 19, posterHasLicense ? '#ecfdf5' : '#f8fafc');
+                ctx.fillStyle = posterHasLicense ? '#059669' : '#64748b';
+                ctx.font = posterFont(18, 800);
+                ctx.fillText(posterHasLicense ? '勞工局持牌' : '牌照待核實', 235, 268);
+
+                fillRoundedRect(ctx, 349, 258, 134, 38, 19, '#eff6ff');
+                ctx.fillStyle = '#003399';
+                ctx.fillText('掃碼看詳情', 369, 268);
+
+                ctx.fillStyle = '#142033';
+                let nameFontSize = 40;
+                const agencyName = currentAgencyData.name || '未命名中介';
+                while (nameFontSize > 32) {
+                    ctx.font = posterFont(nameFontSize, 900);
+                    if (ctx.measureText(agencyName).width <= 580) break;
+                    nameFontSize -= 2;
+                }
+                ctx.fillText(truncateByWidth(ctx, agencyName, 580), 220, 320);
+
+                const ratingCardX = 48;
+                const ratingCardY = 470;
+                const ratingCardW = 386;
+                const ratingCardH = 230;
+                fillRoundedRect(ctx, ratingCardX, ratingCardY, ratingCardW, ratingCardH, 36, '#ffffff');
+                strokeRoundedRect(ctx, ratingCardX, ratingCardY, ratingCardW, ratingCardH, 36, '#e5edf9', 1.5);
+
+                ctx.fillStyle = '#627086';
+                ctx.font = posterFont(24, 800);
+                ctx.fillText('綜合評分', ratingCardX + 38, ratingCardY + 28);
+
+                ctx.fillStyle = '#003399';
+                ctx.font = posterFont(74, 900);
+                ctx.fillText(stats.avgRating || '0.0', ratingCardX + 38, ratingCardY + 70);
+                ctx.fillStyle = '#94a3b8';
+                ctx.font = posterFont(38, 800);
+                ctx.fillText('/ 5', ratingCardX + 187, ratingCardY + 100);
+
+                drawPosterStarRating(ctx, stats.avgRating, ratingCardX + 38, ratingCardY + 147, 28);
+
+                fillRoundedRect(ctx, ratingCardX + 38, ratingCardY + 185, 136, 28, 14, '#f2f6fb');
+                fillRoundedRect(ctx, ratingCardX + 188, ratingCardY + 185, 128, 28, 14, '#f2f6fb');
+                ctx.fillStyle = '#7b8aa0';
+                ctx.font = posterFont(18, 800);
+                ctx.fillText(`已審核評分 ${stats.totalCount || 0}`, ratingCardX + 54, ratingCardY + 190);
+                ctx.fillText(`文字評價 ${stats.textCount || 0}`, ratingCardX + 204, ratingCardY + 190);
+
+                const featureCardY = 470;
+                const featureCardH = 230;
+                const cardG = ctx.createLinearGradient(468, featureCardY, 852, featureCardY + featureCardH);
+                cardG.addColorStop(0, '#002068');
+                cardG.addColorStop(1, '#2563eb');
+                fillRoundedRect(ctx, 468, featureCardY, 384, featureCardH, 36, cardG);
+                const features = ['持牌中介整合', '真實評價參考', '雇傭快速指南'];
+                const featureBlockHeight = 154;
+                const featureBlockTop = featureCardY + (featureCardH - featureBlockHeight) / 2;
+                ctx.fillStyle = 'rgba(255,255,255,0.78)';
+                ctx.font = posterFont(23, 800);
+                ctx.fillText('平台重點功能', 506, featureBlockTop-8);
+                ctx.font = posterFont(30, 800);
+                features.forEach((item, index) => {
+                    const y = featureBlockTop + 40 + index * 44;
+                    ctx.fillStyle = '#67e8f9';
+                    ctx.beginPath();
+                    ctx.arc(514, y + 15, 6, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.fillStyle = '#ffffff';
+                    ctx.fillText(item, 538, y);
+                });
+
+                const metrics = [
+                    ['收費透明度', posterMetricLabel(stats.avgT), stats.avgT],
+                    ['辦證速度', posterMetricLabel(stats.avgS), stats.avgS],
+                    ['服務態度', posterMetricLabel(stats.avgA), stats.avgA]
+                ];
+                metrics.forEach(([label, value, raw], index) => {
+                    const x = 48 + index * 280;
+                    const y = 740;
+                    const cardH = 150;
+                    fillRoundedRect(ctx, x, y, 244, cardH, 32, '#ffffff');
+                    strokeRoundedRect(ctx, x, y, 244, cardH, 32, '#e5edf9', 1.5);
+                    ctx.fillStyle = '#64748b';
+                    ctx.font = posterFont(22, 800);
+                    ctx.fillText(label, x + 32, y + 34);
+                    ctx.fillStyle = '#142033';
+                    ctx.font = posterFont(39, 900);
+                    ctx.fillText(value, x + 32, y + 76);
+                    fillRoundedRect(ctx, x + 32, y + 119, 172, 12, 6, '#eef2f7');
+                    if (raw !== null && raw !== undefined) {
+                        const barWidth = Math.max(0, Math.min(172, 172 * (Number(raw) || 0) / 100));
+                        fillRoundedRect(ctx, x + 32, y + 119, barWidth, 12, 6, '#003399');
+                    }
+                });
+
+                const ctaX = 48;
+                const ctaY = 934;
+                const ctaW = 804;
+                const ctaH = 248;
+                fillRoundedRect(ctx, ctaX, ctaY, ctaW, ctaH, 38, '#ffffff');
+                strokeRoundedRect(ctx, ctaX, ctaY, ctaW, ctaH, 38, '#e5edf9', 1.5);
+
+                const leftBlockTop = ctaY + 28;
+                fillRoundedRect(ctx, 86, leftBlockTop, 194, 44, 22, '#eff6ff');
+                ctx.fillStyle = '#003399';
+                ctx.font = posterFont(22, 900);
+                ctx.fillText('立即查看詳情', 111, leftBlockTop + 10);
+
+                ctx.font = posterFont(27, 800);
+                const detailBullets = [
+                    '掃碼進入中介詳情頁',
+                    '查看完整資料與聯絡方式',
+                    '參考已審核真實評價'
+                ];
+                const bulletStartY = leftBlockTop + 70;
+                detailBullets.forEach((item, index) => {
+                    const y = bulletStartY + index * 43;
+                    ctx.fillStyle = '#003399';
+                    ctx.beginPath();
+                    ctx.arc(100, y + 14, 6, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.fillStyle = '#142033';
+                    ctx.fillText(item, 122, y);
+                });
+
+                const qrCanvas = await createQrCanvas(getShareUrl(), 510);
+                const qrBoxX = 622;
+                const qrBoxY = ctaY + 23;
+                fillRoundedRect(ctx, qrBoxX, qrBoxY, 196, 204, 30, '#ffffff');
+                strokeRoundedRect(ctx, qrBoxX, qrBoxY, 196, 204, 30, '#dbe7f6', 2);
+                ctx.drawImage(qrCanvas, qrBoxX + 32, qrBoxY + 28, 138, 138);
+                ctx.fillStyle = '#64748b';
+                ctx.font = posterFont(15, 800);
+                ctx.textAlign = 'center';
+                ctx.fillText('長按圖片辨識二維碼', qrBoxX + 98, qrBoxY + 176);
+                ctx.textAlign = 'left';
+
+                ctx.fillStyle = '#8a97ab';
+                ctx.font = posterFont(12, 600);
+                ctx.fillText('資料由平台整理，實際資訊請以官方資料及中介最新公佈為準。', 48, 1203);
+
+                ctx.fillStyle = '#003399';
+                ctx.font = posterFont(22, 900);
+                ctx.fillText('澳門家傭點評網', 48, 1252);
+                ctx.fillStyle = '#64748b';
+                ctx.font = posterFont(19, 700);
+                const dateText = `資料更新於 ${new Date().toLocaleDateString('zh-Hant')}`;
+                const dateWidth = ctx.measureText(dateText).width;
+                ctx.fillText(dateText, W - 48 - dateWidth, 1254);
+
+                currentPosterDataUrl = canvas.toDataURL('image/png', 0.96);
+                if (imgEl) {
+                    imgEl.src = currentPosterDataUrl;
+                    imgEl.style.display = 'block';
+                }
+                if (loadingEl) loadingEl.classList.add('hidden');
+                return currentPosterDataUrl;
+            } catch (error) {
+                if (loadingEl) loadingEl.classList.add('hidden');
+                throw error;
+            } finally {
+                isPosterRendering = false;
+            }
+        }
+
+        function showPosterStatus(message, type = 'success') {
+            const statusEl = document.getElementById('sharePosterStatus');
+            if (!statusEl) return;
+            statusEl.classList.remove('hidden', 'bg-emerald-50', 'border-emerald-100', 'text-emerald-700', 'bg-amber-50', 'border-amber-100', 'text-amber-700');
+            if (type === 'warning') {
+                statusEl.classList.add('bg-amber-50', 'border-amber-100', 'text-amber-700');
+            } else {
+                statusEl.classList.add('bg-emerald-50', 'border-emerald-100', 'text-emerald-700');
+            }
+            statusEl.innerText = message;
+        }
+
+        window.openSharePosterModal = async function() {
+            if (!currentAgencyData) return;
+            const modal = document.getElementById('sharePosterModal');
+            if (!modal) return;
+            
+            modal.classList.add('show');
+            modal.classList.remove('hidden');
+            document.body.classList.add('overflow-hidden');
+
+            // 关键优化：如果海报已经存在（预加载好了），直接显示，秒开！
+            if (currentPosterDataUrl) {
+                const imgEl = document.getElementById('posterPreviewImage');
+                const loadingEl = document.getElementById('posterPreviewLoading');
+                if (loadingEl) loadingEl.classList.add('hidden');
+                if (imgEl) {
+                    imgEl.src = currentPosterDataUrl;
+                    imgEl.style.display = 'block';
+                }
+                showPosterStatus('海報已準備就緒，可保存圖片或複製鏈接。');
+                return;
+            }
+
+            // 如果还没有准备好（极少数情况），再去生成
+            try {
+                await generateSharePosterDataUrl();
+                showPosterStatus('海報已生成，可保存圖片或複製鏈接。');
+            } catch (error) {
+                console.error('生成海報失敗：', error);
+                showPosterStatus('未能生成海報，請檢查網絡後重試。', 'warning');
+            }
+        };
+
+        window.closeSharePosterModal = function() {
+            const modal = document.getElementById('sharePosterModal');
+            if (!modal) return;
+            modal.classList.remove('show');
+            modal.classList.add('hidden');
+            document.body.classList.remove('overflow-hidden');
+        };
+
+        // 辅助函数：将 base64 的 Data URL 转换为 Blob 对象
+        function dataUrlToBlob(dataUrl) {
+            const arr = dataUrl.split(',');
+            const mime = arr[0].match(/:(.*?);/)[1];
+            const bstr = atob(arr[1]);
+            let n = bstr.length;
+            const u8arr = new Uint8Array(n);
+            while (n--) {
+                u8arr[n] = bstr.charCodeAt(n);
+            }
+            return new Blob([u8arr], { type: mime });
+        }
+
+        window.downloadSharePoster = async function() {
+            if (!currentAgencyData) return;
+            try {
+                // 1. 获取海报数据
+                const dataUrl = currentPosterDataUrl || await generateSharePosterDataUrl();
+                const fileName = `${(currentAgencyData.name || 'agency').replace(/[\\/:*?"<>|]+/g, '_')}-share-poster.png`;
+
+                // 2. 尝试调用现代移动端 H5 的原生分享 API (Web Share API)
+                // 只有 HTTPS 环境或 localhost 才能使用 navigator.share
+                if (navigator.share && window.isSecureContext) {
+                    const blob = dataUrlToBlob(dataUrl);
+                    const file = new File([blob], fileName, { type: 'image/png' });
+
+                    // 检查当前设备/浏览器是否支持分享文件
+                    if (navigator.canShare && navigator.canShare({ files: [file] })) {
+                        try {
+                            await navigator.share({
+                                files: [file],
+                                title: '分享中介海報'
+                            });
+                            showPosterStatus('已喚起系統選單，請點擊「儲存影像」保存到相冊。');
+                            return; // 成功唤起分享后，直接退出函数
+                        } catch (shareError) {
+                            // 用户取消分享，或者分享失败，走下方兜底逻辑
+                            console.log('Share API cancelled or failed:', shareError);
+                        }
+                    }
+                }
+
+                // 3. 兜底方案：传统的 a 标签下载（针对 PC 端、微信内置浏览器或不支持 Share 的环境）
+                const link = document.createElement('a');
+                link.href = dataUrl;
+                link.download = fileName;
+                document.body.appendChild(link);
+                link.click();
+                link.remove();
+                
+                // 针对 iOS 的特色提示文案
+                const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+                if (isIOS) {
+                    showPosterStatus('圖片已下載至「檔案」App。若需保存到相冊，請直接長按上方海報選擇「儲存」。', 'warning');
+                } else {
+                    showPosterStatus('海報已下載。若未在相冊看到，可直接長按上方海報保存。');
+                }
+
+            } catch (error) {
+                console.error('保存海報失敗：', error);
+                showPosterStatus('未能保存海報，請直接長按上方海報進行保存。', 'warning');
+            }
+        };
+
+        window.copyAgencyLink = async function() {
+            const url = getShareUrl();
+            
+            // 获取触发点击的按钮，用于提供视觉反馈
+            const btnElements = document.querySelectorAll('button[onclick="copyAgencyLink()"] span');
+            const textSpan = btnElements.length > 1 ? btnElements[1] : null;
+            const originalText = textSpan ? textSpan.innerText : '複製鏈接';
+
+            // 传统的后备复制方案（兼容微信、旧版 WebView 及 HTTP 环境）
+            const fallbackCopy = (text) => {
+                const textArea = document.createElement("textarea");
+                textArea.value = text;
+                // 避免滚动到页面底部
+                textArea.style.top = "0";
+                textArea.style.left = "0";
+                textArea.style.position = "fixed";
+                document.body.appendChild(textArea);
+                textArea.focus();
+                textArea.select();
+                try {
+                    const successful = document.execCommand('copy');
+                    return successful;
+                } catch (err) {
+                    console.error('Fallback copy error', err);
+                    return false;
+                } finally {
+                    document.body.removeChild(textArea);
+                }
+            };
+
+            let success = false;
+
+            // 1. 尝试使用现代 API（需处于安全上下文）
+            if (navigator.clipboard && window.isSecureContext) {
+                try {
+                    await navigator.clipboard.writeText(url);
+                    success = true;
+                } catch (error) {
+                    console.warn('Clipboard API failed, trying fallback...', error);
+                    success = fallbackCopy(url);
+                }
+            } else {
+                // 2. 环境不支持现代 API 时，直接使用后备方案
+                success = fallbackCopy(url);
+            }
+
+            // 3. 处理交互结果反馈
+            if (success) {
+                showPosterStatus('詳情頁鏈接已複製。');
+                
+                // 【关键交互优化】在按钮上给予直接反馈，打破视觉盲区
+                if (textSpan) {
+                    textSpan.innerText = '已複製！';
+                    textSpan.parentElement.classList.add('bg-emerald-50', 'text-emerald-600', 'border-emerald-200');
+                    
+                    setTimeout(() => {
+                        textSpan.innerText = originalText;
+                        textSpan.parentElement.classList.remove('bg-emerald-50', 'text-emerald-600', 'border-emerald-200');
+                    }, 2000);
+                }
+            } else {
+                // 极极端情况下（如被系统完全锁死），才调出 prompt
+                window.prompt('您的瀏覽器不支持一鍵複製，請手動複製以下鏈接：', url);
+            }
+        };
+
+        window.shareAgency = function() {
+            if (!currentAgencyData) return;
+            openSharePosterModal();
+        };
+
+        window.revealPhones = function() {
+            document.getElementById('reveal-phones-btn').classList.add('hidden');
+            document.getElementById('desktop-phones-container').classList.remove('hidden');
+            document.getElementById('desktop-phones-container').classList.add('flex', 'flex-col');
+        };
+
+        function getPhonesHtml(phonesArray, isDesktop = false) {
+            const phones = (phonesArray || [])
+                .map(phone => ({
+                    original: String(phone || '').trim(),
+                    normalized: normalizePhone(phone)
+                }))
+                .filter(item => item.original && item.normalized);
+
+            if (!phones.length) {
+                return '<p class="text-slate-500 text-center py-4 bg-slate-50 rounded-xl text-xs">暫未提供聯繫電話</p>';
+            }
+
+            const btnClass = isDesktop 
+                ? "flex items-center justify-center gap-2 w-full bg-slate-50 text-[#003399] border border-[#003399]/20 font-bold text-sm py-3 rounded-xl hover:bg-blue-50 transition-all"
+                : "flex items-center justify-center gap-2 w-full bg-[#003399] text-white font-bold text-lg py-4 rounded-xl hover:bg-[#002068] active:scale-95 transition-all shadow-lg shadow-blue-900/20";
+            
+            return phones.map(item => `
+                <a href="tel:${escapeHTML(item.normalized)}" class="${btnClass}">
+                    <span class="material-symbols-rounded ${isDesktop ? 'text-[18px]' : ''}">call</span>
+                    ${escapeHTML(item.original)}
+                </a>
+            `).join('');
+        }
+
+        window.openPhoneModal = function() {
+            const phoneListEl = document.getElementById('phoneList');
+            const phones = currentAgencyData ? parseMaybeJsonArray(currentAgencyData.phones) : [];
+            phoneListEl.innerHTML = getPhonesHtml(phones, false);
+            const modal = document.getElementById('phoneModal');
+            const content = document.getElementById('phoneModalContent');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            setTimeout(() => content.classList.remove('translate-y-full'), 10);
+        };
+
+        window.closePhoneModal = function() {
+            const modal = document.getElementById('phoneModal');
+            const content = document.getElementById('phoneModalContent');
+            content.classList.add('translate-y-full');
+            setTimeout(() => { modal.classList.add('hidden'); modal.classList.remove('flex'); }, 300);
+        };
+
+        function renderReviews(textReviews) {
+            const reviewsList = document.getElementById('reviews-list');
+
+            if (!textReviews.length) {
+                reviewsList.innerHTML = `
+                    <div class="bg-white rounded-[20px] md:rounded-2xl p-8 shadow-ambient border border-slate-100 text-center">
+                        <p class="text-slate-500 text-sm">暫無詳細文字評價。</p>
+                    </div>
+                `;
+                return;
+            }
+
+            textReviews.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+
+            reviewsList.innerHTML = textReviews.map(r => {
+                const safeContent = escapeHTML(r.content);
+                const safeTags = parseMaybeJsonArray(r.tags);
+                const tagsHtml = safeTags.map(t => `
+                    <span class="bg-slate-50 text-slate-600 text-[11px] md:text-xs px-2 md:px-2.5 py-0.5 md:py-1 rounded border border-slate-100">${escapeHTML(t)}</span>
+                `).join('');
+
+                return `
+                    <div class="bg-white rounded-[20px] md:rounded-2xl p-5 md:p-6 shadow-ambient border border-slate-100 mb-3 md:mb-4 overflow-hidden hover:shadow-md transition-shadow">
+                        <div class="flex items-start justify-between gap-4 mb-3 md:mb-4">
+                            <div class="flex items-center gap-3 min-w-0">
+                                <div class="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center font-bold text-slate-500 shrink-0">匿名</div>
+                                <div class="min-w-0 flex-1">
+                                    <h3 class="text-sm font-bold text-slate-800 truncate">匿名僱主</h3>
+                                    <div class="flex items-center gap-1 mt-0.5">${generatePreciseStars(r.rating, '14px')}</div>
+                                </div>
+                            </div>
+                            <span class="text-[10px] md:text-xs text-slate-400 whitespace-nowrap shrink-0 mt-1 bg-slate-50 px-2 py-1 rounded-md border border-slate-100">${escapeHTML(timeAgo(r.created_at))}</span>
+                        </div>
+                        <p class="text-slate-600 mb-3 md:mb-4 leading-relaxed whitespace-pre-wrap break-words overflow-hidden text-[14px] md:text-[15px]">${safeContent}</p>
+                        <div class="flex flex-wrap gap-2">${tagsHtml}</div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') {
+                closePhoneModal();
+                closeSharePosterModal();
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const targetId = urlParams.get('id');
+
+            if (!targetId) {
+                renderLoadError('缺少中介 ID', '請從中介列表重新進入詳情頁。');
+                return;
+            }
+
+            try {
+                if (typeof fetchAgencyById !== 'function' || typeof fetchReviewsByAgencyId !== 'function') {
+                    throw new Error('Required data functions are not available');
+                }
+
+                const agency = await fetchAgencyById(targetId);
+
+                if (!agency) {
+                    renderLoadError('找不到此中介資料', '此中介可能已下架，或連結已失效。');
+                    return;
+                }
+
+                currentAgencyData = agency;
+                document.getElementById('skeleton-view').classList.add('hidden');
+                document.getElementById('real-content').classList.remove('hidden');
+
+                const safeAgencyName = agency.name || '未命名中介';
+                document.title = `${safeAgencyName} - 澳門家傭點評網`;
+
+                setText('detail-name', safeAgencyName);
+                const hasLicense = hasLicenseNumber(agency);
+                document.getElementById('licensed-badge')?.classList.toggle('hidden', !hasLicense);
+                setText('detail-license', hasLicense ? `牌照編號：${String(agency.license_no).trim()}` : '牌照資料未提供');
+                setText('detail-desc', agency.desc || '該中介暫無詳細介紹。');
+
+                const reviewHref = `review.html?id=${encodeURIComponent(agency.uuid || targetId)}`;
+                setHref('reviewBtn', reviewHref);
+                setHref('mobileReviewBtn', reviewHref);
+                setHref('claim-link-sidebar', `contact.html?type=agency-claim&id=${encodeURIComponent(agency.uuid || targetId)}`);
+                
+                const displayAddress = agency.address || agency.region || '地址不詳';
+                setText('detail-address-sidebar', displayAddress);
+                setText('detail-address-mobile', displayAddress);
+                
+                const emailSidebar = document.getElementById('detail-email-sidebar');
+                const emailLink = document.getElementById('email-link');
+
+                if (agency.email && String(agency.email).trim() !== '') {
+                    const safeEmail = String(agency.email).trim();
+                    emailLink.innerText = safeEmail;
+                    emailLink.href = `mailto:${encodeURIComponent(safeEmail)}`;
+                } else {
+                    emailSidebar.classList.add('hidden');
+                }
+
+                const phones = parseMaybeJsonArray(agency.phones);
+                document.getElementById('desktop-phones-container').innerHTML = getPhonesHtml(phones, true);
+
+                const reviews = await fetchReviewsByAgencyId(targetId);
+                const stats = calculateReviewStats(reviews || [], agency);
+                currentAgencyStats = stats;
+
+                setText('detail-rating', stats.avgRating);
+                setText('detail-rating-mobile', stats.avgRating);
+                setText('detail-count', `基於 ${stats.totalCount} 個已審核評分，包含 ${stats.textCount} 條文字評價`);
+                setText('detail-count-mobile', `${stats.totalCount} 評分 · ${stats.textCount} 文字`);
+                
+                document.getElementById('star-display').innerHTML = generatePreciseStars(stats.avgRating, '20px');
+
+                setTimeout(() => {
+                    setMetric('t', stats.avgT);
+                    setMetric('s', stats.avgS);
+                    setMetric('a', stats.avgA);
+                }, 50);
+
+                renderReviews(stats.textReviews);
+                // 【新增：静默预生成海报】
+                // 延迟 1.5 秒执行，确保不抢占首屏渲染的 CPU 资源
+                setTimeout(() => {
+                    // 只有当环境一切就绪时，才开始在后台偷偷画海报和请求二维码
+                    if (currentAgencyData && !currentPosterDataUrl && !isPosterRendering) {
+                        generateSharePosterDataUrl().catch(err => {
+                            console.warn('后台预生成海报失败 (通常由于网络波动)，将在用户点击时重试:', err);
+                        });
+                    }
+                }, 1500);
+            } catch (error) {
+                console.error("出錯: ", error);
+                renderLoadError('無法載入中介資料', '請檢查網絡或稍後重試。如問題持續，請聯絡平台管理員。');
+            }
+        });
+    </script>
+</body>
+</html>
