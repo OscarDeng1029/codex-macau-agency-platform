@@ -9,7 +9,7 @@
     let migrationPromise = null;
     let migratedUserId = null;
     let migrationAttemptedUserId = null;
-    let lastMigration = { status: 'idle', localCount: 0, localIds: [], migrated: 0, alreadyOwned: 0, blocked: 0, missing: 0, error: null };
+    let lastMigration = { status: 'idle', localCount: 0, migrated: 0, alreadyOwned: 0, blocked: 0, missing: 0, error: null };
 
     function getClient() {
         if (client) return client;
@@ -98,7 +98,7 @@
         const localIds = getLocalReviewIds();
 
         if (!user || localIds.length === 0) {
-            lastMigration = { status: 'idle', localCount: localIds.length, localIds, migrated: 0, alreadyOwned: 0, blocked: 0, missing: 0, error: null };
+            lastMigration = { status: 'idle', localCount: localIds.length, migrated: 0, alreadyOwned: 0, blocked: 0, missing: 0, error: null };
             return lastMigration;
         }
 
@@ -126,7 +126,6 @@
             return {
                 status: 'error',
                 localCount: localIds.length,
-                localIds,
                 migrated: 0,
                 alreadyOwned: 0,
                 blocked: 0,
@@ -163,7 +162,6 @@
             return {
                 status: 'success',
                 localCount: localIds.length,
-                localIds,
                 migrated: claimed.length,
                 alreadyOwned: alreadyOwned.length,
                 blocked: blocked.length,
@@ -175,7 +173,6 @@
             return {
                 status: 'error',
                 localCount: localIds.length,
-                localIds,
                 migrated: 0,
                 alreadyOwned: 0,
                 blocked: 0,
@@ -370,8 +367,7 @@
             detail: {
                 session: currentSession,
                 user: currentSession?.user || null,
-                migration,
-                localReviewIds: getLocalReviewIds()
+                migration
             }
         }));
     }
@@ -406,11 +402,6 @@
         getMyReviews,
         getLocalReviewIds,
         getLastMigration: () => lastMigration,
-        inspectLocalReviews: () => ({
-            storageKey: STORAGE_KEY,
-            localIds: getLocalReviewIds(),
-            lastMigration
-        }),
         login,
         logout,
         migrateLocalReviews
