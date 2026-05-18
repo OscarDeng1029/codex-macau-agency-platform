@@ -205,7 +205,7 @@
     <section class="grid grid-cols-1 lg:grid-cols-12 gap-5 md:gap-6 mb-7 md:mb-8">
       <div class="lg:col-span-5 card rounded-[30px] p-5 md:p-6">
         <div class="flex items-start gap-4">
-          <div class="w-20 h-20 rounded-[26px] bg-gradient-to-br from-[#003399] to-slate-950 flex items-center justify-center shrink-0 shadow-lg shadow-blue-900/15">
+          <div id="profile-avatar" class="w-20 h-20 rounded-[26px] bg-gradient-to-br from-[#003399] to-slate-950 flex items-center justify-center shrink-0 shadow-lg shadow-blue-900/15 overflow-hidden">
             <span class="material-symbols-rounded text-blue-100 text-[42px]">person</span>
           </div>
 
@@ -213,13 +213,14 @@
             <div class="flex flex-wrap items-center gap-2 mb-2">
               <h2 id="profile-name" class="text-2xl font-black text-slate-950 safe-wrap">訪客用戶</h2>
               <span id="profile-badge" class="inline-flex items-center gap-1 bg-slate-100 text-slate-500 border border-slate-200 rounded-full px-3 py-1 text-xs font-black">
-                <span class="material-symbols-rounded text-[14px]">devices</span>
-                本機記錄
+                <span class="material-symbols-rounded text-[14px]">login</span>
+                尚未登入
               </span>
             </div>
             <p id="profile-summary" class="text-sm text-slate-500 leading-relaxed">
               目前根據此瀏覽器保存的提交記錄顯示；之後接入登入系統，可改為讀取用戶帳號下的全部評價。
             </p>
+            <p id="profile-sync-status" class="mt-3 text-xs font-bold text-slate-400 leading-relaxed"></p>
           </div>
         </div>
 
@@ -391,13 +392,13 @@
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="../assets/js/db.js"></script>
+  <script src="auth.js"></script>
 
   <script>
     const NO_TEXT_MSG = '該僱主僅進行了評分與打標籤，未留下詳細文字說明。';
-    const STORAGE_KEY = 'macau_housekeeping_my_review_ids';
-
     let allReviews = [];
     let activeFilter = 'all';
+    let currentSession = null;
 
     function escapeHTML(value = '') {
       return String(value)
@@ -453,6 +454,67 @@
       }, 2400);
     }
 
+    function getGoogleName(user) {
+      return user?.user_metadata?.full_name || user?.user_metadata?.name || user?.email || 'Google 用戶';
+    }
+
+    function getGoogleAvatar(user) {
+      return user?.user_metadata?.avatar_url || user?.user_metadata?.picture || '';
+    }
+
+    function updateProfileIdentity(session) {
+      const user = session?.user || null;
+      const name = document.getElementById('profile-name');
+      const badge = document.getElementById('profile-badge');
+      const avatar = document.getElementById('profile-avatar');
+
+      if (name) name.innerText = user ? getGoogleName(user) : '訪客用戶';
+      if (badge) {
+        badge.className = user
+          ? 'inline-flex items-center gap-1 bg-emerald-50 text-emerald-700 border border-emerald-100 rounded-full px-3 py-1 text-xs font-black'
+          : 'inline-flex items-center gap-1 bg-slate-100 text-slate-500 border border-slate-200 rounded-full px-3 py-1 text-xs font-black';
+        badge.innerHTML = user
+          ? '<span class="material-symbols-rounded text-[14px]">verified</span>已連接 Google'
+          : '<span class="material-symbols-rounded text-[14px]">login</span>尚未登入';
+      }
+      if (avatar) {
+        const image = user ? getGoogleAvatar(user) : '';
+        avatar.innerHTML = image
+          ? `<img src="${escapeAttr(image)}" alt="" class="w-full h-full object-cover rounded-[26px]">`
+          : '<span class="material-symbols-rounded text-blue-100 text-[42px]">person</span>';
+      }
+    }
+
+    function updateSyncStatus(migration = window.MacauAuth?.getLastMigration?.()) {
+      const status = document.getElementById('profile-sync-status');
+      if (!status) return;
+
+      const localCount = window.MacauAuth?.getLocalReviewIds?.().length || migration?.localCount || 0;
+      if (!currentSession?.user) {
+        status.innerText = localCount > 0
+          ? `此瀏覽器有 ${localCount} 條待關聯的本機匿名評論，登入後會自動連到你的 Google 帳號。`
+          : '此瀏覽器暫無待關聯的本機匿名評論。';
+        status.className = 'mt-3 text-xs font-bold text-slate-400 leading-relaxed';
+        return;
+      }
+
+      if (!migration || migration.status === 'idle') {
+        status.innerText = '此瀏覽器暫無待關聯的本機匿名評論。';
+        status.className = 'mt-3 text-xs font-bold text-slate-400 leading-relaxed';
+        return;
+      }
+
+      if (migration.status === 'success') {
+        const ignored = (migration.blocked || 0) + (migration.missing || 0);
+        status.innerText = `已讀取本機 ${migration.localCount || 0} 條匿名評論：成功關聯 ${migration.migrated || 0} 條，已屬於此帳號 ${migration.alreadyOwned || 0} 條，忽略 ${ignored} 條。`;
+        status.className = 'mt-3 text-xs font-bold text-emerald-700 leading-relaxed';
+        return;
+      }
+
+      status.innerText = `已讀取本機 ${migration.localCount || 0} 條匿名評論，但服務端關聯失敗：${migration.error?.message || '未知錯誤'}。`;
+      status.className = 'mt-3 text-xs font-bold text-rose-600 leading-relaxed';
+    }
+
     function getStatusConfig(status) {
       if (status === 'approved') {
         return { text: '已發佈', cls: 'bg-emerald-50 text-emerald-700 border-emerald-100', icon: 'verified' };
@@ -494,10 +556,12 @@
       const summary = document.getElementById('profile-summary');
       if (!summary) return;
 
-      if (ctx.total === 0) {
-        summary.innerText = '你還沒有提交過評價。之後接入登入系統，可改為顯示帳號資料與跨設備評價記錄。';
+      if (!currentSession?.user) {
+        summary.innerText = '請先使用 Google 登入。登入後將顯示已連接 Google，並讀取此帳號下的評價記錄；本機匿名評論會在登入時自動關聯到你的 Google 帳號。';
+      } else if (ctx.total === 0) {
+        summary.innerText = '已連接 Google。你還沒有提交過評價，之後的評論會保存到此 Google 帳號下，切換頁面或設備時都能保持登入狀態。';
       } else {
-        summary.innerText = `你目前有 ${ctx.total} 條評價記錄，評過 ${ctx.agencyCount} 間中介；其中 ${ctx.text} 條包含文字評論、${ctx.pending} 條審核中。`;
+        summary.innerText = `已連接 Google。你目前有 ${ctx.total} 條評價記錄，評過 ${ctx.agencyCount} 間中介；其中 ${ctx.text} 條包含文字評論、${ctx.pending} 條審核中。`;
       }
     }
 
@@ -632,13 +696,10 @@
         const { error } = await supabaseClient
           .from('reviews')
           .update({ status: 'deleted' })
-          .eq('id', reviewId);
+          .eq('id', reviewId)
+          .eq('user_id', currentSession.user.id);
 
         if (error) throw error;
-
-        let localIds = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-        localIds = localIds.filter(id => String(id) !== String(reviewId));
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(localIds));
 
         allReviews = allReviews.filter(review => String(review.id) !== String(reviewId));
         applyUI(buildContext(allReviews));
@@ -655,12 +716,14 @@
 
     async function loadMyReviews() {
       const skeleton = document.getElementById('reviewSkeleton');
-      const localIds = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+      currentSession = window.MacauAuth?.getCurrentSession?.() || await window.MacauAuth?.ready || null;
+      updateProfileIdentity(currentSession);
+      updateSyncStatus();
 
       allReviews = [];
       applyUI(buildContext([]));
 
-      if (localIds.length === 0) {
+      if (!currentSession?.user) {
         if (skeleton) skeleton.classList.add('hidden');
         renderReviews();
         return;
@@ -669,24 +732,11 @@
       try {
         if (typeof supabaseClient === 'undefined') throw new Error('supabaseClient is not available');
 
-        const { data: reviews, error } = await supabaseClient
-          .from('reviews')
-          .select('id, agency_id, agency_name, rating, status, content, created_at')
-          .in('id', localIds)
-          .neq('status', 'deleted')
-          .order('created_at', { ascending: false });
-
-        if (error) throw error;
+        const reviews = await window.MacauAuth.getMyReviews();
 
         if (skeleton) skeleton.classList.add('hidden');
 
         allReviews = Array.isArray(reviews) ? reviews : [];
-        const validIds = allReviews.map(review => review.id);
-
-        if (validIds.length !== localIds.length) {
-          localStorage.setItem(STORAGE_KEY, JSON.stringify(validIds));
-        }
-
         applyUI(buildContext(allReviews));
       } catch (err) {
         console.error('加載評價失敗:', err);
@@ -710,6 +760,12 @@
     document.addEventListener('DOMContentLoaded', () => {
       setupFilters();
       loadMyReviews();
+      window.addEventListener('macau-auth-change', event => {
+        currentSession = event.detail?.session || null;
+        updateProfileIdentity(currentSession);
+        updateSyncStatus(event.detail?.migration);
+        loadMyReviews();
+      });
     });
   </script>
 </body>

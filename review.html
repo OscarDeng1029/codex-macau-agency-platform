@@ -179,7 +179,7 @@
 
             <div class="pt-4">
                 <button type="button" id="submitBtn" class="w-full bg-[#003399] text-white font-bold text-lg py-4 rounded-xl shadow-lg hover:bg-[#002068] active:scale-95 transition-all flex items-center justify-center gap-2">
-                    <span class="material-symbols-rounded text-[20px]">shield</span> 安全提交 (匿名發佈)
+                    <span class="material-symbols-rounded text-[20px]">verified_user</span> 登入後安全提交
                 </button>
                 
                 <div class="flex items-start gap-3 mt-4 px-2">
@@ -239,6 +239,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="../assets/js/db.js"></script>
+    <script src="auth.js"></script>
     
     <script>
         // 🌟 彈窗控制邏輯
@@ -303,6 +304,22 @@
 
         document.addEventListener('DOMContentLoaded', async () => {
             document.getElementById('backBtn').addEventListener('click', () => window.history.back());
+            let currentSession = await window.MacauAuth?.ready;
+            const submitBtn = document.getElementById('submitBtn');
+
+            function refreshSubmitState() {
+                currentSession = window.MacauAuth?.getCurrentSession?.() || currentSession;
+                if (!submitBtn) return;
+                submitBtn.innerHTML = currentSession?.user
+                    ? '<span class="material-symbols-rounded text-[20px]">verified_user</span> 登入後安全提交'
+                    : '<span class="material-symbols-rounded text-[20px]">login</span> 使用 Google 登入後提交';
+            }
+
+            window.addEventListener('macau-auth-change', event => {
+                currentSession = event.detail?.session || null;
+                refreshSubmitState();
+            });
+            refreshSubmitState();
 
             const urlParams = new URLSearchParams(window.location.search);
             const targetId = urlParams.get('id');
@@ -350,6 +367,12 @@
 
             document.getElementById('submitBtn').addEventListener('click', async () => {
                 if (!targetId) return alert('缺少中介 ID');
+                currentSession = window.MacauAuth?.getCurrentSession?.() || await window.MacauAuth?.getSession?.();
+                if (!currentSession?.user) {
+                    alert('評論前請先使用 Google 登入。登入後我們會把此瀏覽器曾提交的匿名評論關聯到你的 Google 帳號。');
+                    window.MacauAuth?.login?.();
+                    return;
+                }
                 
                 const rating = parseInt(document.getElementById('ratingValue').value);
                 const t_val = parseInt(document.getElementById('metric-transparency').value);
@@ -382,7 +405,6 @@
                 }
 
                 const selectedTags = Array.from(document.querySelectorAll('.tag-btn.selected')).map(btn => btn.innerText);
-                const submitBtn = document.getElementById('submitBtn');
                 submitBtn.innerHTML = '<span class="material-symbols-rounded animate-spin">autorenew</span> 提交中...';
                 submitBtn.disabled = true;
 
@@ -397,6 +419,7 @@
                         attitude: a_val,     
                         tags: selectedTags,
                         content: text, 
+                        user_id: currentSession.user.id,
                         status: 'pending'
                     }]).select();
                     
@@ -414,15 +437,6 @@
                         text_length_bucket: text.length === 0 ? '0' : text.length < 50 ? '1_49' : text.length < 200 ? '50_199' : '200_plus'
                     });
                     
-                    // 🌟 LocalStorage 寫入邏輯，保存到本地
-                    if (data && data.length > 0) {
-                        const newReviewId = data[0].id;
-                        const storageKey = 'macau_housekeeping_my_review_ids';
-                        const localIds = JSON.parse(localStorage.getItem(storageKey) || '[]');
-                        localIds.push(newReviewId);
-                        localStorage.setItem(storageKey, JSON.stringify(localIds));
-                    }
-                    
                     alert('提交成功！評價已進入審核隊列，您可在「我的」頁面查看進度。');
                     window.history.back();
                 } catch (error) {
@@ -434,7 +448,7 @@
                         error_message: String(error?.message || '').slice(0, 80)
                     });
                     alert("提交失敗，請檢查網絡連接。");
-                    submitBtn.innerHTML = '<span class="material-symbols-rounded text-[20px]">shield</span> 安全提交 (匿名發佈)';
+                    refreshSubmitState();
                     submitBtn.disabled = false;
                 }
             });
