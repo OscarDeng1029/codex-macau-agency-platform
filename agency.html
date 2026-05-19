@@ -351,6 +351,11 @@
                                 </div>
                             </div>
 
+                            <button id="followAgencyBtn" type="button" class="mt-4 w-full bg-slate-50 text-slate-700 font-bold text-sm py-4 rounded-xl hover:bg-blue-50 hover:text-[#003399] transition-all flex items-center justify-center gap-2 border border-slate-200">
+                                <span class="material-symbols-rounded text-[18px]">bookmark_add</span>
+                                <span>關注中介</span>
+                            </button>
+
                             <div class="mt-6 pt-6 border-t border-slate-100">
                                 <a id="claim-link-sidebar" href="contact.html?type=agency-claim" class="inline-flex items-center gap-1 text-xs font-medium text-slate-400 hover:text-[#003399] transition-colors">
                                     <span class="material-symbols-rounded text-[16px]">edit_note</span>
@@ -395,10 +400,14 @@
 
     <div class="lg:hidden fixed bottom-6 left-0 w-full px-4 z-40 pointer-events-none">
         <div class="max-w-[1024px] mx-auto flex justify-center">
-            <div class="bg-white/90 backdrop-blur-xl rounded-2xl p-3 shadow-[0_20px_40px_-10px_rgba(0,32,104,0.15)] border border-slate-200 pointer-events-auto grid grid-cols-2 gap-2 w-full">
+            <div class="bg-white/90 backdrop-blur-xl rounded-2xl p-3 shadow-[0_20px_40px_-10px_rgba(0,32,104,0.15)] border border-slate-200 pointer-events-auto grid grid-cols-3 gap-2 w-full">
                 <button onclick="openPhoneModal()" class="bg-[#003399] text-white font-bold rounded-xl px-3 py-3 hover:bg-[#002068] active:scale-[0.98] transition-all flex flex-col items-center justify-center gap-1">
                     <span class="material-symbols-rounded text-[20px]">call</span>
                     <span class="text-xs">電話</span>
+                </button>
+                <button id="mobileFollowAgencyBtn" type="button" class="bg-slate-50 text-slate-700 font-bold rounded-xl px-3 py-3 hover:bg-slate-100 active:scale-[0.98] transition-all flex flex-col items-center justify-center gap-1 border border-slate-200">
+                    <span class="material-symbols-rounded text-[20px]">bookmark_add</span>
+                    <span class="text-xs">關注</span>
                 </button>
                 <a id="mobileReviewBtn" href="#" class="bg-slate-50 text-slate-700 font-bold rounded-xl px-3 py-3 hover:bg-slate-100 active:scale-[0.98] transition-all flex flex-col items-center justify-center gap-1 border border-slate-200">
                     <span class="material-symbols-rounded text-[20px]">rate_review</span>
@@ -1347,6 +1356,69 @@
             }).join('');
         }
 
+        function setFollowButtons(isFollowing, isBusy = false) {
+            [
+                { id: 'followAgencyBtn', full: true },
+                { id: 'mobileFollowAgencyBtn', full: false }
+            ].forEach(config => {
+                const btn = document.getElementById(config.id);
+                if (!btn) return;
+
+                btn.disabled = isBusy;
+                btn.classList.toggle('bg-blue-50', isFollowing);
+                btn.classList.toggle('text-[#003399]', isFollowing);
+                btn.classList.toggle('border-blue-100', isFollowing);
+                const icon = isBusy ? 'autorenew' : isFollowing ? 'bookmark_added' : 'bookmark_add';
+                btn.innerHTML = config.full
+                    ? `<span class="material-symbols-rounded text-[18px] ${isBusy ? 'animate-spin' : ''}">${icon}</span><span>${isFollowing ? '已關注中介' : '關注中介'}</span>`
+                    : `<span class="material-symbols-rounded text-[20px] ${isBusy ? 'animate-spin' : ''}">${icon}</span><span class="text-xs">${isFollowing ? '已關注' : '關注'}</span>`;
+            });
+        }
+
+        async function setupAgencyFollow(agencyId) {
+            const buttons = ['followAgencyBtn', 'mobileFollowAgencyBtn']
+                .map(id => document.getElementById(id))
+                .filter(Boolean);
+            if (!buttons.length || !agencyId) return;
+
+            let isFollowing = false;
+
+            async function refreshFollowState() {
+                const session = window.MacauAuth?.getCurrentSession?.() || await window.MacauAuth?.ready;
+                isFollowing = session?.user ? await window.MacauAuth.isFollowingAgency(agencyId) : false;
+                setFollowButtons(isFollowing);
+            }
+
+            async function toggleFollow() {
+                const session = window.MacauAuth?.getCurrentSession?.() || await window.MacauAuth?.getSession?.();
+                if (!session?.user) {
+                    alert('請先使用 Google 登入，登入後即可關注中介並接收新評論通知。');
+                    window.MacauAuth?.login?.();
+                    return;
+                }
+
+                setFollowButtons(isFollowing, true);
+                try {
+                    if (isFollowing) {
+                        await window.MacauAuth.unfollowAgency(agencyId);
+                        isFollowing = false;
+                    } else {
+                        await window.MacauAuth.followAgency(agencyId);
+                        isFollowing = true;
+                    }
+                    setFollowButtons(isFollowing);
+                } catch (err) {
+                    console.error('關注狀態更新失敗:', err);
+                    alert('關注狀態更新失敗，請稍後再試。');
+                    setFollowButtons(isFollowing);
+                }
+            }
+
+            buttons.forEach(btn => btn.addEventListener('click', toggleFollow));
+            window.addEventListener('macau-auth-change', refreshFollowState);
+            await refreshFollowState();
+        }
+
         document.addEventListener('keydown', (event) => {
             if (event.key === 'Escape') {
                 closePhoneModal();
@@ -1392,6 +1464,7 @@
                 setHref('reviewBtn', reviewHref);
                 setHref('mobileReviewBtn', reviewHref);
                 setHref('claim-link-sidebar', `contact.html?type=agency-claim&id=${encodeURIComponent(agency.uuid || targetId)}`);
+                setupAgencyFollow(agency.uuid || targetId);
                 
                 const displayAddress = agency.address || agency.region || '地址不詳';
                 setText('detail-address-sidebar', displayAddress);

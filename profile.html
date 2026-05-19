@@ -355,6 +355,16 @@
       <aside class="lg:col-span-4 space-y-5">
         <section class="card rounded-[28px] p-5 md:p-6">
           <h3 class="font-black text-slate-900 flex items-center gap-2 mb-4">
+            <span class="material-symbols-rounded text-[#003399]">bookmark</span>
+            我關注的中介
+          </h3>
+          <div id="followedAgenciesList" class="space-y-3">
+            <div class="bg-white/90 rounded-2xl h-16 animate-pulse border border-slate-100"></div>
+          </div>
+        </section>
+
+        <section class="card rounded-[28px] p-5 md:p-6">
+          <h3 class="font-black text-slate-900 flex items-center gap-2 mb-4">
             <span class="material-symbols-rounded text-[#003399]">info</span>
             評價狀態說明
           </h3>
@@ -475,6 +485,7 @@
     function getNotificationIcon(type) {
       if (type === 'review_approved') return { icon: 'verified', cls: 'bg-emerald-50 text-emerald-700 border-emerald-100' };
       if (type === 'review_rejected') return { icon: 'cancel', cls: 'bg-rose-50 text-rose-700 border-rose-100' };
+      if (type === 'followed_agency_review') return { icon: 'rate_review', cls: 'bg-blue-50 text-[#003399] border-blue-100' };
       return { icon: 'notifications', cls: 'bg-blue-50 text-[#003399] border-blue-100' };
     }
 
@@ -553,6 +564,74 @@
           list.innerHTML = `
             <div class="rounded-2xl border border-red-100 bg-red-50 p-4 text-sm font-bold text-red-600">
               通知暫時無法載入，請稍後再試。
+            </div>
+          `;
+        }
+      }
+    }
+
+    function renderFollowedAgencies(items = []) {
+      const list = document.getElementById('followedAgenciesList');
+      if (!list) return;
+
+      if (!currentSession?.user) {
+        list.innerHTML = `
+          <div class="rounded-2xl border border-slate-100 bg-slate-50 p-4 text-sm text-slate-500">
+            登入後可關注中介並接收新評論通知。
+          </div>
+        `;
+        return;
+      }
+
+      if (items.length === 0) {
+        list.innerHTML = `
+          <div class="rounded-2xl border border-slate-100 bg-slate-50 p-4 text-sm text-slate-500">
+            暫未關注中介。進入中介詳情頁即可關注。
+          </div>
+        `;
+        return;
+      }
+
+      list.innerHTML = items.map(agency => `
+        <a href="agency.html?id=${encodeURIComponent(agency.uuid)}" class="block rounded-2xl border border-slate-100 bg-white/80 p-4 hover:border-blue-200 hover:bg-blue-50/30 transition-colors">
+          <div class="flex items-start gap-3">
+            <span class="w-10 h-10 rounded-2xl bg-blue-50 text-[#003399] flex items-center justify-center shrink-0">
+              <span class="material-symbols-rounded text-[20px]">storefront</span>
+            </span>
+            <span class="min-w-0 flex-1">
+              <strong class="block text-sm font-black text-slate-900 safe-wrap">${escapeHTML(agency.name || '未命名中介')}</strong>
+              <span class="block text-xs text-slate-500 mt-1 truncate">${escapeHTML(agency.address || agency.region || '地址不詳')}</span>
+            </span>
+          </div>
+        </a>
+      `).join('');
+    }
+
+    async function loadFollowedAgencies() {
+      try {
+        currentSession = window.MacauAuth?.getCurrentSession?.() || currentSession;
+        if (!currentSession?.user) {
+          renderFollowedAgencies([]);
+          return;
+        }
+
+        const follows = await window.MacauAuth.getFollowedAgencies();
+        const followIds = follows.map(item => String(item.agency_id));
+        if (followIds.length === 0) {
+          renderFollowedAgencies([]);
+          return;
+        }
+
+        const agencies = typeof fetchAllAgencies === 'function' ? await fetchAllAgencies() : [];
+        const agencyMap = new Map((agencies || []).map(agency => [String(agency.uuid), agency]));
+        renderFollowedAgencies(followIds.map(id => agencyMap.get(id)).filter(Boolean));
+      } catch (err) {
+        console.warn('關注中介載入失敗:', err);
+        const list = document.getElementById('followedAgenciesList');
+        if (list) {
+          list.innerHTML = `
+            <div class="rounded-2xl border border-red-100 bg-red-50 p-4 text-sm font-bold text-red-600">
+              關注列表暫時無法載入，請稍後再試。
             </div>
           `;
         }
@@ -923,12 +1002,14 @@
       setupFilters();
       loadMyReviews();
       loadNotifications();
+      loadFollowedAgencies();
       window.addEventListener('macau-auth-change', event => {
         currentSession = event.detail?.session || null;
         updateProfileIdentity(currentSession);
         updateSyncStatus(event.detail?.migration);
         loadMyReviews();
         loadNotifications();
+        loadFollowedAgencies();
       });
     });
   </script>

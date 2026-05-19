@@ -241,6 +241,65 @@
         return Array.isArray(data) ? data : [];
     }
 
+    async function isFollowingAgency(agencyId) {
+        const authClient = getClient();
+        const session = currentSession || await getSession();
+        if (!authClient || !session?.user || !agencyId) return false;
+
+        const { data, error } = await authClient
+            .from('agency_follows')
+            .select('agency_id')
+            .eq('user_id', session.user.id)
+            .eq('agency_id', agencyId)
+            .maybeSingle();
+
+        if (error) throw error;
+        return Boolean(data);
+    }
+
+    async function followAgency(agencyId) {
+        const authClient = getClient();
+        const session = currentSession || await getSession();
+        if (!authClient || !session?.user || !agencyId) return false;
+
+        const { error } = await authClient
+            .from('agency_follows')
+            .upsert({ user_id: session.user.id, agency_id: agencyId }, { onConflict: 'user_id,agency_id' });
+
+        if (error) throw error;
+        return true;
+    }
+
+    async function unfollowAgency(agencyId) {
+        const authClient = getClient();
+        const session = currentSession || await getSession();
+        if (!authClient || !session?.user || !agencyId) return false;
+
+        const { error } = await authClient
+            .from('agency_follows')
+            .delete()
+            .eq('user_id', session.user.id)
+            .eq('agency_id', agencyId);
+
+        if (error) throw error;
+        return true;
+    }
+
+    async function getFollowedAgencies() {
+        const authClient = getClient();
+        const session = currentSession || await getSession();
+        if (!authClient || !session?.user) return [];
+
+        const { data, error } = await authClient
+            .from('agency_follows')
+            .select('agency_id, created_at')
+            .eq('user_id', session.user.id)
+            .order('created_at', { ascending: false });
+
+        if (error) throw error;
+        return Array.isArray(data) ? data : [];
+    }
+
     async function refreshNotificationCount() {
         const authClient = getClient();
         const session = currentSession || await getSession();
@@ -511,6 +570,10 @@
         getCurrentSession: () => currentSession,
         getMyReviews,
         getNotifications,
+        isFollowingAgency,
+        followAgency,
+        unfollowAgency,
+        getFollowedAgencies,
         markNotificationsRead,
         refreshNotificationCount,
         getUnreadNotificationCount: () => unreadNotificationCount,
