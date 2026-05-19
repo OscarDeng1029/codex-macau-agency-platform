@@ -44,3 +44,9 @@ supabase.from('reviews').update({ user_id }).in('id', localIds)
 ```
 
 That fails with `permission denied for table reviews` when Row Level Security does not allow authenticated users to update those rows. The new server endpoint avoids that client-side `PATCH` and keeps the write behind a verified API request.
+
+## Review Approval Notifications
+
+Run `supabase-notifications.sql` in Supabase SQL Editor to enable in-app review status notifications.
+
+After it is installed, changing a logged-in user's review from `pending` to `approved` or `rejected` creates a row in `notifications`. The webapp reads those rows on the profile page and shows an unread badge in the account menu.

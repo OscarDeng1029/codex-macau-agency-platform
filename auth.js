@@ -10,6 +10,7 @@
     let migratedUserId = null;
     let migrationAttemptedUserId = null;
     let lastMigration = { status: 'idle', localCount: 0, migrated: 0, alreadyOwned: 0, blocked: 0, missing: 0, error: null };
+    let unreadNotificationCount = 0;
 
     function getClient() {
         if (client) return client;
@@ -224,6 +225,63 @@
         return Array.isArray(data) ? data : [];
     }
 
+    async function getNotifications({ limit = 20 } = {}) {
+        const authClient = getClient();
+        const session = currentSession || await getSession();
+        if (!authClient || !session?.user) return [];
+
+        const { data, error } = await authClient
+            .from('notifications')
+            .select('id, review_id, type, title, body, is_read, created_at')
+            .eq('user_id', session.user.id)
+            .order('created_at', { ascending: false })
+            .limit(limit);
+
+        if (error) throw error;
+        return Array.isArray(data) ? data : [];
+    }
+
+    async function refreshNotificationCount() {
+        const authClient = getClient();
+        const session = currentSession || await getSession();
+        if (!authClient || !session?.user) {
+            unreadNotificationCount = 0;
+            return unreadNotificationCount;
+        }
+
+        const { count, error } = await authClient
+            .from('notifications')
+            .select('id', { count: 'exact', head: true })
+            .eq('user_id', session.user.id)
+            .eq('is_read', false);
+
+        if (error) {
+            console.warn('Unable to load notification count:', error);
+            unreadNotificationCount = 0;
+            return unreadNotificationCount;
+        }
+
+        unreadNotificationCount = count || 0;
+        renderAccountMenus();
+        return unreadNotificationCount;
+    }
+
+    async function markNotificationsRead(ids = []) {
+        const authClient = getClient();
+        const session = currentSession || await getSession();
+        const safeIds = Array.isArray(ids) ? ids.filter(Boolean) : [];
+        if (!authClient || !session?.user || safeIds.length === 0) return;
+
+        const { error } = await authClient
+            .from('notifications')
+            .update({ is_read: true })
+            .eq('user_id', session.user.id)
+            .in('id', safeIds);
+
+        if (error) throw error;
+        await refreshNotificationCount();
+    }
+
     function injectMenuStyles() {
         if (document.getElementById('macau-auth-menu-style')) return;
         const style = document.createElement('style');
@@ -278,6 +336,37 @@
             .macau-auth-menu-item:hover { background: #f8fafc; color: #003399; }
             .macau-auth-menu-item .material-symbols-rounded { font-size: 18px; }
             .macau-auth-avatar-img { width: 100%; height: 100%; border-radius: 999px; object-fit: cover; }
+            .macau-auth-menu-count {
+                margin-left: auto;
+                min-width: 16px;
+                height: 16px;
+                border-radius: 999px;
+                background: #dc2626;
+                color: white;
+                font-size: 10px;
+                line-height: 16px;
+                text-align: center;
+                padding: 0 5px;
+                font-weight: 900;
+                box-shadow: 0 0 0 2px white;
+            }
+            .macau-auth-button-badge {
+                position: absolute;
+                top: -4px;
+                right: -6px;
+                min-width: 18px;
+                height: 18px;
+                border-radius: 999px;
+                background: #ff3b30;
+                color: white;
+                font-size: 11px;
+                line-height: 18px;
+                text-align: center;
+                padding: 0 5px;
+                font-weight: 900;
+                box-shadow: 0 2px 6px rgba(255, 59, 48, .35);
+                pointer-events: none;
+            }
         `;
         document.head.appendChild(style);
     }
@@ -300,6 +389,7 @@
             </div>
             ${user
                 ? `<a class="macau-auth-menu-item" href="profile.html"><span class="material-symbols-rounded">account_circle</span>個人頁</a>
+                   <a class="macau-auth-menu-item" href="profile.html#notifications"><span class="material-symbols-rounded">notifications</span>通知${unreadNotificationCount > 0 ? `<span class="macau-auth-menu-count">${unreadNotificationCount > 99 ? '99+' : unreadNotificationCount}</span>` : ''}</a>
                    <button class="macau-auth-menu-item" type="button" data-auth-action="logout"><span class="material-symbols-rounded">logout</span>退出登入</button>`
                 : `<button class="macau-auth-menu-item" type="button" data-auth-action="login"><span class="material-symbols-rounded">login</span>使用 Google 登入</button>
                    <a class="macau-auth-menu-item" href="profile.html"><span class="material-symbols-rounded">account_circle</span>個人頁</a>`}
@@ -368,9 +458,13 @@
 
         document.querySelectorAll('[data-auth-menu-button]').forEach(button => {
             const avatar = currentSession?.user ? getUserAvatar(currentSession.user) : '';
+            button.style.position = 'relative';
+            const badge = unreadNotificationCount > 0
+                ? `<span class="macau-auth-button-badge" aria-label="${unreadNotificationCount} 條未讀通知">${unreadNotificationCount > 99 ? '99+' : unreadNotificationCount}</span>`
+                : '';
             button.innerHTML = avatar
-                ? `<img class="macau-auth-avatar-img" src="${escapeAttr(avatar)}" alt="">`
-                : '<span class="material-symbols-rounded text-[#003399] text-[19px]">person</span>';
+                ? `<img class="macau-auth-avatar-img" src="${escapeAttr(avatar)}" alt="">${badge}`
+                : `<span class="material-symbols-rounded text-[#003399] text-[19px]">person</span>${badge}`;
         });
     }
 
@@ -379,7 +473,8 @@
             detail: {
                 session: currentSession,
                 user: currentSession?.user || null,
-                migration
+                migration,
+                unreadNotificationCount
             }
         }));
     }
@@ -388,6 +483,7 @@
         setupAccountMenus();
         currentSession = await getSession();
         const migration = currentSession ? await migrateLocalReviews(currentSession) : { migrated: 0, error: null };
+        if (currentSession) await refreshNotificationCount();
         renderAccountMenus();
         notifyAuthChange(migration);
 
@@ -395,6 +491,8 @@
         authClient?.auth?.onAuthStateChange(async (_event, session) => {
             currentSession = session || null;
             const nextMigration = currentSession ? await migrateLocalReviews(currentSession) : { migrated: 0, error: null };
+            if (currentSession) await refreshNotificationCount();
+            else unreadNotificationCount = 0;
             renderAccountMenus();
             notifyAuthChange(nextMigration);
         });
@@ -412,6 +510,10 @@
         getSession,
         getCurrentSession: () => currentSession,
         getMyReviews,
+        getNotifications,
+        markNotificationsRead,
+        refreshNotificationCount,
+        getUnreadNotificationCount: () => unreadNotificationCount,
         getLocalReviewIds,
         getLastMigration: () => lastMigration,
         login,

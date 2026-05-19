@@ -285,6 +285,22 @@
       </div>
     </section>
 
+    <section id="notifications" class="card rounded-[30px] p-5 md:p-6 mb-7 md:mb-8">
+      <div class="flex items-start justify-between gap-3 mb-4">
+        <div>
+          <h2 class="text-xl font-black text-slate-950 flex items-center gap-2">
+            <span class="material-symbols-rounded text-[#003399]">notifications</span>
+            通知
+          </h2>
+          <p class="text-xs text-slate-500 mt-1">評論審核結果會顯示在這裡。</p>
+        </div>
+        <span id="notificationUnreadBadge" class="hidden bg-red-50 text-red-600 border border-red-100 rounded-full px-3 py-1 text-xs font-black"></span>
+      </div>
+      <div id="notificationList" class="space-y-3">
+        <div class="bg-white/90 rounded-2xl h-16 animate-pulse border border-slate-100"></div>
+      </div>
+    </section>
+
     <section class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
       <div class="lg:col-span-8">
         <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-4 px-1">
@@ -454,6 +470,93 @@
         toast.classList.add('hidden');
         toast.classList.remove('toast-enter');
       }, 2400);
+    }
+
+    function getNotificationIcon(type) {
+      if (type === 'review_approved') return { icon: 'verified', cls: 'bg-emerald-50 text-emerald-700 border-emerald-100' };
+      if (type === 'review_rejected') return { icon: 'cancel', cls: 'bg-rose-50 text-rose-700 border-rose-100' };
+      return { icon: 'notifications', cls: 'bg-blue-50 text-[#003399] border-blue-100' };
+    }
+
+    function renderNotifications(notifications = []) {
+      const list = document.getElementById('notificationList');
+      const badge = document.getElementById('notificationUnreadBadge');
+      if (!list) return;
+
+      const unread = notifications.filter(item => !item.is_read);
+      if (badge) {
+        badge.classList.toggle('hidden', unread.length === 0);
+        badge.innerText = unread.length > 0 ? `${unread.length} 未讀` : '';
+      }
+
+      if (!currentSession?.user) {
+        list.innerHTML = `
+          <div class="rounded-2xl border border-slate-100 bg-slate-50 p-4 text-sm text-slate-500">
+            登入後可查看評論審核通知。
+          </div>
+        `;
+        return;
+      }
+
+      if (notifications.length === 0) {
+        list.innerHTML = `
+          <div class="rounded-2xl border border-slate-100 bg-slate-50 p-4 text-sm text-slate-500">
+            暫時沒有通知。評論通過審核後會顯示在這裡。
+          </div>
+        `;
+        return;
+      }
+
+      list.innerHTML = notifications.map(item => {
+        const meta = getNotificationIcon(item.type);
+        const date = item.created_at ? new Date(item.created_at).toLocaleDateString('zh-Hant', { month: 'short', day: 'numeric' }) : '';
+        const reviewHref = item.review_id ? `profile.html#review-card-${encodeURIComponent(item.review_id)}` : 'profile.html#notifications';
+        return `
+          <a href="${reviewHref}" class="block rounded-2xl border ${item.is_read ? 'border-slate-100 bg-white/80' : 'border-blue-100 bg-blue-50/40'} p-4 hover:border-blue-200 transition-colors">
+            <div class="flex items-start gap-3">
+              <span class="${meta.cls} w-10 h-10 rounded-2xl border flex items-center justify-center shrink-0">
+                <span class="material-symbols-rounded text-[20px]">${meta.icon}</span>
+              </span>
+              <span class="min-w-0 flex-1">
+                <span class="flex items-center justify-between gap-3">
+                  <strong class="block text-sm font-black text-slate-900 safe-wrap">${escapeHTML(item.title || '通知')}</strong>
+                  <span class="text-[11px] font-bold text-slate-400 shrink-0">${escapeHTML(date)}</span>
+                </span>
+                <span class="block text-xs text-slate-500 leading-relaxed mt-1 safe-wrap">${escapeHTML(item.body || '')}</span>
+              </span>
+            </div>
+          </a>
+        `;
+      }).join('');
+    }
+
+    async function loadNotifications() {
+      try {
+        currentSession = window.MacauAuth?.getCurrentSession?.() || currentSession;
+        if (!currentSession?.user) {
+          renderNotifications([]);
+          return;
+        }
+
+        const notifications = await window.MacauAuth.getNotifications({ limit: 20 });
+        renderNotifications(notifications);
+
+        const unreadIds = notifications.filter(item => !item.is_read).map(item => item.id);
+        if (unreadIds.length > 0) {
+          await window.MacauAuth.markNotificationsRead(unreadIds);
+          renderNotifications(notifications.map(item => ({ ...item, is_read: true })));
+        }
+      } catch (err) {
+        console.warn('通知載入失敗:', err);
+        const list = document.getElementById('notificationList');
+        if (list) {
+          list.innerHTML = `
+            <div class="rounded-2xl border border-red-100 bg-red-50 p-4 text-sm font-bold text-red-600">
+              通知暫時無法載入，請稍後再試。
+            </div>
+          `;
+        }
+      }
     }
 
     function getGoogleName(user) {
@@ -819,11 +922,13 @@
     document.addEventListener('DOMContentLoaded', () => {
       setupFilters();
       loadMyReviews();
+      loadNotifications();
       window.addEventListener('macau-auth-change', event => {
         currentSession = event.detail?.session || null;
         updateProfileIdentity(currentSession);
         updateSyncStatus(event.detail?.migration);
         loadMyReviews();
+        loadNotifications();
       });
     });
   </script>
