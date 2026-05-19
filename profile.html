@@ -116,6 +116,19 @@
       padding-bottom: env(safe-area-inset-bottom);
     }
 
+    .profile-mobile-tab[aria-selected="true"] {
+      background: #003399;
+      color: #ffffff;
+      border-color: #003399;
+      box-shadow: 0 10px 22px rgba(0, 51, 153, 0.16);
+    }
+
+    @media (max-width: 1023px) {
+      [data-profile-panel].is-mobile-hidden {
+        display: none;
+      }
+    }
+
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
         animation-duration: 0.001ms !important;
@@ -285,7 +298,23 @@
       </div>
     </section>
 
-    <section id="notifications" class="card rounded-[30px] p-5 md:p-6 mb-7 md:mb-8">
+    <div class="lg:hidden mb-5 sticky top-16 z-30 bg-white/88 backdrop-blur-xl border border-slate-200 rounded-2xl p-1 shadow-sm grid grid-cols-3 gap-1">
+      <button type="button" class="profile-mobile-tab rounded-xl border border-transparent px-3 py-2.5 text-xs font-black text-slate-500 transition-all" data-profile-tab="followed" aria-selected="true">關注</button>
+      <button type="button" class="profile-mobile-tab rounded-xl border border-transparent px-3 py-2.5 text-xs font-black text-slate-500 transition-all" data-profile-tab="notifications" aria-selected="false">通知</button>
+      <button type="button" class="profile-mobile-tab rounded-xl border border-transparent px-3 py-2.5 text-xs font-black text-slate-500 transition-all" data-profile-tab="reviews" aria-selected="false">評價</button>
+    </div>
+
+    <section id="mobileFollowedPanel" data-profile-panel="followed" class="lg:hidden card rounded-[30px] p-5 md:p-6 mb-7 md:mb-8">
+      <h2 class="text-xl font-black text-slate-950 flex items-center gap-2 mb-4">
+        <span class="material-symbols-rounded text-[#003399]">bookmark</span>
+        我關注的中介
+      </h2>
+      <div id="mobileFollowedAgenciesList" class="space-y-3">
+        <div class="bg-white/90 rounded-2xl h-16 animate-pulse border border-slate-100"></div>
+      </div>
+    </section>
+
+    <section id="notifications" data-profile-panel="notifications" class="card rounded-[30px] p-5 md:p-6 mb-7 md:mb-8">
       <div class="flex items-start justify-between gap-3 mb-4">
         <div>
           <h2 class="text-xl font-black text-slate-950 flex items-center gap-2">
@@ -302,7 +331,7 @@
     </section>
 
     <section class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-      <div class="lg:col-span-8">
+      <div data-profile-panel="reviews" class="lg:col-span-8">
         <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-4 px-1">
           <div class="min-w-0">
             <h2 class="text-xl font-black text-slate-950 flex items-center gap-2">
@@ -353,7 +382,7 @@
       </div>
 
       <aside class="lg:col-span-4 space-y-5">
-        <section class="card rounded-[28px] p-5 md:p-6">
+        <section class="hidden lg:block card rounded-[28px] p-5 md:p-6">
           <h3 class="font-black text-slate-900 flex items-center gap-2 mb-4">
             <span class="material-symbols-rounded text-[#003399]">bookmark</span>
             我關注的中介
@@ -571,28 +600,33 @@
     }
 
     function renderFollowedAgencies(items = []) {
-      const list = document.getElementById('followedAgenciesList');
-      if (!list) return;
+      const lists = [
+        document.getElementById('followedAgenciesList'),
+        document.getElementById('mobileFollowedAgenciesList')
+      ].filter(Boolean);
+      if (!lists.length) return;
 
       if (!currentSession?.user) {
-        list.innerHTML = `
+        const html = `
           <div class="rounded-2xl border border-slate-100 bg-slate-50 p-4 text-sm text-slate-500">
             登入後可關注中介並接收新評論通知。
           </div>
         `;
+        lists.forEach(list => { list.innerHTML = html; });
         return;
       }
 
       if (items.length === 0) {
-        list.innerHTML = `
+        const html = `
           <div class="rounded-2xl border border-slate-100 bg-slate-50 p-4 text-sm text-slate-500">
             暫未關注中介。進入中介詳情頁即可關注。
           </div>
         `;
+        lists.forEach(list => { list.innerHTML = html; });
         return;
       }
 
-      list.innerHTML = items.map(agency => `
+      const html = items.map(agency => `
         <a href="agency.html?id=${encodeURIComponent(agency.uuid)}" class="block rounded-2xl border border-slate-100 bg-white/80 p-4 hover:border-blue-200 hover:bg-blue-50/30 transition-colors">
           <div class="flex items-start gap-3">
             <span class="w-10 h-10 rounded-2xl bg-blue-50 text-[#003399] flex items-center justify-center shrink-0">
@@ -605,6 +639,7 @@
           </div>
         </a>
       `).join('');
+      lists.forEach(list => { list.innerHTML = html; });
     }
 
     async function loadFollowedAgencies() {
@@ -627,14 +662,16 @@
         renderFollowedAgencies(followIds.map(id => agencyMap.get(id)).filter(Boolean));
       } catch (err) {
         console.warn('關注中介載入失敗:', err);
-        const list = document.getElementById('followedAgenciesList');
-        if (list) {
-          list.innerHTML = `
+        const lists = [
+          document.getElementById('followedAgenciesList'),
+          document.getElementById('mobileFollowedAgenciesList')
+        ].filter(Boolean);
+        const html = `
             <div class="rounded-2xl border border-red-100 bg-red-50 p-4 text-sm font-bold text-red-600">
               關注列表暫時無法載入，請稍後再試。
             </div>
           `;
-        }
+        lists.forEach(list => { list.innerHTML = html; });
       }
     }
 
@@ -884,6 +921,29 @@
       });
     }
 
+    function setupMobileProfileTabs() {
+      const tabs = Array.from(document.querySelectorAll('[data-profile-tab]'));
+      const panels = Array.from(document.querySelectorAll('[data-profile-panel]'));
+      if (!tabs.length || !panels.length) return;
+
+      function activate(target) {
+        tabs.forEach(tab => {
+          tab.setAttribute('aria-selected', tab.dataset.profileTab === target ? 'true' : 'false');
+        });
+
+        panels.forEach(panel => {
+          panel.classList.toggle('is-mobile-hidden', panel.dataset.profilePanel !== target);
+        });
+      }
+
+      tabs.forEach(tab => {
+        tab.addEventListener('click', () => activate(tab.dataset.profileTab));
+      });
+
+      const initial = window.location.hash === '#notifications' ? 'notifications' : 'followed';
+      activate(initial);
+    }
+
     function applyUI(ctx) {
       updateStats(ctx);
       renderReviews();
@@ -1000,6 +1060,7 @@
 
     document.addEventListener('DOMContentLoaded', () => {
       setupFilters();
+      setupMobileProfileTabs();
       loadMyReviews();
       loadNotifications();
       loadFollowedAgencies();

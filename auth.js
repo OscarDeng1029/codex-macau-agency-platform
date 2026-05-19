@@ -264,9 +264,9 @@
 
         const { error } = await authClient
             .from('agency_follows')
-            .upsert({ user_id: session.user.id, agency_id: agencyId }, { onConflict: 'user_id,agency_id' });
+            .insert({ user_id: session.user.id, agency_id: agencyId });
 
-        if (error) throw error;
+        if (error && error.code !== '23505') throw error;
         return true;
     }
 
