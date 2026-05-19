@@ -92,6 +92,26 @@
                     #faf8ff;
             }
         }
+
+        .agency-follow-badge {
+            position: absolute;
+            top: -7px;
+            right: -2px;
+            z-index: 2;
+            display: inline-flex;
+            align-items: center;
+            height: 18px;
+            padding: 0 8px;
+            border-radius: 999px;
+            background: #003399;
+            color: #fff;
+            font-size: 10px;
+            font-weight: 900;
+            line-height: 18px;
+            letter-spacing: .02em;
+            box-shadow: 0 5px 12px rgba(0, 51, 153, .22);
+            pointer-events: none;
+        }
     </style>
 
     <!-- GA4 monitoring core -->
@@ -290,6 +310,7 @@
             };
 
             let cloudAgencies = [];
+            let followedAgencyIds = new Set();
 
             function setupCustomSelect(id) {
                 const wrap = document.getElementById(`wrap-${id}`);
@@ -383,6 +404,29 @@
                 return rB - rA;
             }
 
+            function compareByFollowStatus(a, b) {
+                const aFollowed = followedAgencyIds.has(String(a.uuid));
+                const bFollowed = followedAgencyIds.has(String(b.uuid));
+                if (aFollowed === bFollowed) return 0;
+                return aFollowed ? -1 : 1;
+            }
+
+            async function loadFollowedAgencyIds() {
+                try {
+                    const session = window.MacauAuth?.getCurrentSession?.() || await window.MacauAuth?.ready;
+                    if (!session?.user) {
+                        followedAgencyIds = new Set();
+                        return;
+                    }
+
+                    const follows = await window.MacauAuth.getFollowedAgencies();
+                    followedAgencyIds = new Set((follows || []).map(item => String(item.agency_id)));
+                } catch (err) {
+                    console.warn('關注中介讀取失敗:', err);
+                    followedAgencyIds = new Set();
+                }
+            }
+
             function showSkeletonLoading() {
                 listContainer.innerHTML = ''; 
                 resultCount.innerHTML = '<span class="animate-pulse text-slate-400">同步數據中...</span>';
@@ -430,6 +474,7 @@
                 const cardsHTML = dataArray.map(agency => {
                     const ratingText = agency.displayRating === '暫無' ? '暫無' : agency.displayRating;
                     const ratingClass = agency.displayRating === '暫無' ? 'text-slate-400' : 'text-amber-500';
+                    const isFollowed = followedAgencyIds.has(String(agency.uuid));
 
                     const tagsHTML = (agency.topTags || []).map(tag => 
                         `<span class="bg-slate-50 text-slate-600 px-2 py-0.5 rounded text-[11px] sm:text-xs font-medium border border-slate-100 whitespace-nowrap">${tag}</span>`
@@ -438,7 +483,8 @@
                     const textCountDisplay = agency.textCount > 0 ? ` | ${agency.textCount} 文字` : '';
 
                     const cardHTML = `
-                    <a href="agency.html?id=${agency.uuid}" class="block bg-white rounded-2xl shadow-sm border border-slate-100 p-4 sm:p-5 hover:bg-blue-50/30 md:hover:shadow-md transition-all group">
+                    <a href="agency.html?id=${agency.uuid}" class="relative block bg-white rounded-2xl shadow-sm border border-slate-100 p-4 sm:p-5 hover:bg-blue-50/30 md:hover:shadow-md transition-all group">
+                        ${isFollowed ? '<span class="agency-follow-badge">已關注</span>' : ''}
                         <div class="flex flex-col md:flex-row md:justify-between md:items-center gap-4 w-full">
                             
                             <div class="flex items-start gap-3 sm:gap-4 flex-1 min-w-0">
@@ -528,6 +574,8 @@
                         const rankDiff = getSearchRank(a, query) - getSearchRank(b, query);
                         if (rankDiff !== 0) return rankDiff;
                     }
+                    const followDiff = compareByFollowStatus(a, b);
+                    if (followDiff !== 0) return followDiff;
                     return compareBySelectedSort(a, b, sort);
                 });
 
@@ -535,12 +583,17 @@
             }
 
             searchInput.addEventListener('input', applyFilters);
+            window.addEventListener('macau-auth-change', async () => {
+                await loadFollowedAgencyIds();
+                applyFilters();
+            });
 
             showSkeletonLoading();
             
             try {
                 if (typeof fetchAllAgencies === 'function') {
                     cloudAgencies = await fetchAllAgencies();
+                    await loadFollowedAgencyIds();
 
                     if (typeof supabaseClient !== 'undefined') {
                         const { data: reviewsData } = await supabaseClient
