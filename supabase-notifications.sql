@@ -12,6 +12,11 @@ create table if not exists public.notifications (
   created_at timestamptz not null default now()
 );
 
+alter table public.notifications
+  add column if not exists email_sent_at timestamptz,
+  add column if not exists email_attempts integer not null default 0,
+  add column if not exists email_last_error text;
+
 alter table public.notifications drop constraint if exists notifications_review_id_type_key;
 alter table public.notifications drop constraint if exists notifications_type_check;
 
@@ -51,6 +56,41 @@ with check (auth.uid() = user_id);
 
 revoke all on public.notifications from anon, authenticated;
 grant select, update (is_read) on public.notifications to authenticated;
+
+create table if not exists public.user_notification_preferences (
+  user_id uuid primary key references auth.users(id) on delete cascade,
+  email_review_updates boolean not null default true,
+  email_followed_agency_updates boolean not null default true,
+  email_marketing boolean not null default false,
+  updated_at timestamptz not null default now()
+);
+
+alter table public.user_notification_preferences enable row level security;
+
+drop policy if exists "Users can read own notification preferences" on public.user_notification_preferences;
+create policy "Users can read own notification preferences"
+on public.user_notification_preferences
+for select
+to authenticated
+using (auth.uid() = user_id);
+
+drop policy if exists "Users can insert own notification preferences" on public.user_notification_preferences;
+create policy "Users can insert own notification preferences"
+on public.user_notification_preferences
+for insert
+to authenticated
+with check (auth.uid() = user_id);
+
+drop policy if exists "Users can update own notification preferences" on public.user_notification_preferences;
+create policy "Users can update own notification preferences"
+on public.user_notification_preferences
+for update
+to authenticated
+using (auth.uid() = user_id)
+with check (auth.uid() = user_id);
+
+revoke all on public.user_notification_preferences from anon, authenticated;
+grant select, insert, update on public.user_notification_preferences to authenticated;
 
 create table if not exists public.agency_follows (
   user_id uuid not null references auth.users(id) on delete cascade,

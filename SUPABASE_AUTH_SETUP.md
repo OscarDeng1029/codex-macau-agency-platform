@@ -9,9 +9,13 @@ Set these in Vercel project settings:
 ```text
 SUPABASE_URL=https://dvhwdirwpraorehlzdar.supabase.co
 SUPABASE_SERVICE_ROLE_KEY=your Supabase service_role key
+RESEND_API_KEY=your Resend API key
+RESEND_FROM=澳門家傭點評網 <notify@your-verified-domain.com>
+CRON_SECRET=use a long random string
+SITE_URL=https://codex-macau-agency-platform.vercel.app
 ```
 
-Do not expose `SUPABASE_SERVICE_ROLE_KEY` in frontend code.
+Do not expose `SUPABASE_SERVICE_ROLE_KEY` or `RESEND_API_KEY` in frontend code.
 
 ## Required Supabase Auth URL Settings
 
@@ -50,3 +54,21 @@ That fails with `permission denied for table reviews` when Row Level Security do
 Run `supabase-notifications.sql` in Supabase SQL Editor to enable in-app review status notifications.
 
 After it is installed, changing a logged-in user's review from `pending` to `approved` or `rejected` creates a row in `notifications`. The webapp reads those rows on the profile page and shows an unread badge in the account menu.
+
+## Resend Email Notifications
+
+The `/api/send-notification-emails` endpoint scans unsent `notifications` rows and sends email through Resend for:
+
+- review approval / rejection
+- new approved reviews on agencies the user follows
+
+The endpoint marks each notification with `email_sent_at` after it is sent or intentionally skipped. Failed sends are retried up to 3 times.
+
+The included Vercel Cron runs once per day because Vercel Hobby projects do not support high-frequency cron schedules. For near-real-time emails, use an external scheduler to call:
+
+```text
+GET https://codex-macau-agency-platform.vercel.app/api/send-notification-emails
+Authorization: Bearer your CRON_SECRET
+```
+
+Users can adjust email preferences on the profile page. Promotional/platform emails must only be sent when `email_marketing` is enabled.

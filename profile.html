@@ -328,6 +328,41 @@
       <div id="notificationList" class="space-y-3">
         <div class="bg-white/90 rounded-2xl h-16 animate-pulse border border-slate-100"></div>
       </div>
+      <div id="emailPreferencesPanel" class="mt-5 rounded-3xl border border-blue-100 bg-blue-50/45 p-4 hidden">
+        <div class="flex items-start gap-3 mb-4">
+          <span class="w-10 h-10 rounded-2xl bg-white text-[#003399] border border-blue-100 flex items-center justify-center shrink-0">
+            <span class="material-symbols-rounded text-[20px]">mail</span>
+          </span>
+          <div class="min-w-0">
+            <h3 class="font-black text-slate-900">Email 通知偏好</h3>
+            <p class="text-xs text-slate-500 mt-1 leading-relaxed">重要通知會同步寄到你的 Google 信箱；平台宣傳只會在你同意後發送。</p>
+          </div>
+        </div>
+        <div class="space-y-2">
+          <label class="flex items-center justify-between gap-3 rounded-2xl bg-white/85 border border-white px-4 py-3">
+            <span class="min-w-0">
+              <span class="block text-sm font-black text-slate-800">評論審核結果</span>
+              <span class="block text-xs text-slate-500 mt-0.5">通過或未通過審核時通知我。</span>
+            </span>
+            <input id="prefReviewUpdates" type="checkbox" class="w-5 h-5 rounded border-slate-300 text-[#003399] focus:ring-[#003399]">
+          </label>
+          <label class="flex items-center justify-between gap-3 rounded-2xl bg-white/85 border border-white px-4 py-3">
+            <span class="min-w-0">
+              <span class="block text-sm font-black text-slate-800">關注中介新評論</span>
+              <span class="block text-xs text-slate-500 mt-0.5">你關注的中介有新評論時通知我。</span>
+            </span>
+            <input id="prefFollowedUpdates" type="checkbox" class="w-5 h-5 rounded border-slate-300 text-[#003399] focus:ring-[#003399]">
+          </label>
+          <label class="flex items-center justify-between gap-3 rounded-2xl bg-white/85 border border-white px-4 py-3">
+            <span class="min-w-0">
+              <span class="block text-sm font-black text-slate-800">平台精選與實用提醒</span>
+              <span class="block text-xs text-slate-500 mt-0.5">之後可用於週報、避坑提醒和平台更新。</span>
+            </span>
+            <input id="prefMarketing" type="checkbox" class="w-5 h-5 rounded border-slate-300 text-[#003399] focus:ring-[#003399]">
+          </label>
+        </div>
+        <p id="emailPreferencesStatus" class="mt-3 text-xs font-bold text-slate-400"></p>
+      </div>
     </section>
 
     <section class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
@@ -597,6 +632,67 @@
           `;
         }
       }
+    }
+
+    function setEmailPreferencesState(prefs = {}) {
+      const review = document.getElementById('prefReviewUpdates');
+      const followed = document.getElementById('prefFollowedUpdates');
+      const marketing = document.getElementById('prefMarketing');
+      if (review) review.checked = prefs.email_review_updates !== false;
+      if (followed) followed.checked = prefs.email_followed_agency_updates !== false;
+      if (marketing) marketing.checked = prefs.email_marketing === true;
+    }
+
+    function getEmailPreferencesState() {
+      return {
+        email_review_updates: document.getElementById('prefReviewUpdates')?.checked !== false,
+        email_followed_agency_updates: document.getElementById('prefFollowedUpdates')?.checked !== false,
+        email_marketing: document.getElementById('prefMarketing')?.checked === true
+      };
+    }
+
+    async function loadEmailPreferences() {
+      const panel = document.getElementById('emailPreferencesPanel');
+      const status = document.getElementById('emailPreferencesStatus');
+      currentSession = window.MacauAuth?.getCurrentSession?.() || currentSession;
+
+      if (!panel) return;
+      panel.classList.toggle('hidden', !currentSession?.user);
+      if (!currentSession?.user) return;
+
+      try {
+        if (status) status.innerText = '正在讀取通知偏好...';
+        const prefs = await window.MacauAuth.getNotificationPreferences();
+        setEmailPreferencesState(prefs);
+        if (status) status.innerText = '偏好已同步到你的 Google 帳號。';
+      } catch (err) {
+        console.warn('Email 通知偏好載入失敗:', err);
+        if (status) status.innerText = '通知偏好暫時無法載入，請稍後再試。';
+      }
+    }
+
+    function setupEmailPreferences() {
+      ['prefReviewUpdates', 'prefFollowedUpdates', 'prefMarketing'].forEach(id => {
+        const input = document.getElementById(id);
+        if (!input || input.dataset.ready === 'true') return;
+        input.dataset.ready = 'true';
+        input.addEventListener('change', async () => {
+          const status = document.getElementById('emailPreferencesStatus');
+          const prefs = getEmailPreferencesState();
+          input.disabled = true;
+          if (status) status.innerText = '正在保存...';
+          try {
+            await window.MacauAuth.updateNotificationPreferences(prefs);
+            if (status) status.innerText = '已保存。';
+          } catch (err) {
+            console.warn('Email 通知偏好保存失敗:', err);
+            input.checked = !input.checked;
+            if (status) status.innerText = '保存失敗，請稍後再試。';
+          } finally {
+            input.disabled = false;
+          }
+        });
+      });
     }
 
     function renderFollowedAgencies(items = []) {
@@ -1061,8 +1157,10 @@
     document.addEventListener('DOMContentLoaded', () => {
       setupFilters();
       setupMobileProfileTabs();
+      setupEmailPreferences();
       loadMyReviews();
       loadNotifications();
+      loadEmailPreferences();
       loadFollowedAgencies();
       window.addEventListener('macau-auth-change', event => {
         currentSession = event.detail?.session || null;
@@ -1070,6 +1168,7 @@
         updateSyncStatus(event.detail?.migration);
         loadMyReviews();
         loadNotifications();
+        loadEmailPreferences();
         loadFollowedAgencies();
       });
     });

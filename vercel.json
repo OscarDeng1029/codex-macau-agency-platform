@@ -1,4 +1,10 @@
 {
+  "crons": [
+    {
+      "path": "/api/send-notification-emails",
+      "schedule": "0 2 * * *"
+    }
+  ],
   "rewrites": [
     {
       "source": "/seo/:slug",

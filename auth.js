@@ -241,6 +241,49 @@
         return Array.isArray(data) ? data : [];
     }
 
+    async function getNotificationPreferences() {
+        const authClient = getClient();
+        const session = currentSession || await getSession();
+        const defaults = {
+            email_review_updates: true,
+            email_followed_agency_updates: true,
+            email_marketing: false
+        };
+        if (!authClient || !session?.user) return defaults;
+
+        const { data, error } = await authClient
+            .from('user_notification_preferences')
+            .select('email_review_updates, email_followed_agency_updates, email_marketing')
+            .eq('user_id', session.user.id)
+            .maybeSingle();
+
+        if (error) throw error;
+        return { ...defaults, ...(data || {}) };
+    }
+
+    async function updateNotificationPreferences(prefs = {}) {
+        const authClient = getClient();
+        const session = currentSession || await getSession();
+        if (!authClient || !session?.user) throw new Error('login_required');
+
+        const payload = {
+            user_id: session.user.id,
+            email_review_updates: prefs.email_review_updates !== false,
+            email_followed_agency_updates: prefs.email_followed_agency_updates !== false,
+            email_marketing: prefs.email_marketing === true,
+            updated_at: new Date().toISOString()
+        };
+
+        const { data, error } = await authClient
+            .from('user_notification_preferences')
+            .upsert(payload, { onConflict: 'user_id' })
+            .select('email_review_updates, email_followed_agency_updates, email_marketing')
+            .single();
+
+        if (error) throw error;
+        return data;
+    }
+
     async function isFollowingAgency(agencyId) {
         const authClient = getClient();
         const session = currentSession || await getSession();
@@ -570,6 +613,8 @@
         getCurrentSession: () => currentSession,
         getMyReviews,
         getNotifications,
+        getNotificationPreferences,
+        updateNotificationPreferences,
         isFollowingAgency,
         followAgency,
         unfollowAgency,
