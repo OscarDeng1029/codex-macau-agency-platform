@@ -386,6 +386,13 @@
 
     function injectMenuStyles() {
         if (document.getElementById('macau-auth-menu-style')) return;
+        if (!document.getElementById('macau-auth-cjk-font')) {
+            const font = document.createElement('link');
+            font.id = 'macau-auth-cjk-font';
+            font.rel = 'stylesheet';
+            font.href = 'https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@700;900&family=Noto+Sans+TC:wght@700;900&display=swap';
+            document.head.appendChild(font);
+        }
         const style = document.createElement('style');
         style.id = 'macau-auth-menu-style';
         style.textContent = `
@@ -401,6 +408,8 @@
                 box-shadow: 0 22px 60px rgba(15,23,42,.18);
                 padding: 8px;
                 z-index: 80;
+                font-family: "Noto Sans TC", "Noto Sans SC", "PingFang TC", "PingFang SC", "Microsoft JhengHei", "Microsoft YaHei", sans-serif;
+                font-synthesis-weight: none;
             }
             .macau-auth-menu[hidden] { display: none; }
             .macau-auth-menu::before {
@@ -436,7 +445,7 @@
                 cursor: pointer;
             }
             .macau-auth-menu-item:hover { background: #f8fafc; color: #003399; }
-            .macau-auth-menu-item .material-symbols-rounded { font-size: 18px; }
+            .macau-auth-menu-item .material-symbols-rounded { font-size: 18px; font-family: 'Material Symbols Rounded'; }
             .macau-auth-avatar-img { width: 100%; height: 100%; border-radius: 999px; object-fit: cover; }
             .macau-auth-menu-count {
                 margin-left: auto;
